@@ -1,0 +1,2 @@
+ // animalPtr = &dogObj;
+    // animalPtr->makeSound();
