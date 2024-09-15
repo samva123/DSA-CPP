@@ -1,19 +1,28 @@
-#include <iostream> 
-using namespace std ;
+#include<iostream>
+#include<algorithm>
+using namespace std;
 
-int main(){
-    int arr[5] = {10,20,30,40,50} ;
+void printing(string s ){
+	for(int i = 0 ; i < s.size() ; i++){
+		if(i == 0 && isupper(s[i])){
+			cout << s[i];
+			continue;
+		}
+		else if(isupper(s[i])){
+			cout << endl;
+			cout << s[i];
+			continue;
+		}
+		else{
+			cout << s[i];
 
-    //int *p = arr+1;
-    int *q  = arr;
+		}
+	}
+}
+int main() {
+	string s;
+	cin >> s ;
 
-    cout << arr <<endl;
-    cout << &arr<<endl ; 
-    cout << &arr[0]<<endl;
-    cout << *(arr+1)<<endl;
-    cout << q << endl;
-    cout << *q ;
-    // cout << (++a)*(a++) ;
-
-
+	printing(s);
+	return 0;
 }
