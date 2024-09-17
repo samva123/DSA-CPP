@@ -87,13 +87,13 @@ void multitwo(int arr[] , int size ,int index){
 
 int main() {
 
-	// int num = 4217;
-	// vector<int> ans;
-	// printDigits(num,ans);
+	int num = 4217;
+	vector<int> ans;
+	printDigits(num,ans);
 
-	// for(int num: ans) {
-	// 	cout << num << endl;
-	// }
+	for(int num: ans) {
+		cout << num << endl;
+	}
 	
 	
 	int arr[] = {11,20,31,40,51};
