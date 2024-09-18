@@ -175,26 +175,26 @@ Node* constructTreeFromPostAndInorderTraversal( map<int,int> &valueToIndexMap, i
 }
 
 int main() {
-  // int inorder[] = {10,8,6,2,4,12};
-  // int preOrder[] = {2,8,10,6,4,12};
-  // int size = 6;
-  // int preOrderIndex = 0;
-  // int inorderStart = 0;
-  // int inorderEnd = 5;
-  // map<int,int> valueToIndexMap;
-  // createMapping(inorder, size, valueToIndexMap);
-
-  // Node* root = constructTreeFromPreAndInorderTraversal(valueToIndexMap,preOrder, inorder, preOrderIndex, inorderStart,inorderEnd, size);
-
-  int inorder[]= {8,14,6,2,10,4};
-  int postorder[] = {8,6,14,4,10,2};
+  int inorder[] = {10,8,6,2,4,12};
+  int preOrder[] = {2,8,10,6,4,12};
   int size = 6;
-  int postIndex = size-1;
+  int preOrderIndex = 0;
   int inorderStart = 0;
-  int inorderEnd = size-1; 
+  int inorderEnd = 5;
   map<int,int> valueToIndexMap;
   createMapping(inorder, size, valueToIndexMap);
-  Node* root = constructTreeFromPostAndInorderTraversal(valueToIndexMap,postorder, inorder, postIndex, inorderStart,inorderEnd, size);
+
+  Node* root = constructTreeFromPreAndInorderTraversal(valueToIndexMap,preOrder, inorder, preOrderIndex, inorderStart,inorderEnd, size);
+
+  // int inorder[]= {8,14,6,2,10,4};
+  // int postorder[] = {8,6,14,4,10,2};
+  // int size = 6;
+  // int postIndex = size-1;
+  // int inorderStart = 0;
+  // int inorderEnd = size-1; 
+  // map<int,int> valueToIndexMap;
+  // createMapping(inorder, size, valueToIndexMap);
+  // Node* root = constructTreeFromPostAndInorderTraversal(valueToIndexMap,postorder, inorder, postIndex, inorderStart,inorderEnd, size);
   cout << "Printing the entire tree: " << endl;
   levelOrderTraversal(root);
   return 0;
