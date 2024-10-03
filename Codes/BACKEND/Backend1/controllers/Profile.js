@@ -10,8 +10,8 @@ const mongoose = require("mongoose")
 exports.updateProfile = async (req, res) => {
   try {
     const {
-      firstName = "varun",
-      lastName = "babbar",
+      firstName = "",
+      lastName = "",
       dateOfBirth = "",
       about = "",
       contactNumber = "",

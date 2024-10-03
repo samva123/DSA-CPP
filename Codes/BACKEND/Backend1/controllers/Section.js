@@ -15,6 +15,14 @@ exports.createSection = async (req, res) => {
 			});
 		}
 
+		const ifcourse= await Course.findById(courseId);
+		if (!ifcourse) {
+			return res.status(404).json({
+                success: false,
+                message: "Course not found",
+            });
+        }
+
 
 		// there is a check 
 

@@ -5,7 +5,7 @@ const SubSection = require("../models/SubSection")
 const User = require("../models/User")
 const { uploadImageToCloudinary } = require("../utils/imageUploader")
 const CourseProgress = require("../models/CourseProgress")
-// const { convertSecondsToDuration } = require("../utils/secToDuration")
+const { convertSecondsToDuration } = require("../utils/secToDuration")
 // Function to create a new course
 exports.createCourse = async (req, res) => {
   try {
@@ -20,8 +20,8 @@ exports.createCourse = async (req, res) => {
       price,
       tag: _tag,
       category,
-    //   status,
-    //   instructions: _instructions,
+      status,
+      instructions: _instructions,
     } = req.body
     // Get thumbnail image from request files
     const thumbnail = req.files.thumbnailImage
@@ -88,8 +88,8 @@ exports.createCourse = async (req, res) => {
       tag,
       category: categoryDetails._id,
       thumbnail: thumbnailImage.secure_url,
-    //   status: status,
-    //   instructions,
+      status: status,
+      instructions,
     })
 
     // Add the new course to the User Schema of the Instructor
@@ -318,21 +318,21 @@ exports.getCourseDetails = async (req, res) => {
     //   });
     // }
 
-    let totalDurationInSeconds = 0
-    courseDetails.courseContent.forEach((content) => {
-      content.subSection.forEach((subSection) => {
-        const timeDurationInSeconds = parseInt(subSection.timeDuration)
-        totalDurationInSeconds += timeDurationInSeconds
-      })
-    })
+    // let totalDurationInSeconds = 0
+    // courseDetails.courseContent.forEach((content) => {
+    //   content.subSection.forEach((subSection) => {
+    //     const timeDurationInSeconds = parseInt(subSection.timeDuration)
+    //     totalDurationInSeconds += timeDurationInSeconds
+    //   })
+    // })
 
-    const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+    // const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
 
     return res.status(200).json({
       success: true,
       data: {
         courseDetails,
-        totalDuration,
+        // totalDuration,
       },
     })
   } catch (error) {
