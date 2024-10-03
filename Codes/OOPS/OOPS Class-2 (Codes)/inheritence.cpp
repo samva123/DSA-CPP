@@ -99,17 +99,27 @@ public:
     }
 };
 
-class Parrot : private Bird
+class Parrot : protected Bird
 {
     
 public:
+
+    // string getwife(){
+    //     return this->wife;
+    // }
     void speaking()
     {
         cout << "Parrot is speaking" << endl;
     }
     //void print()
 };
+class yashasvi : public Parrot{
 
+    string getwife(){
+        return this->wife;
+    } 
+
+};
 int main()
 {
   //  Sparrow s(1, 1, "brown", 2 , "janu");
