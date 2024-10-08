@@ -12,7 +12,7 @@ public:
     {
         std::cout << "Animal makes a sound" << std::endl;
     }
-    ~Animal(){
+     virtual ~Animal(){
         std::cout << "Animal destructor" << std::endl;
     }
 };
@@ -53,6 +53,13 @@ int main()
     sound(animal);
     delete animal;
 
+    // Dog *hello = new Animal();
+    // Animal *hello = new Animal();
+    // Animal *hello1 = new Dog();
+    // Dog *hello2 = new Dog();
+
+    // sound(hello);
+
     // Animal *animalPtr;
     // Dog dogObj;
     // Cat catObj;
@@ -63,5 +70,23 @@ int main()
     // animalPtr = &catObj;
     // animalPtr->makeSound(); // Output: "Cat meows"
 
-    return 0;
+
+    // Animal *animal = new Animal();
+    // Dog *dog = dynamic_cast<Dog*>(animal); // Attempting downcast
+
+    // if (dog) {
+    //     dog->makeSound();
+    // } else {
+    //     std::cout << "Downcasting failed!" << std::endl;
+    // }
+
+    // delete animal;
+    // return 0;
+
+    
 }
+
+
+// things are not working without virtual and override because all
+// things are working a compile time so that is why animal is sounding 
+// whether the object is of animal or not
