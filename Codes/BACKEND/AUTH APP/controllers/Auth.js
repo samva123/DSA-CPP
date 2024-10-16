@@ -19,6 +19,7 @@ exports.signup = async (req, res) => {
                 message: "User Already Exists",
             })
         }
+        /// how to applu retry startegy 1 ghnta 4 min. first lecture
 
         // Secured password 
         let hashedPassword;
