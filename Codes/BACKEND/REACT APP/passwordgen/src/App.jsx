@@ -41,9 +41,7 @@ function App() {
 
       {/* Tailwind Flexbox container for cards */}
       <div className="flex justify-between items-center mt-6 mx-auto max-w-5xl">
-        <Card />
-        <Card />
-        <Card />
+        
       </div>
 
       <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">

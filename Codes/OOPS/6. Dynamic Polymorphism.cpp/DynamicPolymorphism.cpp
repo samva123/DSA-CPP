@@ -49,14 +49,14 @@ int main()
     // dog -> makeSound(); //PRINT DOG BARKS
 
 
-    Animal *animal = new Dog();
-    sound(animal);
-    delete animal;
+    // Animal *animal = new Dog();
+    // sound(animal);
+    // delete animal;
 
     // Dog *hello = new Animal();
-    // Animal *hello = new Animal();
-    // Animal *hello1 = new Dog();
-    // Dog *hello2 = new Dog();
+    Animal *hello = new Animal();
+    Animal *hello1 = new Dog();
+    Dog *hello2 = new Dog();
 
     // sound(hello);
 

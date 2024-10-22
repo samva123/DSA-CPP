@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+  }
+  
+  .left-pane {
+    width: 50%;
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  
+  .right-pane {
+    width: 50%;
+    padding: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  li.completed {
+    text-decoration: line-through;
+  }
+  
+  button {
+    margin-left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+  }
+  
+  input[type="text"] {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  
