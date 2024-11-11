@@ -20,7 +20,10 @@ public:
 class Dog : public Animal
 {
 public:
-    void makeSound() override
+    virtual void hello(){
+        std::cout << "hello" << std::endl;
+    }
+    void makeSound() 
     {
         std::cout << "Dog barks" << std::endl;
     }
@@ -51,7 +54,7 @@ int main()
 
     Animal *animal = new Dog();
     sound(animal);
-    delete animal;
+    // delete animal;
 
     // Dog *hello = new Animal();
     // Animal *hello = new Animal();

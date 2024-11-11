@@ -1,2 +1,1 @@
- // animalPtr = &dogObj;
-    // animalPtr->makeSound();
+delete animal;
