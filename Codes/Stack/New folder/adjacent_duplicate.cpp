@@ -18,5 +18,23 @@ public:
         }
         reverse(ans.begin() , ans.end());
         return ans;
+        
+    }
+    
+};
+
+// time complexity is O(n) and space complexity is decreased to O(n) in worst case  from O(n) but it helps in removing overhead of stack
+class Solution {
+public:
+    string removeDuplicates(string s) {
+        string result;
+        for (char ch : s) {
+            if (!result.empty() && result.back() == ch) {
+                result.pop_back();
+            } else {
+                result.push_back(ch);
+            }
+        }
+        return result;
     }
 };

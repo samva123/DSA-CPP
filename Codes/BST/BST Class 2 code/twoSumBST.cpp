@@ -47,3 +47,71 @@ public:
         return false;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    bool findTarget(TreeNode* root, int k) {
+        if (!root) return false;
+
+        stack<TreeNode*> leftStack, rightStack;
+        TreeNode* left = root, *right = root;
+
+        // Initialize the left stack for in-order traversal
+        while (left) {
+            leftStack.push(left);
+            left = left->left;
+        }
+
+        // Initialize the right stack for reverse in-order traversal
+        while (right) {
+            rightStack.push(right);
+            right = right->right;
+        }
+
+        while (!leftStack.empty() && !rightStack.empty()) {
+            TreeNode* leftNode = leftStack.top();
+            TreeNode* rightNode = rightStack.top();
+
+            // If the two pointers meet, break the loop
+            if (leftNode == rightNode) break;
+
+            int sum = leftNode->val + rightNode->val;
+
+            if (sum == k) {
+                return true;
+            } else if (sum < k) {
+                // Move the left pointer to the next higher value
+                leftStack.pop();
+                TreeNode* node = leftNode->right;
+                while (node) {
+                    leftStack.push(node);
+                    node = node->left;
+                }
+            } else {
+                // Move the right pointer to the next lower value
+                rightStack.pop();
+                TreeNode* node = rightNode->left;
+                while (node) {
+                    rightStack.push(node);
+                    node = node->right;
+                }
+            }
+        }
+
+        return false;
+    }
+};

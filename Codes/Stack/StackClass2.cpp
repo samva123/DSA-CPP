@@ -102,7 +102,7 @@ int main()
     // st.push1(3);
     // st.push2(4);
     // cout << st.getTop1() << endl;
-    string str = "(((a+b)*(a+b)))";
+    string str = "((a+b)*c)";
     cout << checkRedundantBracket(str) << endl;
     return 0;
 }

@@ -86,8 +86,8 @@ int main() {
 // //   10 20 30
   
 //   cout << "with reverse: " << endl;
-//insertSorted(st,35);
-  sortStack(st);
+insertSorted(st,35);
+  // sortStack(st);
   while(!st.empty()) {
     cout << st.top() << " ";
     st.pop();
