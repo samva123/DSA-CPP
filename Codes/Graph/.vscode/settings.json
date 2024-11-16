@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "map": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "type_traits": "cpp",
+        "*.tcc": "cpp"
     }
 }

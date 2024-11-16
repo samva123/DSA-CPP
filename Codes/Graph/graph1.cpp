@@ -128,15 +128,31 @@ int main() {
     }
   }
   //HW: find out number of disconnected components in a graph
+  vis.clear();
   
 
-//   unordered_map<char, bool> vis;
-//   for(char node='a'; node<='f'; node++) {
-//       if(!vis[node] ) {
-//         g.bfsTraversal(node,vis);
-//       }
-//   }
+  // unordered_map<char, bool> vis;
+  for(char node='a'; node<='f'; node++) {
+      if(!vis[node] ) {
+        g.bfsTraversal(node,vis);
+      }
+  }
 
   
   return 0;
 }
+
+
+
+// DFS (Depth-First Search):
+
+// Explores as far as possible along each branch before backtracking.
+// Uses a stack (either explicitly or via recursion).
+// Typically implemented using recursion or an explicit stack.
+// Visits nodes in a depthward motion.
+// BFS (Breadth-First Search):
+
+// Explores all neighbors at the present depth prior to moving on to nodes at the next depth level.
+// Uses a queue.
+// Typically implemented using an explicit queue.
+// Visits nodes in a level-order motion.
