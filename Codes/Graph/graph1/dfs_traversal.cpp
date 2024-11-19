@@ -63,34 +63,7 @@ class Graph {
       }
     }
 
-    void bfsTraversal(T src,unordered_map< T, bool>& vis) {
-      //adjList alrady data member me hai 
-      //visited
-      
-      //queue
-      queue<T> q;
-
-      //initial state
-      q.push(src);
-      vis[src] =true;
-
-      while(!q.empty()) {
-        T frontNode = q.front();
-        cout << frontNode << " ";
-        q.pop();
-
-        //go to nbr
-        for(auto nbr: adjList[frontNode]) {
-          T nbrData = nbr.first;
-
-          if(!vis[nbrData]) {
-            q.push(nbrData);
-            vis[nbrData] = true;
-          }
-        }
-      }
-
-    }
+   
 
     void dfs(T src, unordered_map<T,bool>& vis ) {
       vis[src] = true;
@@ -135,11 +108,11 @@ int main() {
   
 
   // unordered_map<char, bool> vis;
-  for(char node='a'; node<='f'; node++) {
-      if(!vis[node] ) {
-        g.bfsTraversal(node,vis);
-      }
-  }
+//   for(char node='a'; node<='f'; node++) {
+//       if(!vis[node] ) {
+//         g.bfsTraversal(node,vis);
+//       }
+//   }
 
   
   return 0;

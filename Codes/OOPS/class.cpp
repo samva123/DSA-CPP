@@ -144,13 +144,15 @@ int main()
     // cout << s1.name << endl;
     // cout << s2.name << endl;
 
-    Student s1(1, 12, 1, "Chota Bheem", 1);
+    Student s1(1, 12, 1, "Chota Bheem", 1, "lassi");
     cout << s1.name << endl;
     cout << s1.getGfName() << endl;
 
-    s1.setGfName("Indumati");
+    
 
-    cout << s1.getGfName() << endl;
+    // s1.setGfName("Indumati");
+
+    // cout << s1.getGfName() << endl;
 
     return 0;
 }

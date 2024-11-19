@@ -92,17 +92,7 @@ class Graph {
 
     }
 
-    void dfs(T src, unordered_map<T,bool>& vis ) {
-      vis[src] = true;
-      cout << src << " ";
-
-      for(auto nbr: adjList[src]) {
-        T nbrData = nbr.first;
-        if(!vis[nbrData]) {
-          dfs(nbrData, vis);
-        }
-      }
-    }
+   
 
 };
 
@@ -125,11 +115,11 @@ int main() {
 
   unordered_map<char, bool> vis;
   //g.dfs('a',visited);
-  for(char node='a'; node<='f'; node++) {
-    if(!vis[node]) {
-        g.dfs(node, vis);
-    }
-  }
+//   for(char node='a'; node<='f'; node++) {
+//     if(!vis[node]) {
+//         g.dfs(node, vis);
+//     }
+//   }
   //HW: find out number of disconnected components in a graph
   vis.clear();
   

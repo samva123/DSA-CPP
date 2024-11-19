@@ -23,7 +23,7 @@ public:
     virtual void hello(){
         std::cout << "hello" << std::endl;
     }
-    void makeSound() 
+    void makeSound() override
     {
         std::cout << "Dog barks" << std::endl;
     }

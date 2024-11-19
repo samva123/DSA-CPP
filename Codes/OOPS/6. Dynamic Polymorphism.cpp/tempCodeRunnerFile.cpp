@@ -1,1 +1,2 @@
-delete animal;
+Animal *animal = new Dog();
+    sound(animal);

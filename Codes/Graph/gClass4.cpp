@@ -174,3 +174,55 @@ int main() {
 
 	return 0;
 }
+
+
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_map>
+#include <list>
+#include <climits>
+
+using namespace std;
+
+class Graph {
+    unordered_map<int, list<pair<int, int>>> adj;
+
+public:
+    void addEdge(int u, int v, int weight, bool bidir = true) {
+        adj[u].push_back(make_pair(v, weight));
+        if (bidir) {
+            adj[v].push_back(make_pair(u, weight));
+        }
+    }
+
+    void dijkstraPQ(int src, int dest) {
+        unordered_map<int, int> dist;
+        for (auto i : adj) {
+            dist[i.first] = INT_MAX;
+        }
+
+        dist[src] = 0;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        pq.push(make_pair(0, src));
+
+        while (!pq.empty()) {
+            int topNode = pq.top().second;
+            int topDist = pq.top().first;
+            pq.pop();
+
+            for (auto nbrPair : adj[topNode]) {
+                int nbrNode = nbrPair.first;
+                int nbrDist = nbrPair.second;
+
+                if (topDist + nbrDist < dist[nbrNode]) {
+                    dist[nbrNode] = topDist + nbrDist;
+                    pq.push(make_pair(dist[nbrNode], nbrNode));
+                }
+            }
+        }
+
+        cout << "Shortest Distance from " << src << " Node to " << dest << " Node: " << dist[dest] << endl;
+    }
+};
