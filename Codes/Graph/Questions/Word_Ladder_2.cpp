@@ -1,4 +1,10 @@
-vector<vector<string>>ans;
+//User function Template for C++
+
+class Solution {
+public:
+    vector<vector<string>> findSequences(string beginWord, string endWord, vector<string>& wordList) {
+        // code here
+        vector<vector<string>>ans;
         queue<pair<vector<string>,int>>q;
         q.push({{beginWord} , 1});
         unordered_set<string> st(wordList.begin() , wordList.end());
@@ -41,3 +47,7 @@ vector<vector<string>>ans;
             }
         }
         return ans;
+        
+        
+    }
+};
