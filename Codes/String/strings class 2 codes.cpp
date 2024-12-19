@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 // https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/description/
 //1047
 
@@ -23,9 +26,24 @@ public:
         return ans;
     }
 };
-// 1209 leetcode 
 
-https://leetcode.com/problems/remove-all-occurrences-of-a-substring/
+class Solution {
+public:
+    string removeDuplicates(string s) {
+        vector<char> ans;
+        for (char c : s) {
+            if (!ans.empty() && ans.back() == c) {
+                ans.pop_back();
+            } else {
+                ans.push_back(c);
+            }
+        }
+        return string(ans.begin(), ans.end());
+    }
+};
+ 
+
+//https://leetcode.com/problems/remove-all-occurrences-of-a-substring/
 //1910
 
 class Solution {
@@ -39,11 +57,35 @@ public:
         }
         return s;
     }
+};// find has time complexity of n*m and erase has on n and the loop runs n/m times 
+
+class Solution {
+public:
+    string removeOccurrences(string s, string part) {
+        string result;
+        int partLen = part.length();
+
+        for (char c : s) {
+            result.push_back(c);
+            if (result.size() >= partLen && result.substr(result.size() - partLen) == part) {
+                result.erase(result.size() - partLen, partLen);
+            }
+        }
+
+        return result;
+    }
 };
 
+// First Solution:
+// Time Complexity: O(n^2) where n is the length of the string s
+// Space Complexity: O(1)
+// Second Solution:
+// Time Complexity: O(n * m)
+// Space Complexity: O(n)
 
 
-https://leetcode.com/problems/valid-palindrome-ii/
+
+//https://leetcode.com/problems/valid-palindrome-ii/
 
 class Solution {
 public:
@@ -90,12 +132,12 @@ public:
 }; 
 //time complexity O(n)
 
-//539
+
 
 
 //647  
 
-https://leetcode.com/problems/palindromic-substrings/
+//https://leetcode.com/problems/palindromic-substrings/
 
 class Solution {
 public:
@@ -123,6 +165,11 @@ public:
         return totalCount;
     }
 };
+
+// Summary:
+// Time Complexity: O(n^2)
+// Space Complexity: O(1)
+// This approach is already optimal for counting palindromic substrings in a given string.
 
 // string ke andar kuch find karne kee kon kon si algorithm hai or un sab ki time complexity 
 // or erase function ki implementation and find function ki bhi time complexity

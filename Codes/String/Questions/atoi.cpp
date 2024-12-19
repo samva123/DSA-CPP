@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
     int myAtoi(string s) {
@@ -25,3 +28,4 @@ public:
         
     }
 };
+// time is O(n) and space is O(1)

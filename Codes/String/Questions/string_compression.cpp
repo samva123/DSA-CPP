@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
     int compress(vector<char>& s) {
@@ -46,7 +49,9 @@ public:
         
     }
 };
+//time complexity is O(n) and space complexity is O(1)
 
 
-//METHOD 2 
+
+
 

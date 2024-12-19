@@ -102,49 +102,23 @@ public:
     }
     int largestRectangleArea(vector<int> &heights)
     {
-        // int n=heights.size();
-        // if(n==1)return heights[0];
-        // vector<int>  leftToRight=prevSmaller(heights,n);
-        // vector<int> rightToLeft=nextSmaller(heights,n);
-        // // rev krdo
-        // // reverse(rightToLeft.begin(),rightToLeft.end());
-        // vector<int>area(leftToRight.size());
-        // for(int i=0;i<leftToRight.size();i++){
-        //     int width=rightToLeft[i]-leftToRight[i]-1;
-        //     int length=heights[i];\        //     area[i]=width*length;
-        // }
-        // int maxi=INT_MIN;
-        // for(int i=0;i<area.size();i++){
-        //     maxi=max(maxi,area[i]);
-        // }
-        // return maxi;
-        int area = INT_MIN;
-
-        for (int i = 0; i < heights.size(); i++)
-        {
-            int j = i;
-            int k = i;
-            int a = 1; // Reset 'a' for each histogram bar
-
-            // Move left while the bar is higher
-            while (j >= 0 && heights[j] >= heights[i])
-            {
-                a++;
-                j--;
-            }
-
-            // Move right while the bar is higher
-            while (k < heights.size() && heights[k] >= heights[i])
-            {
-                a++;
-                k++;
-            }
-
-            int multi = heights[i] * a;
-            area = std::max(area, multi);
+        int n=heights.size();
+        if(n==1)return heights[0];
+        vector<int>  leftToRight=prevSmaller(heights,n);
+        vector<int> rightToLeft=nextSmaller(heights,n);
+        // rev krdo
+        // reverse(rightToLeft.begin(),rightToLeft.end());
+        vector<int>area(leftToRight.size());
+        for(int i=0;i<leftToRight.size();i++){
+            int width=rightToLeft[i]-leftToRight[i]-1;
+            int length=heights[i];       //     area[i]=width*length;
         }
-
-        return area;
+        int maxi=INT_MIN;
+        for(int i=0;i<area.size();i++){
+            maxi=max(maxi,area[i]);
+        }
+        return maxi;
+        
     }
 };
 

@@ -173,6 +173,9 @@ int main() {
         // insertAtHead(head,tail, 90);
         // insertAtTail(head, tail, 77);
 
+        // for loops questions 
+        // tail->next = head->next->next;
+
         print(head);
         
         // head = reverse(head);

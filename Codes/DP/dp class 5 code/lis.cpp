@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
 
@@ -22,6 +25,7 @@ public:
            return 0;
        } 
        //if ans already exists
+       // we used prev+1 because prev is set to -1 initially
        if(dp[curr][prev+1] != -1 ) {
            return dp[curr][prev+1];
        }

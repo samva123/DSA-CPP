@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 //METHOD 1 
 
 class Solution {
