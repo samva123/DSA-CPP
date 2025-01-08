@@ -1,3 +1,7 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
 class Solution {
 public:
     int solveUsingRecursion(vector<int>& arr, map< pair<int,int>, int >& maxi, int s, int e) {
@@ -46,7 +50,7 @@ public:
         int n = arr.size();
         vector<vector<int> > dp(n+2, vector<int>(n+1, 0));
 
-        for(int s_index=n; s_index>=0; s_index--) {
+        for(int s_index=n-1; s_index>=0; s_index--) {
             for(int e_index=0; e_index<=n-1; e_index++) {
                 if(s_index >= e_index) {
                     continue;

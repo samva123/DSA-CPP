@@ -1,4 +1,6 @@
 // partition equal subset sum
+#include<bits/stdc++.h>
+using namespace std;
 #include <vector>
 
 // class solution{
@@ -108,3 +110,44 @@ public:
 // O(n*target) in old mathods
 // O(targe) in space optimization
 
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    bool solve(vector<int>& arr, int target) {
+        int n = arr.size();
+        vector<int> prev(target + 1, 0);
+        vector<int> curr(target + 1, 0);
+
+        // Initialize the base case
+        for (int row = 0; row <= n; row++) {
+            prev[target] = 1;
+        }
+
+        for (int ind = n - 1; ind >= 0; ind--) {
+            for (int s = target-1; s >= 0; s--) {
+                bool include = 0;
+                if (s + arr[ind] <= target)
+                    include = prev[s + arr[ind]];
+
+                bool exclude = prev[s];
+                curr[s] = (include || exclude);
+            }
+            prev = curr;
+        }
+        return prev[0];
+    }
+
+    bool canPartition(vector<int>& nums) {
+        int totalsum = 0;
+        for (int num : nums) {
+            totalsum += num;
+        }
+        if (totalsum % 2 != 0) {
+            return false;
+        }
+        int target = totalsum / 2;
+        return solve(nums, target);
+    }
+};

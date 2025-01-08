@@ -17,7 +17,7 @@ public:
         }
 
         if(p[pi] == '*'){
-            bool caseA = ismatchhelper(s , si+1 , p , pi+1);
+            bool caseA = ismatchhelper(s , si , p , pi+1);
 
             bool caseB = ismatchhelper(s , si+1 , p , pi);
             return caseA || caseB;

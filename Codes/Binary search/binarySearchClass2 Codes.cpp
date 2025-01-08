@@ -181,3 +181,126 @@ public:
         return false;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+// User function template for C++
+class Solution {
+  public:
+    bool matSearch(vector<vector<int>> &matrix, int target) {
+        // your code here
+        long long int row = matrix.size();
+        long long int col = matrix[0].size();
+        long long int n = row*col;
+
+        long long int s = 0;
+        long long int e = n-1;
+        long long int mid = s + (e-s)/2;
+
+        while(s <= e) {
+            long long int rowIndex = mid/col;
+            long long int colIndex = mid % col;
+            long long int currNumber = matrix[rowIndex][colIndex];
+
+            if(currNumber == target)
+                return true;
+            else if(target > currNumber ) {
+                //right;
+                s = mid + 1;
+            } 
+            else {
+                //left;
+                e = mid-1;
+            }
+            mid = s + (e-s)/2;
+        }
+        return false;
+    }
+};
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int r, c;
+        cin >> r >> c;
+        vector<vector<int>> matrix(r, vector<int>(c, 0));
+        int x;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                cin >> matrix[i][j];
+            }
+        }
+        cin >> x;
+        Solution ob;
+        bool an = ob.matSearch(matrix, x);
+        if (an)
+            cout << "true" << endl;
+        else
+            cout << "false" << endl;
+        cout << "~" << endl;
+    }
+    return 0;
+}
+// } Driver Code Ends

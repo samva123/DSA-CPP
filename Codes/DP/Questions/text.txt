@@ -1,0 +1,2 @@
+lps , distinct_sub or mimimum ascii wale mein 
+solution single 1d  dp array tak ja sakte hai 

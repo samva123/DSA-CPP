@@ -1,4 +1,3 @@
-#include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -15,53 +14,34 @@ public:
             profit = max(buyitprofit , skipprofit);
         }
         else{
-            int sellitprofit = prices[i] + solve(prices , i+1 , 1);
+            int sellitprofit = prices[i] + solve(prices , i+2 , 1);
             int skipprofit = solve(prices , i+1 ,0);
             profit = max(sellitprofit , skipprofit);
         }
         return profit ;
     }
-    int maxProfit(vector<int>& prices) {
-        return solve(prices , 0 ,1);
-        
-    }
-};
 
-
-
-class Solution {
-public:
-    int solve(vector<int>&prices , int i , int buy , vector<vector<int>>&dp){
+    int solveMemo(vector<int>&prices , int i , int buy , vector<vector<int>>&dp){
         if(i >= prices.size()) return 0;
 
         if(dp[i][buy] != -1) return dp[i][buy];
 
         int profit = 0;
         if(buy){
-            int buyitprofit = -prices[i] + solve(prices , i+1 , 0 ,dp);
-            int skipprofit = solve(prices , i+1 ,1,dp);
+            int buyitprofit = -prices[i] + solveMemo(prices , i+1 , 0 ,dp);
+            int skipprofit = solveMemo(prices , i+1 ,1,dp);
             profit = max(buyitprofit , skipprofit);
         }
         else{
-            int sellitprofit = prices[i] + solve(prices , i+1 , 1,dp);
-            int skipprofit = solve(prices , i+1 ,0,dp);
+            int sellitprofit = prices[i] + solveMemo(prices , i+2 , 1,dp);
+            int skipprofit = solveMemo(prices , i+1 ,0,dp);
             profit = max(sellitprofit , skipprofit);
         }
         return dp[i][buy] =  profit ;
     }
-    int maxProfit(vector<int>& prices) {
-        vector<vector<int>>dp(prices.size() + 1 , vector<int>(2,-1));
 
-        return solve(prices , 0 ,1,dp);
-        
-    }
-};
-
-
-class Solution {
-public:
-    int solve(vector<int>&prices , int buy  ){
-        vector<vector<int>>dp(prices.size() + 1 , vector<int>(2,0));
+    int solveBU(vector<int>&prices  ){
+        vector<vector<int>>dp(prices.size() + 2 , vector<int>(2,0));
         //if(i >= prices.size()) return 0;
         
 
@@ -74,7 +54,7 @@ public:
                     profit = max(buyitprofit , skipprofit);
                 }
                 else{
-                    int sellitprofit = prices[i] + dp[i+1][1];
+                    int sellitprofit = prices[i] + dp[i+2][1];
                     int skipprofit =  dp[i+1][0];
                     profit = max(sellitprofit , skipprofit);
                 }
@@ -84,26 +64,9 @@ public:
         return dp[0][1];
         
     }
-    
 
 
-       // int profit = 0;
-       
-    int maxProfit(vector<int>& prices) {
-       
-        return solve(prices, 1 );
-        
-    }
-};
-
-
-
-
-
-
-class Solution {
-public:
-    int solve(vector<int>&prices , int buy  ){
+    int solveSO(vector<int>&prices  ){
         vector<vector<int>>dp(2, vector<int>(2,0));
         //if(i >= prices.size()) return 0;
         
@@ -128,15 +91,13 @@ public:
         return dp[0][1];
         
     }
-    
 
 
-       // int profit = 0;
-       
+
     int maxProfit(vector<int>& prices) {
-       
-        return solve(prices, 1 );
+        //vector<vector<int>>dp(prices.size() + 1 , vector<int>(2,-1));
+        //return solveMemo(prices ,0,1,dp);
+        return solveSO(prices);
         
     }
 };
-

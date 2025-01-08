@@ -1,3 +1,5 @@
+#include<bits/stdc++.h>
+using namespace std;
 ///////////////////TOP DOWN ///////////////////////////////
 class Solution
 {
@@ -29,16 +31,17 @@ public:
 
         return dp[i][j] = cost;
     }
-                 int minimumDeleteSum(string s1, string s2)
-                {
-                    // return solve(s1 , s2 ,0 , 0);
+    int minimumDeleteSum(string s1, string s2)
+    {
+        // return solve(s1 , s2 ,0 , 0);
 
-                    vector<vector<int>> dp(s1.size() + 1, vector<int>(s2.size() + 1, -1));
-                    return solveTD(s1, s2, 0, 0, dp);
+        vector<vector<int>> dp(s1.size() + 1, vector<int>(s2.size() + 1, -1));
+        return solveTD(s1, s2, 0, 0, dp);
 
-                    // return solveBU(s1, s2);
-                }
-            };
+        // return solveBU(s1, s2);
+    }
+};                
+                 
 
 
 // --------------BOTTOM UP-------------------
@@ -78,5 +81,114 @@ public:
         return solveBU(s1,s2);
         
     }
+}; 
+
+class Solution {
+public:
+
+    int solveBU(string&s1 ,string&s2){
+        vector<vector<int>>dp(s1.size()+1, vector<int>(s2.size()+1 , 0));
+
+        for(int i = s1.size()-1; i>=0 ; --i){
+            dp[i][s2.size()] = s1[i] + dp[i+1][s2.size()];
+        }
+        for(int i = s2.size()-1; i>=0 ; --i){
+            dp[s1.size()][i] = s2[i] + dp[s1.size()][i+1];
+        }
+
+        for(int i = s1.size()-1; i >= 0 ; --i){
+            for(int j = s2.size()-1 ; j>=0 ; --j){
+                int cost = 0;
+                if(s1[i] == s2[j]){
+                    cost = dp[i+1][j+1];}
+                else{
+                    int cost1 = s1[i] + dp[i+1][j];
+                    int cost2 = s2[j] + dp[i][j+1];
+                    cost = min(cost1 , cost2);
+                }
+                dp[i][j] = cost;
+
+            }
+        }
+        return dp[0][0];
+    }
+
+
+    int minimumDeleteSum(string s1, string s2) {
+
+        return solveBU(s1,s2);
+        
+    }
 };
+
+
+
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int minimumDeleteSum(string s1, string s2) {
+        int m = s1.size(), n = s2.size();
+        vector<int> prev(n + 1, 0), curr(n + 1, 0);
+
+        // Initialize the last row
+        for (int j = n - 1; j >= 0; --j) {
+            prev[j] = s2[j] + prev[j + 1];
+        }
+
+        for (int i = m - 1; i >= 0; --i) {
+            curr[n] = s1[i] + prev[n]; // Initialize the last column
+            for (int j = n - 1; j >= 0; --j) {
+                if (s1[i] == s2[j]) {
+                    curr[j] = prev[j + 1];
+                } else {
+                    curr[j] = min(s1[i] + prev[j], s2[j] + curr[j + 1]);
+                }
+            }
+            swap(prev, curr); // Move current row to previous row
+        }
+
+        return prev[0];
+    }
+};
+
+
+
+
+class Solution {
+public:
+    int minimumDeleteSum(string s1, string s2) {
+        int m = s1.size(), n = s2.size();
+        vector<int> dp(n + 1, 0);
+
+        for (int j = n - 1; j >= 0; --j) {
+            dp[j] = s2[j] + dp[j + 1];
+        }
+
+        for (int i = m - 1; i >= 0; --i) {
+            int prev = dp[n];
+            dp[n] = s1[i] + dp[n];
+            for (int j = n - 1; j >= 0; --j) {
+                int temp = dp[j];
+                if (s1[i] == s2[j]) {
+                    dp[j] = prev;
+                } else {
+                    dp[j] = min(s1[i] + dp[j], s2[j] + dp[j + 1]);
+                }
+                prev = temp;
+            }
+        }
+
+        return dp[0];
+    }
+};
+
+
+// each has time complexity O(m*n) and
+// space complexity O(n) where m and n are the lengths of s1 and s2, respectively in third and fourth approach
+
+
 

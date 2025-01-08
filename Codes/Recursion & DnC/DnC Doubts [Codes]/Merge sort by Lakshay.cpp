@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
     void merge(vector<int>&v, vector<int>&temp, int start, int mid, int end){
@@ -21,7 +24,7 @@ public:
          while(j <= end)
             temp[k++] = v[j++];
 
-        // let;s copy merged data
+        // lets copy merged data
         while(start <= end){
             v[start] = temp[start];
             start++;

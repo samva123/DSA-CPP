@@ -103,7 +103,7 @@ int solveUsingRecursion(int capacity, int wt[], int profit[], int index, int n)
 	int solveUsingTabulationSO(int capacity, int wt[], int profit[], int n)
 	{
 		vector<int> next(capacity + 1, 0);
-		vector<int> curr(capacity + 1, -1);
+		vector<int> curr(capacity + 1, 0);
 
 		for (int j = n - 1; j >= 0; j--)
 		{
@@ -149,11 +149,11 @@ int solveUsingRecursion(int capacity, int wt[], int profit[], int index, int n)
 	int main()
 	{
 
-		int capacity = 4;
-		int wt[] = {4,5,1};
-		int profit[] = {1,2,3};
+		int capacity = 269;
+		int wt[] = {95,4,60,32,23,72,80,62,65,46};
+		int profit[] = {55,10,47,5,4,50,8,61,85,87};
 		// int index = 0;
-		int n = 3;
+		int n = sizeof(wt) / sizeof(wt[0]);
 
 		//vector<vector<int>> dp(capacity + 1, vector<int>(n + 1, -1));
 
@@ -231,3 +231,71 @@ int solveUsingRecursion(int capacity, int wt[], int profit[], int index, int n)
 
 	// 	return 0;
 	// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	int solveUsingRecursion(int capacity, int wt[], int profit[], int index, int n)
+	{
+	// base case
+		if (index >= n)
+		{
+			return 0;
+		}
+	
+
+		// inc / exc
+		int include = 0;
+		if (wt[index] <= capacity)
+		{
+			include = profit[index] + solveUsingRecursion(capacity - wt[index], wt, profit, index + 1, n);
+		}
+		int exclude = 0 + solveUsingRecursion(capacity, wt, profit, index + 1, n);
+		int ans = max(include, exclude);
+		return ans;
+	}
