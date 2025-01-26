@@ -46,3 +46,5 @@ public:
         return head;
     }
 };
+
+// time and space is n 

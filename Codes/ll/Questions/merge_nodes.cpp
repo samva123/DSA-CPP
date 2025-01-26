@@ -42,3 +42,5 @@ public:
         
     }
 };
+
+// already optimal with n time and 1 space 

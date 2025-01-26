@@ -32,7 +32,7 @@ using namespace std;
 //     }
 // };
 
-unordered_map<int , list<int>>adjList;
+//unordered_map<int , list<int>>adjList;
 
 
 template <typename T>
@@ -56,7 +56,7 @@ class Graph {
     void printAdjList() {
       for(auto i: adjList) {
         cout << i.first <<": {  ";
-        for(pair<T,int> p: i.second) {
+        for(auto p: i.second) {
           cout << "{"<<p.first <<", "<<p.second <<"}, ";
         }
         cout<<"}" << endl;
@@ -84,8 +84,9 @@ class Graph {
           T nbrData = nbr.first;
 
           if(!vis[nbrData]) {
-            q.push(nbrData);
             vis[nbrData] = true;
+            q.push(nbrData);
+            
           }
         }
       }
@@ -119,17 +120,20 @@ int main() {
   g.addEdge('a','c',10,1);
   g.addEdge('b','c',20,1);
 
- // g.addEdge('c','e',20,1);
+  //g.addEdge('c','e',20,1);
   g.addEdge('e','f',50,1);
-   g.addEdge('f','d',50,1);
+  g.addEdge('f','d',50,1);
 
   unordered_map<char, bool> vis;
   //g.dfs('a',visited);
+  int count = 0;
   for(char node='a'; node<='f'; node++) {
     if(!vis[node]) {
-        g.dfs(node, vis);
+      count++;
+      g.dfs(node, vis);
     }
   }
+  cout << endl << "Number of disconnected components: " << count << endl;
   //HW: find out number of disconnected components in a graph
   vis.clear();
   

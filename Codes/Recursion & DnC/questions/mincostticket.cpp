@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
 int helper(vector<int>&days , vector<int>& costs , int i){
@@ -9,7 +12,7 @@ int helper(vector<int>&days , vector<int>& costs , int i){
 
     //7 day
     int passendday = days[i] +7 -1;
-    int j =1;
+    int j =i;
     while(j<days.size() && days[j] <= passendday){
         j++;
     }
@@ -17,7 +20,7 @@ int helper(vector<int>&days , vector<int>& costs , int i){
 
     //30 days
     passendday = days[i] +30 -1;
-    j =1;
+    j =i;
     while(j<days.size() && days[j] <= passendday){
         j++;
     }

@@ -85,20 +85,32 @@ void multitwo(int arr[] , int size ,int index){
 	multitwo(arr , size ,index+1);
 }
 
+int converter(vector<int>&digits , int index  = 0  , int currentNumber = 0 ){
+	if(index  == digits.size()){
+		return currentNumber;
+	}
+	currentNumber = currentNumber*10 + digits[index];
+
+	return converter(digits , index+1 , currentNumber);
+
+}
+
 int main() {
 
-	int num = 4217;
-	vector<int> ans;
-	printDigits(num,ans);
+	// int num = 4217;
+	// vector<int> ans;
+	// printDigits(num,ans);
 
-	for(int num: ans) {
-		cout << num << endl;
-	}
+	// for(int num: ans) {
+	// 	cout << num << endl;
+	// }
 	
 	
-	int arr[] = {11,20,31,40,51};
-	int size = 5;
-	int index = 0;
+	// int arr[] = {11,20,31,40,51};
+	// int size = 5;
+	// int index = 0;
+	vector<int>arr = {4,2,1,7};
+	cout << converter(arr);
 	//multitwo(arr , size ,index);
 	//printArray(arr , size , index);
 	// vector<int> ans;
@@ -118,9 +130,9 @@ int main() {
 	// cout << "Minimum number in array: " << mini << endl;
 
 	
-	int target = 50;
-	cout <<"Tagret found or not: "<< searchArray(arr,size,target, index) << endl;
-	printArray(arr,size, index);
+	// int target = 50;
+	// cout <<"Tagret found or not: "<< searchArray(arr,size,target, index) << endl;
+	// printArray(arr,size, index);
 
 
 

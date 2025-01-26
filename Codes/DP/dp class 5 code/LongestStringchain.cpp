@@ -58,3 +58,39 @@ int main() {
 	cout<<" The length of the longest string chain is : "<<longestStrChain(words);
 	
 }
+
+
+
+// above approach is good but below is more good approach 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int longestStrChain(vector<string>& words) {
+    // Sort words by their lengths
+    sort(words.begin(), words.end(), [](const string& a, const string& b) {
+        return a.size() < b.size();
+    });
+
+    unordered_map<string, int> dp; // dp[word] stores the longest chain ending at 'word'
+    int maxi = 1;
+
+    for (string word : words) {
+        dp[word] = 1; // Minimum chain length for a single word is 1
+        for (int i = 0; i < word.size(); i++) {
+            // Remove one character from the word
+            string prev = word.substr(0, i) + word.substr(i + 1);
+            if (dp.find(prev) != dp.end()) {
+                dp[word] = max(dp[word], dp[prev] + 1);
+            }
+        }
+        maxi = max(maxi, dp[word]); // Update global maximum chain length
+    }
+
+    return maxi;
+}
+
+int main() {
+    vector<string> words = {"a", "b", "ba", "bca", "bda", "bdca"};
+    cout << "The length of the longest string chain is: " << longestStrChain(words) << endl;
+}

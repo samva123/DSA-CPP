@@ -50,3 +50,34 @@ public:
         
     }
 };
+
+
+// below is the same code with time n+m and 
+// 1 as space just another way to write 
+
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* left, ListNode* right) {
+        // Create a dummy node to act as the head of the merged list
+        ListNode dummy(-1);
+        ListNode* tail = &dummy;
+
+        // Merge the two lists
+        while (left && right) {
+            if (left->val <= right->val) {
+                tail->next = left;
+                left = left->next;
+            } else {
+                tail->next = right;
+                right = right->next;
+            }
+            tail = tail->next;
+        }
+
+        // Attach the remaining nodes (if any) from the non-empty list
+        tail->next = left ? left : right;
+
+        return dummy.next;
+    }
+};

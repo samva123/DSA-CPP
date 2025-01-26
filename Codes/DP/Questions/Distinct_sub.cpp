@@ -99,34 +99,37 @@ public:
 
 class Solution {
 public:
+     const int MOD = 1000000007;  // Define a large prime for modulo
     int numDistinct(string s, string t) {
         int m = s.size(), n = t.size();
+        
+        // Edge case: if t is longer than s, no subsequences can match
         if (n > m) return 0;
 
-        const int MOD = 1e9 + 7; // Modulo to prevent overflow
-        vector<long long> prev(n + 1, 0), curr(n + 1, 0);
-        prev[n] = 1;  // Base case: If t is empty, there's exactly one way to match it (by deleting all characters in s)
+        // Previous and current rows for space optimization
+        vector<int> prev(n + 1, 0), curr(n + 1, 0);
 
+        // Base case: if t is empty, there's exactly one way to match it
+        prev[n] = 1;  // dp[i][n] = 1 for all i
+
+        // Filling the dp table bottom-up
         for (int i = m - 1; i >= 0; --i) {
             curr[n] = 1;  // Base case for the current row
             for (int j = n - 1; j >= 0; --j) {
-                curr[j] = prev[j];  // Skip the current character in s
-                if (s[i] == t[j]) {
-                    curr[j] += prev[j + 1];  // Match the current character
-                    curr[j] %= MOD;         // Apply modulo
+                long long ans = 0;
+                 if (s[i] == t[j]) {
+                    ans += prev[j + 1];  // Match the current character
                 }
+                ans += prev[j];  // Skip the current character in s
+                curr[j] = ans % MOD;  // Take modulo to avoid overflow
             }
-            swap(prev, curr);
+            prev = curr;  // Move to the next row
         }
 
-        return prev[0];
+        return prev[0];  // Final result is stored in prev[0]
     }
 };
 
-
-
-// Time Complexity: O(m * n), where m and n are the lengths of s and t respectively.
-// Space Complexity: O(n), where n is the length of t. This is because we are using two 1D arrays of size n + 1.
 
 
 

@@ -61,3 +61,39 @@ int main() {
   print(v);
   return 0;
 }
+
+
+
+#include <stdio.h>
+
+int insertionSortShifts(int arr[], int n) {
+    int shifts = 0;
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        // Count and perform shifts while sorting
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+            shifts++; // Increment shifts for each movement
+        }
+        arr[j + 1] = key; // Place the key in its correct position
+    }
+    return shifts; // Return total shift count
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+    while (T--) {
+        int N;
+        scanf("%d", &N);
+        int arr[N];
+        for (int i = 0; i < N; i++) {
+            scanf("%d", &arr[i]);
+        }
+        printf("%d\n", insertionSortShifts(arr, N));
+    }
+    return 0;
+}

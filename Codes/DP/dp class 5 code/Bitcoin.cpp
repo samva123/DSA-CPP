@@ -43,3 +43,79 @@ int main() {
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////below is my approach/////////////
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    int solve(vector<int>& num, vector<int>& lis) {
+        if (num.size() == 0) {
+            return 0;
+        }
+        vector<int> ans;
+        lis.push_back(1);
+        ans.push_back(num[0]);
+        for (int i = 1; i < num.size(); i++) {
+            if (num[i] > ans.back()) {
+                ans.push_back(num[i]);
+                lis.push_back(ans.size());
+            } else {
+                int index = lower_bound(ans.begin(), ans.end(), num[i]) - ans.begin();
+                ans[index] = num[i];
+                lis.push_back(index + 1);
+            }
+        }
+        return ans.size();
+    }
+
+    int LongestBitonicSequence(int n, vector<int>& nums) {
+        vector<int> lis, lds;
+        solve(nums, lis);
+        reverse(nums.begin(), nums.end());
+        solve(nums, lds);
+        reverse(lds.begin(), lds.end());  // Reverse to align with original array
+
+        int max_length = 0;
+        for (int i = 0; i < n; i++) {
+            if (lis[i] > 1 && lds[i] > 1) {  // Both parts must be valid
+                max_length = max(max_length, lis[i] + lds[i] - 1);
+            }
+        }
+        return max_length;
+    }
+};
+

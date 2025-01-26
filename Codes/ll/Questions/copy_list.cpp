@@ -1,4 +1,5 @@
-/*
+#include <bits/stdc++.h>
+using namespace std;
 // Definition for a Node.
 class Node {
 public:
@@ -12,7 +13,7 @@ public:
         random = NULL;
     }
 };
-*/
+
 
 class Solution {
 public:
@@ -51,3 +52,12 @@ public:
         
     }
 };
+
+
+// Why This is Already Optimal
+// Time Complexity:
+// Each node is traversed only a constant number of times (3 passes in total). So, the time complexity is O(n).
+// Space Complexity:
+// No extra memory is used for hash maps or arrays. The cloning and linking are done within the existing list, so the space complexity is O(1).
+// Is There a More Optimized Approach?
+// No, there isn't a better solution in terms of time and space complexity. Your solution is state-of-the-art for this problem.

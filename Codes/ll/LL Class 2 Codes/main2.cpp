@@ -65,6 +65,7 @@ void print(Node* head) {
                 cout << temp->data << "->";
                 temp = temp->next;
         }
+        cout << "NULL";
 }
 
 int findLength(Node* &head ) {

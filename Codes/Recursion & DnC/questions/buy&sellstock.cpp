@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
     void maxprofitfinder(vector<int>&prices , int i , int&minprice , int&maxprofit){

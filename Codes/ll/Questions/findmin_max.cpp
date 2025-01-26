@@ -40,3 +40,11 @@ public:
         
     }
 };
+
+
+// e and Space Complexity Analysis:
+// Time Complexity:
+// O(n), where n is the number of nodes in the linked list.
+// The while loop iterates through the entire list once, checking for critical points (local maxima and minima), and performing constant-time operations inside the loop.
+// Space Complexity:
+// O(1), because we're only using a constant amount of extra space (for variables like i, mindist, prev_i, first_i, etc.), irrespective of the input size.
