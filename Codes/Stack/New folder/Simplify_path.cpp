@@ -88,3 +88,50 @@ public:
 // This approach maintains the time complexity of O(n) and space complexity of O(n), but it simplifies the code by using a vector and directly constructing the result string.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    string simplifyPath(string path) {
+        vector<string> components;
+        int n = path.size();
+        int i = 0;
+
+        while (i < n) {
+            while (i < n && path[i] == '/') ++i;  // Skip leading '/'
+            int start = i;
+            while (i < n && path[i] != '/') ++i;  // Extract token
+            string token = path.substr(start, i - start);
+
+            if (token == "..") {
+                if (!components.empty()) {
+                    components.pop_back();  // Go up one level
+                }
+            } else if (!token.empty() && token != ".") {
+                components.push_back(token);
+            }
+        }
+
+        string result = "/";
+        for (int j = 0; j < components.size(); ++j) {
+            if (j > 0) result.append("/");
+            result.append(components[j]);
+        }
+
+        return result;
+    }
+};
+
+
+// slightest optimisation

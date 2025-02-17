@@ -15,6 +15,11 @@ public:
             output.push_back(ch);
             solve(ans,mapping,str,index+1,output);
             output.pop_back();
+
+
+            // we can also write below line instead of above three lines 
+            // solve(ans,mapping,str,index+1,output+ch);
+
         }
 
     }

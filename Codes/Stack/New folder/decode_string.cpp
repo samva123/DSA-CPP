@@ -1,3 +1,9 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+
+
 class Solution {
 public:
     string decodeString(string s) {
@@ -111,3 +117,58 @@ public:
 // This approach maintains the time complexity of O(n * k) and space complexity of O(n), but it simplifies the code by using a single stack to store both characters and numbers.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    string decodeString(string s) {
+        stack<pair<int, int>> st;  // Stores (previous string length, repeat count)
+        string currentString = "";
+        int currentNum = 0;
+
+        for (char ch : s) {
+            if (isdigit(ch)) {
+                currentNum = currentNum * 10 + (ch - '0');  // Build multi-digit numbers
+            } 
+            else if (ch == '[') {
+                st.push({currentString.size(), currentNum});  // Store the current string size instead of full string
+                currentNum = 0;
+            } 
+            else if (ch == ']') {
+                auto [prevSize, repeatTimes] = st.top();
+                st.pop();
+                
+                string repeatedString = currentString.substr(prevSize);  // Get the substring to repeat
+                stringstream ss;
+                while (repeatTimes--) {
+                    ss << repeatedString;
+                }
+                
+                currentString = currentString.substr(0, prevSize) + ss.str();  // Append efficiently
+            } 
+            else {
+                currentString += ch;
+            }
+        }
+
+        return currentString;
+    }
+};

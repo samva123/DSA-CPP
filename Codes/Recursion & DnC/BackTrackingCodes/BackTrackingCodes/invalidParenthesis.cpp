@@ -20,11 +20,11 @@ public:
         else {
             //bracket wala case
             if(s[index] =='(') {
-                //removal - include
+                //removal - include(remove karu)
                 if(left > 0) {
                     solve(s, index + 1, left-1, right, bal, output, ans);
                 }
-                //removal - exclude
+                //removal - exclude(remove na karu)
                 output.push_back(s[index]);
                 solve(s, index+1, left, right, bal+1,output, ans );
                 output.pop_back();

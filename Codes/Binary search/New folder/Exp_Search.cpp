@@ -32,3 +32,16 @@ int main(){
     cout << ans << endl;
     return 0;
 }
+
+
+// for unbounded serach algo would be 
+
+// int i = 0 ; 
+// int j = 1;
+
+// while(a[j] < x){
+//     i = j ;
+//     j = j*2;
+// }
+
+// start  = i and end  = j

@@ -23,10 +23,10 @@ public:
     virtual void hello(){
         std::cout << "hello" << std::endl;
     }
-    void makeSound() override
-    {
-        std::cout << "Dog barks" << std::endl;
-    }
+    // void makeSound() override
+    // {
+    //     std::cout << "Dog barks" << std::endl;
+    // }
     ~Dog(){
         std::cout << "dog destructor" << std::endl;
     }
@@ -56,12 +56,13 @@ int main()
     sound(animal);
     // delete animal;
 
-    // Dog *hello = new Animal();
-    // Animal *hello = new Animal();
-    // Animal *hello1 = new Dog();
-    // Dog *hello2 = new Dog();
+    //Dog *hello = new Animal();
+    Animal *hello = new Animal();
+    //sound();
+    Animal *hello1 = new Dog();
+    Dog *hello2 = new Dog();
 
-    // sound(hello);
+    sound(hello1);
 
     // Animal *animalPtr;
     // Dog dogObj;

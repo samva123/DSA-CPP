@@ -84,7 +84,7 @@ void printAllPath(int maze[][4], int row, int col, int srcx, int srcy, string &o
 
 	//DOWN
 	newx = srcx+1;
-	 newy = srcy;
+	newy = srcy;
 	if(isSafe(srcx, srcy, newx, newy,maze,row,col,visited )) {
 		//mark visited
 		visited[newx][newy] = true;

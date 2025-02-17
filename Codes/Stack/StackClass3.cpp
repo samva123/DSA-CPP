@@ -142,7 +142,7 @@ public:
             while (!st.empty() && (i == n || heights[st.top()] >= heights[i])) {
                 int height = heights[st.top()];
                 st.pop();
-                int width = st.empty() ? i : i - st.top() - 1;
+                int width = st.empty() ? i : i - st.top() - 1;// arr[i] *(nse-pse-1)
                 maxArea = max(maxArea, height * width);
             }
             st.push(i);

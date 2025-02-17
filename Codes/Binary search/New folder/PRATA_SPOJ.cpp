@@ -12,6 +12,8 @@ bool isPossible(vector<int>cooksRanks , int nP , int mid ){
         // while(timeTaken * j <= time){
         //     parathas++;
         //     j++;
+
+        
         // }
         int R = cooksRanks[i];
         int j =1;

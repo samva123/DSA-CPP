@@ -48,7 +48,7 @@ int main()
 
     abc *a = new abc(1,2);
     abc b = *a;
-    delete a;
+    // delete a;
     b.print();
     return 0;
 

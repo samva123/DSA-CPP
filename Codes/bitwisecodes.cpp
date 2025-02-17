@@ -40,12 +40,12 @@ int main() {
 	// //verify krte h inc hua ya nahi
 	// cout << a << endl;
 
-	// int a = 10;
-	// cout << (++a)*10 << endl;
+	int a = 10;
+	cout << (++a)*10 << endl;
 
-	// cout << (a++)*10 << endl;
+	cout << (a++)*10 << endl;
 
-	// cout << a ;
+	cout << a ;
 
 	// int a = 10;
 	// cout << ((a++)*(++a)) << endl;

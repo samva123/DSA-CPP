@@ -97,20 +97,20 @@ int converter(vector<int>&digits , int index  = 0  , int currentNumber = 0 ){
 
 int main() {
 
-	// int num = 4217;
-	// vector<int> ans;
-	// printDigits(num,ans);
+	int num = 4217;
+	vector<int> ans;
+	printDigits(num,ans);
 
-	// for(int num: ans) {
-	// 	cout << num << endl;
-	// }
+	for(int num: ans) {
+		cout << num << endl;
+	}
 	
 	
 	// int arr[] = {11,20,31,40,51};
 	// int size = 5;
 	// int index = 0;
-	vector<int>arr = {4,2,1,7};
-	cout << converter(arr);
+	// vector<int>arr = {4,2,1,7};
+	// cout << converter(arr);
 	//multitwo(arr , size ,index);
 	//printArray(arr , size , index);
 	// vector<int> ans;
