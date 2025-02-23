@@ -96,6 +96,27 @@ int fastCOuntSetBits(int n) {
 	return count;
 }
 
+////////////Striver////////////////
+#include <iostream>
+using namespace std;
+
+int countSetBitsLoop(int n) {
+    int count = 0;
+    for (int i = 0; i < 32; i++) {  // Loop through all 32 bits
+        if (n & (1 << i)) {  // Check if the i-th bit is set
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    int n = 29;  // Binary: 11101, expected output: 4
+    cout << "Set bits count: " << countSetBitsLoop(n) << endl;
+    return 0;
+}
+
+
 void clearBitsInRange(int n, int i, int j) {
 	int a = (-1 << (i+1));
 	int b = ~(-1 << j);
