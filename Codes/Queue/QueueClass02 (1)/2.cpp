@@ -165,3 +165,28 @@ int main()
 
 
 
+/// vaibhav sir's approach for finding negative first
+
+// void neg(){
+//     for(int i = 0 ; i < n ; i++){
+//         if(arr[i] < 0){
+//             dq.add[i];
+//         }
+
+//         if(!dq.empty() && dq.peekFirst() < i-k+1){
+            
+//             dq.removeFirst();
+//         }
+
+
+//         if(i >= k-1){
+//             if(dq.isEmpty() ){
+//                 cout << "0";
+//             }
+//             else{
+//                 cout << arr[dq.peek]
+//             }
+//         }
+//     }
+// }
+

@@ -1,14 +1,15 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+#include <bits/stdc++.h>
+using namespace std;
+//Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
@@ -51,3 +52,51 @@ public:
                 
     }
 };
+
+
+
+
+
+
+
+// both are same complexities of Nlogn and n 
+
+
+
+
+
+
+class Solution {
+    public:
+        map<int, map<int, vector<int>>> nodes; // Stores {col -> {row -> {values}}}
+        
+        void dfs(TreeNode* root, int row, int col) {
+            if (!root) return;
+            
+            nodes[col][row].push_back(root->val); // Store value
+            
+            dfs(root->left, row + 1, col - 1);  // Left child: decrease column, increase row
+            dfs(root->right, row + 1, col + 1); // Right child: increase column, increase row
+        }
+    
+        vector<vector<int>> verticalTraversal(TreeNode* root) {
+            vector<vector<int>> ans;
+            dfs(root, 0, 0);
+    
+            for (auto& col : nodes) {
+                vector<int> vertical;
+                for (auto& row : col.second) {
+                    sort(row.second.begin(), row.second.end()); // Sort values within same row
+                    vertical.insert(vertical.end(), row.second.begin(), row.second.end());
+                }
+                ans.push_back(vertical);
+            }
+            return ans;
+        }
+    };
+    
+
+   
+
+
+

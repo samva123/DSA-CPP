@@ -1,14 +1,17 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+#include <bits/stdc++.h>
+using namespace std;
+
+
+//Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
 class Solution {
 public:
     bool solve(TreeNode* root, int targetSum, int sum ){
@@ -35,3 +38,35 @@ public:
         return ans;  
     }
 };
+
+
+
+//////////JAVA///////////////////
+
+// class Solution {
+//     public boolean help(TreeNode root , int targetSum , int sum){
+//         if(root ==  null){
+//             return false;
+//         }
+
+//         sum = sum + root.val;
+//         if(root.right == null && root.left == null){
+//             if(sum == targetSum){
+//                 return true;
+//             }else{
+//                 return false;
+//             }
+//         }
+
+//         Boolean left = help(root.left , targetSum , sum);
+//         Boolean right  = help(root.right , targetSum , sum);
+//         return left||right;
+//     }
+//     public boolean hasPathSum(TreeNode root, int targetSum) {
+
+//         int sum  = 0;
+//         boolean ans =  help(root , targetSum , sum);
+//         return ans;
+        
+//     }
+// }

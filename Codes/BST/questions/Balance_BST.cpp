@@ -37,3 +37,15 @@ public:
     }
     
 };
+
+
+
+// ✅ Current Approach Summary
+// Inorder Traversal → O(n) time, O(n) space (to store values)
+
+// Build Balanced BST from sorted array → O(n) time
+
+// 🔹 Total:
+// Time: O(n)
+
+// Space: O(n) for vector + O(log n) recursion stack

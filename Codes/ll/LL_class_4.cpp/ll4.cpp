@@ -25,33 +25,33 @@ Node* getstartingPoint(Node* &head){
 
     Node *slow = head;
     Node *fast = head;
-while (fast != NULL)
-    {
-        fast = fast->next;
-        if (fast != NULL)
+    while (fast != NULL)
         {
             fast = fast->next;
-            slow = slow->next;
+            if (fast != NULL)
+            {
+                fast = fast->next;
+                slow = slow->next;
+            }
+            // check loop
+            if (fast == slow)
+            {
+                break;
+            }
         }
-        // check loop
-        if (fast == slow)
-        {
-            break;
+        if(fast == NULL){
+            return NULL;
         }
-    }
-    if(fast == NULL){
-        return NULL;
-    }
 
-    slow = head;
+        slow = head;
 
-    while(fast != slow){
-        slow = slow -> next;
-        fast = fast -> next;
+        while(fast != slow){
+            slow = slow -> next;
+            fast = fast -> next;
 
 
-    }
-    return slow;
+        }
+        return slow;
 
 
 }
@@ -63,7 +63,7 @@ void removeloop(Node* &head){
 
     Node *slow = head;
     Node *fast = head;
-while (fast != NULL)
+    while (fast != NULL)
     {
         fast = fast->next;
         if (fast != NULL)

@@ -148,6 +148,35 @@ bool searchInBST(Node* root, int target) {
 	}
 
 	return leftAns || rightAns;
+
+
+	////////////we can shorten the code 
+
+	// if (target > root->data)
+    //     return searchInBST(root->right, target);
+    // else
+    //     return searchInBST(root->left, target);
+
+
+
+
+
+	/////////iterative
+
+	// bool searchInBST(Node* root, int target) {
+	// 	while (root != NULL) {
+	// 		if (root->data == target)
+	// 			return true;
+	// 		else if (target < root->data)
+	// 			root = root->left;
+	// 		else
+	// 			root = root->right;
+	// 	}
+	// 	return false;
+	// }
+	
+
+	
 }
 
 Node* deleteFromBST(Node* root, int target) {

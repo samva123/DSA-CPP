@@ -53,6 +53,29 @@ public:
 };
 
 
+// import java.util.*;
+
+// class Solution {
+//     public List<Integer> findLeastGreater(int[] arr, int n) {
+//         List<Integer> ans = new ArrayList<>(Collections.nCopies(n, -1));
+//         TreeSet<Integer> bst = new TreeSet<>();
+
+//         for (int i = n - 1; i >= 0; i--) {
+//             Integer nextGreater = bst.higher(arr[i]);  // strictly greater
+
+//             if (nextGreater != null) {
+//                 ans.set(i, nextGreater);
+//             }
+
+//             bst.add(arr[i]);
+//         }
+
+//         return ans;
+//     }
+// }
+
+
+
 // Time Complexity
 // The time complexity of the provided code is O(N log N), where N is the number of elements in the array. This is because each insertion operation in the BST takes O(log N) time on average, and there are N elements to insert.
 

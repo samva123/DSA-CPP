@@ -162,6 +162,47 @@ void adddOne(Node * &head){
 
 }
 
+///////////////////////gfg//////////
+class Solution {
+        public:
+          Node* reverse(Node* head) {
+              Node* prev = NULL;
+              Node* curr = head;
+              
+              while (curr != NULL) {
+                  Node* nextNode = curr->next;
+                  curr->next = prev;
+                  prev = curr;
+                  curr = nextNode;
+              }
+              return prev;
+          }
+          
+          Node* addOne(Node* head) {
+              head = reverse(head);
+              
+              int carry = 1;
+              Node* temp = head;
+              
+              while (temp != NULL) {
+                  int sum = temp->data + carry;
+                  temp->data = sum % 10;
+                  carry = sum / 10;
+                  
+                  if (carry == 0) break;
+                  
+                  if (temp->next == NULL && carry != 0) {
+                      temp->next = new Node(carry);
+                      carry = 0;
+                  }
+                  temp = temp->next;
+              }
+              
+              return reverse(head);
+          }
+      };
+      
+
 
 int main() {
 

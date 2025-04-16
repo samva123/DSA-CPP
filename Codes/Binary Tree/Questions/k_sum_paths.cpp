@@ -1,14 +1,18 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+// path sum 3 - leetcode 
+
+
+#include <bits/stdc++.h>
+using namespace std;
+//Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
 class Solution {
 public:
     int ans = 0;
@@ -175,6 +179,11 @@ public:
 };
 
 
+//////////////////JAVA//////////////////////////
+
+
+
+/// https://chatgpt.com/c/67f3f6f0-74dc-8003-a278-e43fa8fd13b3
 
 
 

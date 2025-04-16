@@ -284,7 +284,7 @@ public:
             arr[rear] = val;
         }
         // circular Nature
-        else if (rear == size - 1 & front != 0)
+        else if (rear == size - 1 && front != 0)
         {
             rear = 0;
             arr[rear] = val;

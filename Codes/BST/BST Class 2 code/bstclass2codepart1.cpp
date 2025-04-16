@@ -223,6 +223,25 @@ Node* bstFromInorder(int inorder[], int s, int e) {
 	return root;
 }
 
+///////////////below approach is iterative but it is very baad as it is taking o(n2) time
+
+// Node* insertIntoBST(Node* root, int data) {
+// 	if (root == NULL) return new Node(data);
+// 	if (data < root->data)
+// 		root->left = insertIntoBST(root->left, data);
+// 	else
+// 		root->right = insertIntoBST(root->right, data);
+// 	return root;
+// }
+
+// Node* bstFromInorder(int inorder[], int s, int e) {
+// 	Node* root = NULL;
+// 	for (int i = s; i <= e; ++i) {
+// 		root = insertIntoBST(root, inorder[i]);
+// 	}
+// 	return root;
+// }
+
 
 int main() {
 
