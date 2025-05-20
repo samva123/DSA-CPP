@@ -27,6 +27,10 @@ public:
         int maxi = INT_MIN;
         int mini = INT_MAX;
 
+
+
+        
+
         //process first k elements ko 
         for(int i=0; i<nums.size(); i++) {
             int element = nums[i][0];

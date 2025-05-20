@@ -43,6 +43,27 @@ public:
 	// 		}cout<<endl;
 	// 	}
 	// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 	// void bellmanFord(int n, char src) {
 	// 	//initial state
 	// 	vector<int> dist(n,INT_MAX);
@@ -90,6 +111,28 @@ public:
 	// 	}
 	// }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	// void floydWarshal(int n) {
 	// 	//intial state
 	// 	vector<vector<int> > dist(n, vector<int>(n, 1e9));
@@ -124,6 +167,38 @@ public:
 	// 		cout << endl;
 	// 	}
 	// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	void dfs1(int node, stack<int>& ordering, unordered_map<int,bool>& vis) {
 		vis[node] = true;
@@ -185,6 +260,23 @@ public:
 	}
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int main() {
 	Graph g;

@@ -148,3 +148,8 @@ int main() {
   // h.printHeap();
   return 0;
 }
+
+
+////////insertion and deletion takes logn time 
+////////min and max takes constant time 
+///////making a heap from array takes n time

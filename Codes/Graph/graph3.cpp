@@ -132,14 +132,14 @@ int main() {
 	g.addEdge(2, 3, 0);
 
 //int n = 7;
-	int src = 0;
-	int dest = 3;
+	// int src = 0;
+	// int dest = 3;
 
-	g.shortestPathBfs(src, dest);
+	// g.shortestPathBfs(src, dest);
 
 
 	
-	//g.printAdjList();
+	g.printAdjList();
 	// int n = 8;
 	// vector<int> topoOrder;
 	// g.topSortBfs(n, topoOrder);

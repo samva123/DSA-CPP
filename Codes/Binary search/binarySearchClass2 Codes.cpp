@@ -33,6 +33,37 @@ int findPivotIndex(vector<int>& arr) {
     }
 
 
+//////////////////////////////////////////////////MINOR CHANGES/////////////////
+
+//     int findPivotIndex(vector<int>& arr) {
+//     int n = arr.size();
+//     int s = 0;
+//     int e = n - 1;
+
+//     while (s <= e) {
+//         int mid = s + (e - s) / 2;
+
+//         // corner case: if mid is at the boundaries
+//         if (mid < n - 1 && arr[mid] > arr[mid + 1])
+//             return mid;
+//         if (mid > 0 && arr[mid] < arr[mid - 1])
+//             return mid - 1;
+
+//         if (arr[s] <= arr[mid]) {
+//             // Left part is sorted, pivot must be in right
+//             s = mid + 1;
+//         } else {
+//             // Pivot is in left part
+//             e = mid - 1;
+//         }
+//     }
+
+//     // If no rotation (sorted array), last element is the pivot
+//     return n - 1;
+// }
+
+
+
 int main() {
   vector<int> v;
 

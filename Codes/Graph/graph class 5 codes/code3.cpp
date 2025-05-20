@@ -1,3 +1,5 @@
+#include <bits/stdc++.h>
+using namespace std;
 // class Solution {
 // public:
 
@@ -79,10 +81,9 @@ public:
         vector<vector<int> > diff(row, vector<int>(col, INT_MAX));
         int destX = row-1;
         int destY = col-1;
-        //initial state
-        //set srcn ka distance 0
+        
         diff[0][0] = 0;
-        //min heap meentry for src push krdo
+
         mini.push({0,{0,0}});
 
         while(!mini.empty()) {
@@ -92,27 +93,20 @@ public:
             pair<int,int>  currNodeIndexPair = topPair.second;
             int currX = currNodeIndexPair.first;
             int currY = currNodeIndexPair.second;
-            //cout << "CurrDiff: " << currDiff << " currX " << currX <<" currY " << currY << endl;
-            
-            //now we can travel to all nbr i.e. top, down, left, right
+
             int dx[] = {-1,0,1,0};
             int dy[] = {0,1,0,-1};
             for(int i=0; i<4; i++) {
-                //cout << "Inside for loop for currX " << currX << " currY " << currY  << endl;
+         
                 int newX = currX + dx[i];
                 int newY = currY + dy[i];
                 if(isSafe(newX, newY,row,col)) {
-                    //cout << "Inside safe if condition with currX " << currX << " currY " << currY << endl;
-                    //cout << " newX " << newX << " newY " << newY << endl; 
+                    
                     int maxDiff = max(currDiff, abs(heights[currX][currY]-heights[newX][newY]));
-                    //check can we update diff array
-                    //diff[newX][newY] = min(diff[newX][newY], maxDiff);
-                    //cout << "diff updated " << diff[newX][newY] << endl;
-                    //entry create karo min Heap me
                     if(maxDiff < diff[newX][newY]) {
                         diff[newX][newY] = maxDiff;
                         mini.push({diff[newX][newY], {newX, newY}});
-                        //cout << "new entry added " << endl;
+                       
                     }
                 }
             }

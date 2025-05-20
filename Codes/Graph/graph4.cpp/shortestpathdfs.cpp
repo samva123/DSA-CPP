@@ -108,10 +108,10 @@ int main() {
 
 	//g.printAdjList();
 
-	//int src = 0;
-	//stack<int> topoOrder;
-	//unordered_map<int,bool> visited;
-	//g.topoOrderDfs(src, topoOrder, visited);
+	int src = 0;
+	stack<int> topoOrder;
+	unordered_map<int,bool> visited;
+	g.topoOrderDfs(src, topoOrder, visited);
 
 	// cout << "printing topo order" << endl;
 	// while(!topoOrder.empty()) {

@@ -57,28 +57,28 @@ public:
 
 
 
-class Solution {
-    public void func(TreeNode root, int targetSum, List<List<Integer>> result, List<Integer> temp, int sum) {
-        if (root == null) return;
+// class Solution {
+//     public void func(TreeNode root, int targetSum, List<List<Integer>> result, List<Integer> temp, int sum) {
+//         if (root == null) return;
 
-        temp.add(root.val);
-        sum += root.val;
+//         temp.add(root.val);
+//         sum += root.val;
 
-        if (root.left == null && root.right == null) {
-            if (sum == targetSum) {
-                result.add(temp); // Safe, because it's already a new list
-            }
-            return;
-        }
+//         if (root.left == null && root.right == null) {
+//             if (sum == targetSum) {
+//                 result.add(temp); // Safe, because it's already a new list
+//             }
+//             return;
+//         }
 
-        func(root.left, targetSum, result, new ArrayList<>(temp), sum);
-        func(root.right, targetSum, result, new ArrayList<>(temp), sum);
-    }
+//         func(root.left, targetSum, result, new ArrayList<>(temp), sum);
+//         func(root.right, targetSum, result, new ArrayList<>(temp), sum);
+//     }
 
-    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        List<List<Integer>> result = new ArrayList<>();
-        func(root, targetSum, result, new ArrayList<>(), 0);
-        return result;
-    }
-}
+//     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+//         List<List<Integer>> result = new ArrayList<>();
+//         func(root, targetSum, result, new ArrayList<>(), 0);
+//         return result;
+//     }
+// }
 
