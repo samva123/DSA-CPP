@@ -62,7 +62,7 @@ app.use("/api/v1", todoRoutes);
 
 //start server
 app.listen(PORT, () => {
-  console.log(`Server started successfully aatt ${PORT}`);
+  console.log(`Server started successfully aat ${PORT}`);
 });
 
 //connect to the database
@@ -71,5 +71,11 @@ dbConnect();
 
 //default Route
 app.get("/", (req, res) => {
-  res.send(`<h1> This is HOMEPAGE baby</h1>`);
+  res.send(`<h1> This is HOMEPAGE baba</h1>`);
 });
+
+
+
+// object 
+// 1.) req - body . query params , param , headers , ip
+// 2.) res - send(string only) , json (to send data in object form), status , redirect(to direct api to another api) , sendfile

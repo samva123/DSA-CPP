@@ -30,14 +30,16 @@ const port = 3000;
 
 // })
 
-app.get("/user/:id",(req,res)=>{
+app.get("/user/sam/:id/:idd",(req,res)=>{
     const result = {
         name: "any",
         work: null
     }
     console.log(req.params)
     const id = req.params.id;
+    const id2 = req.params.idd;
     console.log(id);
+    console.log(id2);
     //res.status(200).json({result});
     res.status(200).send("ok");
 
