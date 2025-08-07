@@ -28,6 +28,29 @@ public:
 };
 
 
+
+
+
+// class Solution {
+//     public String largestNumber(int[] nums) {
+       
+//         String[] snums = new String[nums.length];
+//         for (int i = 0; i < nums.length; i++) {
+//             snums[i] = String.valueOf(nums[i]);
+//         }
+//         Arrays.sort(snums, (a, b) -> (b + a).compareTo(a + b));
+//         if (snums[0].equals("0")) return "0";
+
+//         StringBuilder ans = new StringBuilder();
+//         for (String str : snums) {
+//             ans.append(str);
+//         }
+
+//         return ans.toString();
+//     }
+// }
+
+
 // Time and Space Complexity
 // Time Complexity:
 // Conversion to Strings:

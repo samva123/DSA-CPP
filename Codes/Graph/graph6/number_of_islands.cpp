@@ -12,7 +12,7 @@ public:
             return true;
         return false;
     }
-w
+
     void bfs(int i, int j, vector<vector<char>> &grid, map<pair<int, int>, bool> &vis)
     {
         int n = grid.size();

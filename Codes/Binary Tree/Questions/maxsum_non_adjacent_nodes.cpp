@@ -34,3 +34,44 @@ class Solution{
         return max(ans.first , ans.second);
     }
 };
+
+
+
+
+// class TreeNode {
+//     int data;
+//     TreeNode left, right;
+
+//     TreeNode(int val) {
+//         data = val;
+//         left = right = null;
+//     }
+// }
+
+// class Pair {
+//     int first, second;
+//     Pair(int a, int b) {
+//         first = a;
+//         second = b;
+//     }
+// }
+
+// class Solution {
+
+//     Pair maxsum(TreeNode root) {
+//         if (root == null) return new Pair(0, 0);
+
+//         Pair left = maxsum(root.left);
+//         Pair right = maxsum(root.right);
+
+//         int a = root.data + left.second + right.second;
+//         int b = Math.max(left.first, left.second) + Math.max(right.first, right.second);
+
+//         return new Pair(a, b);
+//     }
+
+//     public int getMaxSum(TreeNode root) {
+//         Pair ans = maxsum(root);
+//         return Math.max(ans.first, ans.second);
+//     }
+// }

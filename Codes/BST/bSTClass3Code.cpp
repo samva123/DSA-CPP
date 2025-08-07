@@ -248,6 +248,27 @@ void convertBSTtoDLL(Node* root, Node* &head) {
 	convertBSTtoDLL(root->left, head);
 }
 
+void convertBSTtoDLL(Node* root, Node*& head) {
+    static Node* prev = NULL;
+    if (!root) return;
+
+    // Left
+    convertBSTtoDLL(root->left, head);
+
+    // Node
+    if (prev == NULL) {
+        head = root;       // First node becomes head
+    } else {
+        root->left = prev; // Link current with previous
+        prev->right = root;
+    }
+    prev = root;
+
+    // Right
+    convertBSTtoDLL(root->right, head);
+}
+
+
 Node* convertDLLtoBST(Node* &head, int n) {
 	//base case
 	if(head == NULL || n<=0) {

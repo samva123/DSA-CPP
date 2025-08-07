@@ -52,6 +52,7 @@ Node* getstartingPoint(Node* &head){
 
         }
         return slow;
+    
 
 
 }

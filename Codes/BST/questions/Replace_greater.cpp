@@ -1,35 +1,26 @@
-class Node{
-    public:
-    int data ; 
-    Node*left , *right;
-    Node(int val):data(val) , left(0) , right(0){};
-    
-};
-class Solution{
-    public:
-    Node* insert(Node*root , int val , int&succ){
-        if(!root) return new Node(val);
-        if(val >= root->data){
-            root->right = insert(root->right , val , succ);
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    std::vector<int> findLeastGreater(std::vector<int>& arr, int n) {
+        std::vector<int> ans(n, -1);
+        std::vector<int> sorted; // maintains elements in sorted order
+
+        for (int i = n - 1; i >= 0; --i) {
+            auto it = std::upper_bound(sorted.begin(), sorted.end(), arr[i]);
+            if (it != sorted.end()) {
+                ans[i] = *it;
+            }
+            // Insert arr[i] into sorted at correct position
+            sorted.insert(std::upper_bound(sorted.begin(), sorted.end(), arr[i]), arr[i]);
         }
-        else{
-            succ = root->data;
-            root->left = insert(root->left , val , succ);
-        }
-        return root;
-    }
-    vector<int> findLeastGreater(vector<int>& arr, int n) {
-        vector<int>ans(arr.size() , -1);
-        Node*root = 0 ;
-        for(int i = arr.size()-1;i>=0;--i){
-            int succ = -1;
-            root = insert(root , arr[i] , succ);
-            ans[i] = succ ;
-        }
+
         return ans;
-        
     }
 };
+
 
 
 #include <vector>

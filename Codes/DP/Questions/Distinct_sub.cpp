@@ -25,6 +25,26 @@ public:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     int solve(string&s , string&t , int i , int j , vector<vector<int>>dp){
@@ -51,6 +71,24 @@ public:
 
 // Time Complexity: O(m * n), where m and n are the lengths of s and t respectively. This is because each state (i, j) is computed only once.
 // Space Complexity: O(m * n) due to the memoization table and O(m + n) for the recursion stack.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -92,6 +130,20 @@ public:
 
 // Time Complexity: O(m * n), where m and n are the lengths of s and t respectively. This is because we are filling an m x n DP table.
 // Space Complexity: O(m * n) for the DP table.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

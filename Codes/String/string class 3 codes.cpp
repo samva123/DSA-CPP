@@ -467,7 +467,7 @@ public:
         return s;
     }
 };
-string Solution::str;
+//string Solution::str;
 
 
 

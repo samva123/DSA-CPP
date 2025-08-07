@@ -1,3 +1,7 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
 class Solution {
 public:
     int solveUsingRecursion(string a, string b, int i, int j) {
@@ -20,6 +24,30 @@ public:
         }
         return ans;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     int solveUsingMem(string& a, string& b, int i, int j,vector<vector<int> >& dp) {
         //basecase
         if( i >= a.length()) {
@@ -47,6 +75,38 @@ public:
         return dp[i][j];
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     int solveUsingTabulation(string a, string b) {
         vector<vector<int> > dp(a.length()+1, vector<int>(b.length()+1, 0));
 
@@ -65,6 +125,45 @@ public:
         
         return dp[0][0];
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     int solveUsingTabulationSO(string a, string b) {
         //vector<vector<int> > dp(a.length()+1, vector<int>(b.length()+1, 0));
@@ -94,7 +193,8 @@ public:
         int i = 0;
         int j = 0;
         //vector<vector<int> > dp(text1.length()+1, vector<int>(text2.length()+1, -1));
-        int ans = solveUsingTabulation(text1,text2);
+        int ans = solveUsingRecursion(text1 , text2 , i , j);
+        //solveUsingTabulation(text1,text2);
         return ans;
     }
 };

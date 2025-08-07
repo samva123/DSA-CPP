@@ -1,121 +1,143 @@
 #include <iostream>
-#include<set>
-#include<unordered_map>
-#include<stack>
-#include<queue>
-#include<list>
-#include<climits>
-
-
+#include <unordered_map>
+#include <stack>
+#include <list>
+#include <vector>
+#include <limits.h>
+#include <set>
 using namespace std;
 
-template<typename T>
+// Generic Graph class
+template <typename T>
+class Graph {
+public:
+    unordered_map<T, list<pair<T, int>>> adj;
 
-class Graph{
-    public:
-
-    unordered_map<T , list<pair<T , int >>>adjList;
-    void addEdge(T u , T v , int wt , bool direction){
-        if(direction == 0){
-            adjList[u].push_back({v , wt});
-            adjList[v].push_back({u , wt});
-        }else{
-            adjList[u].push_back({v , wt});
+    void addEdge(T u, T v, int wt, bool direction) {
+        // direction - 0 - undirected
+        // direction - 1 - directed
+        if (direction == 1) {
+            adj[u].push_back({v, wt});
         }
-
-        cout << endl;
-        printadj();
+        else {
+            adj[u].push_back({v, wt});
+            adj[v].push_back({u, wt});
+        }
     }
 
-    void printadj(){
-        for(auto i : adjList){
-            cout << i.first << " : "  << " { ";
-            for(auto nbr : i.second){
-                cout << "{" << nbr.first << "," << nbr.second << "}" << " ";
+    void printAdjList() {
+        for (auto i : adj) {
+            cout << i.first << " : { ";
+            for (auto j : i.second) {
+                cout << "(" << j.first << " , " << j.second << "), ";
             }
-            cout << " } ";
-            cout << endl;
+            cout << "} " << endl;
         }
     }
 
+    void topoOrderDfs(T src, stack<T>& topo, unordered_map<T, bool>& visited) {
+        visited[src] = true;
 
-    void toposortdfs(T src , unordered_map<T , bool>&vis , stack<T>&topo){
-        vis[src] = true;
-
-        for(auto nbr : adjList[src]){
-            auto nbrData  = nbr.first;
-            if(!vis[nbrData]){
-                toposortdfs(nbrData , vis , topo);
+        for (auto nbrPair : adj[src]) {
+            T nbrNode = nbrPair.first;
+            if (!visited[nbrNode]) {
+                topoOrderDfs(nbrNode, topo, visited);
             }
         }
 
         topo.push(src);
     }
 
-    void shortpathdfs(T src , unordered_map<T , int>&dist , stack<T>&topo){
+    void shortestPathDfs(stack<T>& topoOrder, unordered_map<T, int>& dist) {
+        // Initially, maintain src
+        T src = topoOrder.top();
+        topoOrder.pop();
+        dist[src] = 0;
 
-        T ele  = topo.top();
-        topo.pop();
-        dist[src] = 0 ;
-
-
-        for(auto nbr : adjList[src]){
-            auto 
-
+        for (auto nbrPair : adj[src]) {
+            T nbrNode = nbrPair.first;
+            int nbrDist = nbrPair.second;
+            if (dist[src] + nbrDist < dist[nbrNode]) {
+                dist[nbrNode] = dist[src] + nbrDist;
+            }
         }
 
+        while (!topoOrder.empty()) {
+            T src = topoOrder.top();
+            topoOrder.pop();
 
+            for (auto nbrPair : adj[src]) {
+                T nbrNode = nbrPair.first;
+                int nbrDist = nbrPair.second;
+                if (dist[src] + nbrDist < dist[nbrNode]) {
+                    dist[nbrNode] = dist[src] + nbrDist;
+                }
+            }
+        }
 
-
-
-
-
-
+        cout << "Printing the distance map:" << endl;
+        for (auto i : dist) {
+            cout << i.first << " -> " << i.second << endl;
+        }
     }
 
+    void dijkstraShortestDistance(T src, T dest) {
+        unordered_map<T, int> dist;
+        for (auto i : adj) {
+            dist[i.first] = INT_MAX;
+        }
+        set<pair<int, T>> st;
 
+        // Initial state -> (0, src)
+        st.insert({0, src});
+        dist[src] = 0;
 
+        while (!st.empty()) {
+            auto topElement = st.begin();
+            pair<int, T> topPair = *topElement;
+            int topDist = topPair.first;
+            T topNode = topPair.second;
+            st.erase(st.begin());
+
+            for (pair<T, int> nbrPair : adj[topNode]) {
+                T nbrNode = nbrPair.first;
+                int nbrDist = nbrPair.second;
+                if (topDist + nbrDist < dist[nbrNode]) {
+                    auto previousEntry = st.find({dist[nbrNode], nbrNode});
+                    if (previousEntry != st.end()) {
+                        st.erase(previousEntry);
+                    }
+                    dist[nbrNode] = topDist + nbrDist;
+                    st.insert({dist[nbrNode], nbrNode});
+                }
+            }
+        }
+        cout << "Shortest Distance from " << src << " Node to " << dest << " Node: " << dist[dest] << endl;
+    }
 };
 
 
 int main() {
     Graph<char> g;
+    g.addEdge('A', 'B', 1, 1);
+    g.addEdge('B', 'C', 2, 1);
+    g.addEdge('A', 'C', 4, 1);
+    g.printAdjList();
 
-    g.addEdge('a', 'b', 2, 1);
-    g.addEdge('a', 'c', 3, 1);
-    g.addEdge('b', 'd', 4, 1);
-    g.addEdge('c', 'd', 1, 1);
-    g.addEdge('d', 'e', 2, 1);
-    g.addEdge('c', 'f', 5, 1);
-    g.addEdge('e', 'g', 3, 1);
-    g.addEdge('f', 'g', 2, 1);
-
-
-    stack<char>st;
-    unordered_map<char , bool>vis;
-    for(auto node : g.adjList){
-        if(!vis[node.first]){
-            g.toposortdfs(node.first , vis , st );
+    unordered_map<char, bool> visited;
+    stack<char> topo;
+    for (auto node : g.adj) {
+        if (!visited[node.first]) {
+            g.topoOrderDfs(node.first, topo, visited);
         }
     }
-    
 
-
-    while(!st.empty()){
-        auto ele  = st.top();
-        st.pop();
-        cout << ele << " ";
-
-    }
-
-    cout << endl <<  endl;
-
-    unordered_map<char , int>dist;
-    for(auto node : g.adjList){
+    unordered_map<char, int> dist;
+    for (auto node : g.adj) {
         dist[node.first] = INT_MAX;
-
     }
-    g.shortpathdfs('a' , dist , st);
 
-    return 0;
+    g.shortestPathDfs(topo, dist);
+
+    g.dijkstraShortestDistance('A', 'C');
 }

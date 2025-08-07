@@ -106,3 +106,96 @@ int main() {
 
 	return 0;
 }
+
+
+
+
+
+///////////////////////////generic dfs 
+
+
+
+
+
+
+
+// #include <iostream>
+// #include <unordered_map>
+// #include <map>
+// #include <list>
+// #include <stack>
+// #include <algorithm>
+// #include <queue>
+// #include <vector>
+// using namespace std;
+
+// template<typename T>
+// class Graph {
+// public:
+//     unordered_map<T, list<T>> adj;
+
+//     void addEdge(T u, T v, bool direction) {
+//         // direction -> 0 undirected 
+//         // direction -> 1 directed
+//         if (direction == 1) {
+//             adj[u].push_back(v);
+//         } else {
+//             adj[u].push_back(v);
+//             adj[v].push_back(u);
+//         }
+//     }
+
+//     void printAdjList() {
+//         for (auto i : adj) {
+//             cout << i.first << ": {";
+//             for (auto j : i.second) {
+//                 cout << j << ",";
+//             }
+//             cout << "}" << endl;
+//         }
+//     }
+
+//     void topoSortDfs(T src, map<T, bool>& visited, stack<T>& st) {
+//         visited[src] = true;
+
+//         for (auto nbr : adj[src]) {
+//             if (!visited[nbr]) {
+//                 topoSortDfs(nbr, visited, st);
+//             }
+//         }
+
+//         st.push(src);
+//     }
+// };
+
+// int main() {
+//     Graph<string> g;
+
+//     g.addEdge("A", "B", 1);
+//     g.addEdge("B", "C", 1);
+//     g.addEdge("A", "D", 1);
+//     g.addEdge("D", "C", 1);
+//     g.addEdge("E", "F", 1);
+
+//     g.printAdjList();
+
+//     map<string, bool> visited;
+//     stack<string> st;
+
+//     // DFS call on all nodes
+//     for (auto nodePair : g.adj) {
+//         string node = nodePair.first;
+//         if (!visited[node]) {
+//             g.topoSortDfs(node, visited, st);
+//         }
+//     }
+
+//     cout << "Printing the Topological Sort ordering (DFS): " << endl;
+//     while (!st.empty()) {
+//         cout << st.top() << " ";
+//         st.pop();
+//     }
+//     cout << endl;
+
+//     return 0;
+// }

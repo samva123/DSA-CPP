@@ -34,6 +34,7 @@ public:
     }
 
     int solveUsingTabulation(int n) {
+        // we can also use n+1 instead of n+2 in dp but then we have to start index from n-1
         vector<vector<int> > dp(n+2, vector<int>(n+1, 0));
         for(int start_index = n; start_index>=1; start_index--) {
             for(int end_index = 1; end_index<=n; end_index++) {
