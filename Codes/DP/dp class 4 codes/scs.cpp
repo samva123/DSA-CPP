@@ -1,35 +1,25 @@
-class Solution {
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+// 1. Recursive Version
+class RecursiveSolution {
 public:
     string solveUsingRecursion(string a, string b, int i, int j) {
-        // Base cases
-        if (i >= a.length()) {
-            // Add the remaining part of b
-            return b.substr(j);
-        }
-        if (j >= b.length()) {
-            // Add the remaining part of a
-            return a.substr(i);
-        }
-
-        // Recursive calls
+        if (i >= a.length()) return b.substr(j);
+        if (j >= b.length()) return a.substr(i);
         if (a[i] == b[j]) {
-            // If characters match, include it in the result
             return a[i] + solveUsingRecursion(a, b, i + 1, j + 1);
         } else {
-            // If characters don't match, choose the shorter option and add the current character
             string option1 = a[i] + solveUsingRecursion(a, b, i + 1, j);
             string option2 = b[j] + solveUsingRecursion(a, b, i, j + 1);
-
-            // Return the shorter of the two options
             return (option1.length() <= option2.length()) ? option1 : option2;
         }
     }
 
     string shortestCommonSupersequence(string str1, string str2) {
-        return solveUsingRecursion(str1, str2, 0, 0) ;
-
-        
-        
+        return solveUsingRecursion(str1, str2, 0, 0);
     }
 };
 
@@ -50,35 +40,19 @@ public:
 
 
 
-/// ////////////////////MEMO/
-class Solution {
+// 2. Memoization Version
+class MemoizationSolution {
 public:
-    string solveUsingRecursion(string a, string b, int i, int j , vector<vector<string>> dp) {
-        // Base cases
-        if (i >= a.length()) {
-            // Add the remaining part of b
-            return b.substr(j);
-        }
-        if (j >= b.length()) {
-            // Add the remaining part of a
-            return a.substr(i);
-        }
-
-        if (!dp[i][j].empty()) {
-            return dp[i][j];
-        }
-
-        // Recursive calls
+    string solveUsingRecursion(string a, string b, int i, int j, vector<vector<string>>& dp) {
+        if (i >= a.length()) return b.substr(j);
+        if (j >= b.length()) return a.substr(i);
+        if (!dp[i][j].empty()) return dp[i][j];
         if (a[i] == b[j]) {
-            // If characters match, include it in the result
-            dp[i][j] =  a[i] + solveUsingRecursion(a, b, i + 1, j + 1 , dp);
+            dp[i][j] = a[i] + solveUsingRecursion(a, b, i + 1, j + 1, dp);
         } else {
-            // If characters don't match, choose the shorter option and add the current character
-            string option1 = a[i] + solveUsingRecursion(a, b, i + 1, j ,dp );
-            string option2 = b[j] + solveUsingRecursion(a, b, i, j + 1,dp);
-
-            // Return the shorter of the two options
-            dp[i][j] =  (option1.length() <= option2.length()) ? option1 : option2;
+            string option1 = a[i] + solveUsingRecursion(a, b, i + 1, j, dp);
+            string option2 = b[j] + solveUsingRecursion(a, b, i, j + 1, dp);
+            dp[i][j] = (option1.length() <= option2.length()) ? option1 : option2;
         }
         return dp[i][j];
     }
@@ -86,11 +60,7 @@ public:
     string shortestCommonSupersequence(string str1, string str2) {
         int m = str1.size(), n = str2.size();
         vector<vector<string>> dp(m, vector<string>(n, ""));
-
-        return solveUsingRecursion(str1, str2, 0, 0 , dp ) ;
-
-        
-        
+        return solveUsingRecursion(str1, str2, 0, 0, dp);
     }
 };
 
@@ -109,46 +79,46 @@ public:
 
 
 
-#include <vector>
-#include <string>
-using namespace std;
 
-class Solution {
+
+
+
+
+
+
+
+
+
+
+
+
+// 3. LCS-based Version
+class LCSSolution {
 public:
     string shortestCommonSupersequence(string s1, string s2) {
-        // find the LCS of s1 and s2
         string lcs = getLCS(s1, s2);
         int i = 0, j = 0;
         string result = "";
-        // merge s1 and s2 with the LCS
         for (char c : lcs) {
-            // add characters from s1 until the LCS character is found
             while (s1[i] != c) {
                 result += s1[i];
                 i++;
             }
-            // add characters from s2 until the LCS character is found
             while (s2[j] != c) {
                 result += s2[j];
                 j++;
             }
-            // add the LCS character
             result += c;
             i++;
             j++;
         }
-        // add any remaining characters from s1 and s2
         result += s1.substr(i) + s2.substr(j);
-        // return the merged string
         return result;
     }
 
-    // helper method to find the LCS of two strings
     string getLCS(string s1, string s2) {
         int m = s1.length(), n = s2.length();
         vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
-
-        // populate the dp table using the solveUsingTabulation logic
         for (int i = m - 1; i >= 0; i--) {
             for (int j = n - 1; j >= 0; j--) {
                 if (s1[i] == s2[j]) {
@@ -158,8 +128,6 @@ public:
                 }
             }
         }
-
-        // reconstruct the LCS from the dp table
         string lcs = "";
         int i = 0, j = 0;
         while (i < m && j < n) {
@@ -169,7 +137,6 @@ public:
                 j++;
             } else if (dp[i][j + 1] > dp[i + 1][j]) {
                 j++;
-
             } else {
                 i++;
             }
@@ -178,7 +145,20 @@ public:
     }
 };
 
+// Example usage
+int main() {
+    string str1 = "abac", str2 = "cab";
 
+    RecursiveSolution rsol;
+    MemoizationSolution msol;
+    LCSSolution lsol;
+
+    cout << "Recursive: " << rsol.shortestCommonSupersequence(str1, str2) << endl;
+    cout << "Memoized:  " << msol.shortestCommonSupersequence(str1, str2) << endl;
+    cout << "LCS-Based: " << lsol.shortestCommonSupersequence(str1, str2) << endl;
+
+    return 0;
+}
 
 
 
