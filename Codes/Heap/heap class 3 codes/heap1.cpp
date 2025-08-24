@@ -75,3 +75,183 @@ int main() {
 
 
 // time and memory leakage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////just wrote a delete line for saving memory leakage///////////
+
+
+
+#include <iostream>
+#include <queue>
+#include <vector>
+using namespace std;
+
+class Info {
+public:
+    int data;
+    int rowIndex;
+    int colIndex;
+
+    Info(int a, int b, int c) {
+        this->data = a;
+        this->rowIndex = b;
+        this->colIndex = c;
+    }
+};
+
+class compare {
+public:
+    bool operator()(Info* a, Info* b) {
+        return a->data > b->data; // min-heap
+    }
+};
+
+void mergeKSortedArrays(int arr[][4], int n, int k, vector<int> &ans) {
+    priority_queue<Info*, vector<Info*>, compare> pq;
+
+    // Push first element of each row
+    for (int row = 0; row < k; row++) {
+        pq.push(new Info(arr[row][0], row, 0));
+    }
+
+    while (!pq.empty()) {
+        Info* temp = pq.top();
+        pq.pop();
+
+        ans.push_back(temp->data);
+
+        if (temp->colIndex + 1 < n) {
+            pq.push(new Info(arr[temp->rowIndex][temp->colIndex + 1], 
+                             temp->rowIndex, temp->colIndex + 1));
+        }
+
+        delete temp; // ✅ free memory to avoid leaks
+    }
+}
+
+int main() {
+    int arr[3][4] = {
+        {1, 4, 8, 11},
+        {2, 3, 6, 10},
+        {5, 7, 12, 14}
+    };
+
+    int n = 4, k = 3;
+    vector<int> ans;
+
+    mergeKSortedArrays(arr, n, k, ans);
+
+    cout << "Merged array: ";
+    for (int x : ans) cout << x << " ";
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////no pointer approach//////////////
+// #include <iostream>
+// #include <queue>
+// #include <vector>
+// using namespace std;
+
+// struct Info {
+//     int data;
+//     int rowIndex;
+//     int colIndex;
+// };
+
+// struct compare {
+//     bool operator()(Info a, Info b) {
+//         return a.data > b.data; // min-heap
+//     }
+// };
+
+// void mergeKSortedArrays(int arr[][4], int n, int k, vector<int> &ans) {
+//     priority_queue<Info, vector<Info>, compare> pq;
+
+//     // Push first element of each row
+//     for (int row = 0; row < k; row++) {
+//         pq.push({arr[row][0], row, 0});
+//     }
+
+//     while (!pq.empty()) {
+//         Info top = pq.top();
+//         pq.pop();
+
+//         ans.push_back(top.data);
+
+//         if (top.colIndex + 1 < n) {
+//             pq.push({arr[top.rowIndex][top.colIndex + 1], top.rowIndex, top.colIndex + 1});
+//         }
+//     }
+// }
+
+// int main() {
+//     int arr[3][4] = {
+//         {1, 4, 8, 11},
+//         {2, 3, 6, 10},
+//         {5, 7, 12, 14}
+//     };
+
+//     int n = 4, k = 3;
+//     vector<int> ans;
+
+//     mergeKSortedArrays(arr, n, k, ans);
+
+//     cout << "Merged array: ";
+//     for (int x : ans) cout << x << " ";
+//     return 0;
+// }

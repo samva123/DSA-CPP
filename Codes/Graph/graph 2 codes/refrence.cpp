@@ -1,5 +1,7 @@
 /////////////////////////////////code to convert edgelist to adjacency list///////////////
 
+#include <bits/stdc++.h>
+using namespace std;
 
 class Solution {
     public:

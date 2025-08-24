@@ -60,3 +60,61 @@ public:
     return head;  
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////n*k approach where n is total nodes and k is total list
+/////////////////////////////very bad approach just simpler/////////////////////
+#include <bits/stdc++.h>
+using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+class Solution {
+public:
+    // merge two sorted linked lists
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode dummy(0);
+        ListNode* tail = &dummy;
+
+        while (l1 && l2) {
+            if (l1->val < l2->val) {
+                tail->next = l1;
+                l1 = l1->next;
+            } else {
+                tail->next = l2;
+                l2 = l2->next;
+            }
+            tail = tail->next;
+        }
+        tail->next = (l1 ? l1 : l2);
+        return dummy.next;
+    }
+
+    // merge k lists one by one
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if (lists.empty()) return nullptr;
+        ListNode* ans = lists[0];
+
+        for (int i = 1; i < lists.size(); i++) {
+            ans = mergeTwoLists(ans, lists[i]);
+        }
+        return ans;
+    }
+};

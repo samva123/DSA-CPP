@@ -1,4 +1,7 @@
- class Info{
+#include <bits/stdc++.h>
+using namespace std;
+
+class Info{
     public:
         char val;
         int count;

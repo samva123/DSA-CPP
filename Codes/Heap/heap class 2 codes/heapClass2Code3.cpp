@@ -47,3 +47,30 @@ int main() {
         cout << "Ans is: " << ans << endl;
         return 0;
 }
+
+
+// 🔹 getKthGreatestElement
+// Steps:
+
+// Insert first k elements into min-heap
+
+// Each insertion = O(log k)
+
+// For k elements = O(k log k)
+
+// Process remaining (n – k) elements
+
+// Each check = compare with pq.top() → O(1)
+
+// If condition holds → pop + push = O(log k)
+
+// Worst case: all (n - k) elements replace → (n - k) × O(log k)
+
+// Return pq.top() → O(1)
+
+// ⏱ Time Complexity:
+
+// O(klogk+(n−k)logk)=O(nlogk)
+// 🗂 Space Complexity:
+
+// Heap stores at most k elements → O(k).

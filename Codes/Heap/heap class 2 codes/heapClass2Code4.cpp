@@ -1,8 +1,19 @@
 //cbt is a valid heap or not 
 #include <iostream>
 #include<queue>
+#include<climits>
 using namespace std;
 
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
 pair<bool, int> solve(Node* root) {
         //base case
         if(root == NULL) {

@@ -21,6 +21,8 @@ void storeInorder(Node* root, vector<int>& inorder) {
     storeInorder(root->right, inorder);
 }
 
+
+
 // Step 2: Postorder traversal to assign values
 void replaceWithInorder(Node* root, vector<int>& inorder, int& index) {
     if (root == nullptr) return;
