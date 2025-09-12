@@ -57,3 +57,11 @@ int main() {
 	longestIncreasingSubsequence(arr,n);
 	return 0;
 }
+
+
+
+// dp[i] → Length of the longest increasing subsequence ending at index i.
+// Example: dp[5] = 3 means the LIS ending at arr[5]=7 has length 3 ([2, 5, 7]).
+
+// hash[i] → The index of the previous element in that LIS chain.
+// Example: hash[5] = 3 means that to reach 7, we came from arr[3] = 5.

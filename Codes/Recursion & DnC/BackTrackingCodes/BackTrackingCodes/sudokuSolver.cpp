@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
     bool isSafe(int row, int col, vector<vector<char>>& board, char value) {

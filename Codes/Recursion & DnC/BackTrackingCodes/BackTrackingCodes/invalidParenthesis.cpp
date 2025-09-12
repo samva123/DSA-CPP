@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
     void solve(string& s, int index, int left, int right, int bal, string &output, unordered_set<string>& ans ) {

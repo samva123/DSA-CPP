@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
     void solve(vector<string>& ans, string mapping[], string str, int index,string output) {
@@ -34,3 +37,63 @@ public:
         
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        if (digits.empty()) return {};
+        
+        vector<string> mapping = {
+            "",    "",    "abc", "def", "ghi",
+            "jkl", "mno", "pqrs","tuv","wxyz"
+        };
+
+        vector<string> ans = {""};  // start with an empty string
+
+        for (char d : digits) {
+            vector<string> temp;
+            string letters = mapping[d - '0'];
+            for (string s : ans) {
+                for (char c : letters) {
+                    temp.push_back(s + c);
+                }
+            }
+            ans.swap(temp);  // update ans with new list
+        }
+
+        return ans;
+    }
+};
+
+int main() {
+    Solution obj;
+    string digits = "23";
+    vector<string> result = obj.letterCombinations(digits);
+
+    for (auto &s : result) cout << s << " ";
+    cout << endl;
+
+    return 0;
+}
