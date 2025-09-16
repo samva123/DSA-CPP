@@ -1,40 +1,30 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
-
-
-
-
-
-// https://chatgpt.com/share/68102b62-16f8-8003-a1c6-4ecd2c66e6b0
-
 
 
 
 class Solution {
 public:
-    void dfs(vector<vector<int>>& isConnected, vector<bool>& visited, int i) {
-        visited[i] = true;
-        
+    void dfs(int node, vector<vector<int>>& isConnected, vector<int>& visited) {
+        visited[node] = 1;
         for (int j = 0; j < isConnected.size(); j++) {
-            if (isConnected[i][j] == 1 && !visited[j]) {
-                dfs(isConnected, visited, j);
+            if (isConnected[node][j] == 1 && !visited[j]) {
+                dfs(j, isConnected, visited);
             }
         }
     }
-    
+
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = isConnected.size();
-        vector<bool> visited(n, false);
+        vector<int> visited(n, 0);
         int count = 0;
-        
+
         for (int i = 0; i < n; i++) {
             if (!visited[i]) {
-                dfs(isConnected, visited, i);
+                dfs(i, isConnected, visited);
                 count++;
             }
         }
-        
         return count;
     }
 };
