@@ -17,7 +17,7 @@ const Page = () => {
       password
     }
     let res = await axios.post("http://localhost:5000/auth/signup" , payload);
-    if(res.status == 201){
+    if(res.status = 201){
       router.push('/login');
     }
     

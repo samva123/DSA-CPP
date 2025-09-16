@@ -9,7 +9,11 @@ const userRouter = require("./routes/user.routes");
 
 const path = require('path');
 
-app.use(cors());
+app.use(cors({
+    origin:"http://localhost:3000",
+    methods:["GET","POST","PUT","DELETE"],
+    credentials:true
+}));
 app.set("view engine", "ejs");
 app.set('views',path.join(__dirname,"views"));
 
