@@ -1,4 +1,8 @@
-   class Solution {
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
 public:
     void topSortBfs(int n, vector<int>& topoOrder,unordered_map<int , list<int> >& adjList) {
 		queue<int> q;

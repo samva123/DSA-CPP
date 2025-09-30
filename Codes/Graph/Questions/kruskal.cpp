@@ -1,107 +1,149 @@
-//{ Driver Code Starts
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-// } Driver Code Ends
+
+class DisjointSet {
+    vector<int> rank, parent, size;
+public:
+    DisjointSet(int n) {
+        rank.resize(n + 1, 0);
+        parent.resize(n + 1);
+        size.resize(n + 1);
+        for (int i = 0; i <= n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+    }
+
+    int findUPar(int node) {
+        if (node == parent[node])
+            return node;
+        return parent[node] = findUPar(parent[node]);
+    }
+
+    void unionByRank(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (rank[ulp_u] < rank[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+        }
+        else if (rank[ulp_v] < rank[ulp_u]) {
+            parent[ulp_v] = ulp_u;
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
+        }
+    }
+
+    void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (size[ulp_u] < size[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+        }
+    }
+};
 class Solution
 {
-    static bool mycmp(vector<int>&a , vector<int>&b){
-        return a[2] < b[2];
-        
-    }
-	public:
-	
-	int findparent(vector<int>&parent , int node){
-	    if(parent[node] == node){
-	        return node ;
-	        
-	    }
-	    return parent[node] =  findparent(parent , parent[node]);
-	}
-	
-	void unionset(int u , int v , vector<int>&parent , vector<int>&rank){
-	    u = findparent(parent , u);
-	    v = findparent(parent , v);
-	    
-	    if(rank[u] < rank[v]){
-	        parent[u] = v;
-	        rank[v]++;
-	    }
-	    else{
-	        parent[v] = u;
-	        rank[u]++;
-	    }
-	}
-	//Function to find sum of weights of edges of the Minimum Spanning Tree.
+public:
+    //Function to find sum of weights of edges of the Minimum Spanning Tree.
     int spanningTree(int V, vector<vector<int>> adj[])
     {
-        vector<int>parent(V);
-        vector<int>rank(V,0);
-        
-        for(int u = 0 ; u<V ; ++u){
-            parent[u] = u;
-        }
-        
-        vector<vector<int>>edges;
-        for(int u = 0 ; u<V;++u){
-            for(auto edge : adj[u]){
-                int v = edge[0];
-                int w = edge[1];
-                edges.push_back({u,v,w});
+        // 1 - 2 wt = 5
+        /// 1 - > (2, 5)
+        // 2 -> (1, 5)
+
+        // 5, 1, 2
+        // 5, 2, 1
+        vector<pair<int, pair<int, int>>> edges;
+        for (int i = 0; i < V; i++) {
+            for (auto it : adj[i]) {
+                int adjNode = it[0];
+                int wt = it[1];
+                int node = i;
+
+                edges.push_back({wt, {node, adjNode}});
             }
         }
-        sort(edges.begin() , edges.end() ,mycmp);
-        
-        int ans = 0;
-        for(auto edge: edges){
-            int u = edge[0];
-            int v = edge[1];
-            int w = edge[2];
-            
-            u = findparent(parent , u);
-            v = findparent(parent , v);
-            
-            if(u!=v){
-                unionset(u,v,parent,rank);
-                ans += w;
+        DisjointSet ds(V);
+        sort(edges.begin(), edges.end());
+        int mstWt = 0;
+        for (auto it : edges) {
+            int wt = it.first;
+            int u = it.second.first;
+            int v = it.second.second;
+
+            if (ds.findUPar(u) != ds.findUPar(v)) {
+                mstWt += wt;
+                ds.unionBySize(u, v);
             }
         }
-        
-        
-        return ans;
+
+        return mstWt;
     }
 };
 
-//{ Driver Code Starts.
+int main() {
 
+    int V = 5;
+    vector<vector<int>> edges = {{0, 1, 2}, {0, 2, 1}, {1, 2, 1}, {2, 3, 2}, {3, 4, 1}, {4, 2, 2}};
+    vector<vector<int>> adj[V];
+    for (auto it : edges) {
+        vector<int> tmp(2);
+        tmp[0] = it[1];
+        tmp[1] = it[2];
+        adj[it[0]].push_back(tmp);
 
-int main()
-{
-    int t;
-    cin >> t;
-    while (t--) {
-        int V, E;
-        cin >> V >> E;
-        vector<vector<int>> adj[V];
-        int i=0;
-        while (i++<E) {
-            int u, v, w;
-            cin >> u >> v >> w;
-            vector<int> t1,t2;
-            t1.push_back(v);
-            t1.push_back(w);
-            adj[u].push_back(t1);
-            t2.push_back(u);
-            t2.push_back(w);
-            adj[v].push_back(t2);
-        }
-        
-        Solution obj;
-    	cout << obj.spanningTree(V, adj) << "\n";
+        tmp[0] = it[0];
+        tmp[1] = it[2];
+        adj[it[1]].push_back(tmp);
     }
 
+    Solution obj;
+    int mstWt = obj.spanningTree(V, adj);
+    cout << "The sum of all the edge weights: " << mstWt << endl;
     return 0;
 }
 
 
-// } Driver Code Ends
+
+// Time Complexity
+
+// 1. Building edge list
+//    You loop over all vertices V and their adjacency lists.
+//    Total edges in adjacency list = 2E (because undirected, every edge stored twice).
+//    Complexity: O(V + E)
+
+// 2. Sorting edges
+//    You store each edge once in edges → size = E.
+//    Sorting takes: O(E log E)
+
+// 3. Processing edges with DSU
+//    For each edge, you do two findUPar operations + possibly one unionBySize.
+//    Each DSU operation = O(α(V)) (inverse Ackermann, ≈ constant in practice)
+//    Total for all edges = O(E ⋅ α(V)) ≈ O(E)
+
+// // Overall Time Complexity: O(E log E)
+
+
+
+// Space Complexity
+
+// 1. DSU storage
+//    parent, rank, size arrays → O(V)
+
+// 2. Edge list
+//    edges vector stores all E edges → O(E)
+
+// 3. Adjacency list
+//    Input graph stored as adjacency list → O(V + E)
+
+// Overall Space Complexity: O(V + E)
