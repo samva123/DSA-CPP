@@ -47,18 +47,16 @@ public:
 
 
 
-/////////////dfs///////
-#include <bits/stdc++.h>
-using namespace std;
-
 class Solution {
 public:
     bool dfs(int node, int c, vector<int>& color, vector<vector<int>>& graph) {
         color[node] = c;
         for (int nei : graph[node]) {
             if (color[nei] == -1) {
-                if (!dfs(nei, 1 - c, color, graph)) return false;
-            } else if (color[nei] == c) {
+                bool ok = dfs(nei, 1 - c, color, graph);
+                if (ok == false) return false;
+            } 
+            else if (color[nei] == c) {
                 return false;
             }
         }
@@ -71,7 +69,8 @@ public:
 
         for (int i = 0; i < n; i++) {
             if (color[i] == -1) {
-                if (!dfs(i, 0, color, graph)) return false;
+                bool ok = dfs(i, 0, color, graph);
+                if (ok == false) return false;
             }
         }
         return true;
