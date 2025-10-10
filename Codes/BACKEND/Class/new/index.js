@@ -7,10 +7,12 @@ app.use(express.urlencoded({ extended: true }));
 
 const userRouter = require('./routes/user.route');
 const postRouter = require('./routes/post.route');
+const commentRouter = require('./routes/comment.route');
 const { post } = require('./prisma/client');
 
 app.use('/user', userRouter);
 app.use("/post",postRouter);
+app.use('/comment', commentRouter);
 
 app.get('/', (req, res) => {
     res.send('Welcome to the User Management API');
