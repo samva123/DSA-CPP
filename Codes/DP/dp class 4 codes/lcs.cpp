@@ -9,7 +9,7 @@ public:
         if( i >= a.length()) {
             return 0;
         }
-        if(j >=b.length()) {
+        if(j >= b.length()) {
             return 0;
         }
 

@@ -28,4 +28,18 @@ router.post("/create", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+
+router.get("/all" , async (req,res)=>{
+    try{
+        const allUsers = await prisma.user.findMany({
+            include: { posts: true },
+            orderBy: { createdAt: 'asc' }
+        });
+        res.status(200).json(allUsers);
+    }catch(error){
+        res.status(500).json({ error: "Internal Server Error" });
+        console.error(error);
+    }
+})
 module.exports = router;
