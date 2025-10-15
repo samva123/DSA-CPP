@@ -95,7 +95,7 @@ int twoD_1D_Optimized(string &s1, string &s2) {
         }
         prev = curr;
     }
-
+   
     return prev[m];
 }
 

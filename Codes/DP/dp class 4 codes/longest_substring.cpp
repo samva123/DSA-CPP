@@ -39,6 +39,19 @@ class Solution {
 };
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     int longestCommonSubstring(string a, string b) {
@@ -65,19 +78,6 @@ public:
         return maxLength;
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
