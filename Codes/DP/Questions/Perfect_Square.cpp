@@ -123,7 +123,7 @@ public:
 };
 
 
-// first has 2^n time complexity and second has n time complexity.
+// first has n^n time complexity and second has n time complexity.
 // second has O(n.sqrt(n)) space complexity and first has O(n) space complexity.
 // third has O(n.sqrt(n)) time complexity and O(n) space complexity.
 // fourth has O(n.sqrt(n)) time complexity and O(1) space complexity.
