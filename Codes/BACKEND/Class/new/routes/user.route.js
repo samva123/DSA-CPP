@@ -42,4 +42,41 @@ router.get("/all" , async (req,res)=>{
         console.error(error);
     }
 })
+
+
+
+router.post("/transfer",async(req , res)=>{
+    try{
+        const {senderId , receiverId , amount} = req.body;
+        const transaction  = await prisma.$transaction(async(tx)=>{
+            const sender = await tx.user.findUnique({
+                where : {id:senderId}
+            })
+            if(!sender || sender.balance <= amount){
+                throw new Error("Insufficient balance")
+            }
+            await tx.user.update({
+                where :{id:senderId},
+                data:{balance:{decrement:amount}}
+            })
+
+            await tx.user.update({
+                where:{id:receiverId},
+                data:{balance:{increment:amount}}
+            })
+            const trns = await tx.transaction.create({
+                data:{amount , senderId , receiverId}
+            })
+            return trns;
+        })
+        res.status(201).json({transaction});
+
+        
+    }catch(error){
+        console.log(error);
+        res.status(404).json({message:error.message})
+
+    }
+})
+
 module.exports = router;

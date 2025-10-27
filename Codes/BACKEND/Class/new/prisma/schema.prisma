@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  
 }
 
 datasource db {
@@ -14,61 +13,70 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id String @id @default(uuid())
-  email String @unique
-  name String?
-  posts Post[]
-  comments Comment[]
+model User {
+  id          String       @id @default(uuid())
+  email       String       @unique
+  name        String?
+  posts       Post[]
+  comments    Comment[]
   enrollments Enrollment[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  balance     Float        @default(0)
+  sentTrns    Transaction[] @relation("sender")
+  recieveTrns  Transaction[] @relation ("receiver")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
 
-model Post{
+model Transaction{
   id String @id @default(uuid())
-  title String
+  amount Float
+  senderId  String
+  receiverId String
+  sender User @relation("sender",fields:[senderId] , references:[id])
+  receiver User @relation("receiver",fields:[receiverId] , references:[id])
+  createdAt DateTime @default(now())
+
+}
+
+model Post {
+  id          String    @id @default(uuid())
+  title       String
   description String
-  authorId String
-  comments Comment[]
+  authorId    String
+  comments    Comment[]
   //PostId String
 
   author User @relation(fields: [authorId], references: [id])
 }
 
-model Comment{
-  id String @id @default(uuid())
-  comment String
-  authorId String
-  PostId String
+model Comment {
+  id         String @id @default(uuid())
+  comment    String
+  authorId   String
+  PostId     String
   //courses Courses[]
-  author User @relation(fields: [authorId], references: [id])
-  PostPerson Post @relation(fields: [PostId], references: [id])
-  
+  author     User   @relation(fields: [authorId], references: [id])
+  PostPerson Post   @relation(fields: [PostId], references: [id])
 }
 
-model Courses{
-  id String @id @default(uuid())
-  name String
-  credits Int
+model Courses {
+  id          String       @id @default(uuid())
+  name        String
+  credits     Int
   enrollments Enrollment[]
   //userId String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
 
-
-model Enrollment{
-  id String @id @default(uuid())
- // userId String
-  courseId String
-  course Courses @relation(fields: [courseId], references: [id])
-  userId String
-  user User @relation(fields: [userId], references: [id])
+model Enrollment {
+  id        String   @id @default(uuid())
+  // userId String
+  courseId  String
+  course    Courses  @relation(fields: [courseId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   //enrolledAt DateTime @default(now())
 }
-
