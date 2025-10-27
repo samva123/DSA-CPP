@@ -128,7 +128,8 @@ public:
 //ye samajh mein nahi aayi or jaruri hai kyunki iski or bottom up
 //approach ki time complexity LC par kafi alag hai
 
-
+//for revising (read it after cookie analogy)
+//https://chatgpt.com/c/68ffac9a-7fcc-8320-8cf9-e641c899650a
 
 
 
