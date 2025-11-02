@@ -66,6 +66,11 @@ int main() {
 #include <bits/stdc++.h>
 using namespace std;
 
+// struct Compare {
+//     bool operator()(const string& s1, const string& s2) const {
+//         return s1.size() < s2.size();
+//     }
+// };
 
 
 int longestStrChain(vector<string>& words) {
