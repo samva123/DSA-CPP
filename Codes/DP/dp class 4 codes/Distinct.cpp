@@ -57,24 +57,7 @@ int bottomUpTabulation(string &s1, string &s2) {
     return dp[n][m];
 }
 
-// -------------------------------------
-// 3. Space Optimized: Single 1D DP Array
-// -------------------------------------
-int oneDOptimized(string &s1, string &s2) {
-    int n = s1.size(), m = s2.size();
-    vector<int> dp(m + 1, 0);
-    dp[0] = 1;
 
-    for (int i = 1; i <= n; i++) {
-        for (int j = m; j >= 1; j--) {
-            if (s1[i - 1] == s2[j - 1]) {
-                dp[j] = (dp[j] + dp[j - 1]) % prime;
-            }
-        }
-    }
-
-    return dp[m];
-}
 
 // -------------------------------------
 // 4. Fully Optimized with Two 1D Arrays
@@ -108,7 +91,7 @@ int main() {
 
     cout << "Top-Down Memoization: " << topDownMemo(s1, s2) << endl;
     cout << "Bottom-Up Tabulation: " << bottomUpTabulation(s1, s2) << endl;
-    cout << "1D Optimized: " << oneDOptimized(s1, s2) << endl;
+    //cout << "1D Optimized: " << oneDOptimized(s1, s2) << endl;
     cout << "Two 1D Arrays Optimized: " << twoD_1D_Optimized(s1, s2) << endl;
 
     return 0;

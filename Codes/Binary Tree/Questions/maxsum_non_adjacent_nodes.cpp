@@ -1,14 +1,17 @@
 //User function Template for C++
 
+#include <bits/stdc++.h>
+using namespace std;
+
 //Node Structure
-/*
+
 struct Node
 {
     int data;
     Node* left;
     Node* right;
 };
-*/
+
 
 //https://www.geeksforgeeks.org/problems/maximum-sum-of-non-adjacent-nodes/1
 
