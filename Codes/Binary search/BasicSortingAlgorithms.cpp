@@ -21,6 +21,27 @@ void bubbleSort(vector<int> &v) {
   }
 }
 
+// void bubbleSort(vector<int> &v) {
+//   int n = v.size();
+//   for (int i = 0; i < n - 1; ++i) {
+//     bool swapped = false; // check if any swap happened
+//     for (int j = 0; j < n - i - 1; ++j) {
+//       if (v[j] > v[j + 1]) {
+//         swap(v[j], v[j + 1]);
+//         swapped = true;
+//       }
+//     }
+//     if (!swapped) break; // array already sorted
+//   }
+// }
+
+
+// Case	Explanation	Time Complexity
+// Best case	Already sorted array — but your code does not have an early stop check, so it still does all passes → O(n²) (if optimized with a flag, it becomes O(n))	
+// Average case	Random order, roughly half the pairs swapped per pass → O(n²)	
+// Worst case	Reverse-sorted array — every comparison leads to a swap → O(n²)	
+
+
 void selectionSort(vector<int> &v) {
   int n = v.size();
   for (int i = 0; i < n - 1; i++) {
@@ -35,6 +56,11 @@ void selectionSort(vector<int> &v) {
     swap(v[i], v[minIndex]);
   }
 }
+
+// Case	Explanation	Time
+// Best case	Even if already sorted, we still compare all pairs (no early stop)	O(n²)
+// Average case	Random order, same comparisons	O(n²)
+// Worst case	Reverse sorted — still same comparisons	O(n²)
 
 void insertionSort(vector<int> &v) {
   int n = v.size();
@@ -52,6 +78,11 @@ void insertionSort(vector<int> &v) {
     v[j + 1] = key; // insertion
   }
 }
+
+// Case	Explanation	Time
+// Best case	Already sorted → no shifting in inner loop	O(n)
+// Average case	Random order → about half of the elements shifted	O(n²)
+// Worst case	Reverse sorted → every new element moved to front	O(n²)
 
 int main() {
   vector<int> v = {44,33,55,22,11};
