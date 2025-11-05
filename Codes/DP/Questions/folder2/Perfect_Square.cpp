@@ -12,6 +12,8 @@ public:
         int ans = INT_MAX;
         int i = 1 ;
         int end = sqrt(n);
+
+        
         while(i <= end){
             int perfect = i*i;
             int number = 1+numsquarehelper(n-perfect);
