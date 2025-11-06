@@ -64,7 +64,9 @@ public:
     }
 };
 
-
+/////i prefer a solution with complete array initailse with true but using set instead of traversing and that is submiited lastly on leetcode
+///with 100 precent below solution chnaged my array to false that is why i do not prefer that but i think that is more correct because 
+//false is considered 0 below is more correct correct is also the submitted one but we will prefer this now 
 
 class Solution {
 public:

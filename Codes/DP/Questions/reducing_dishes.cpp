@@ -36,7 +36,29 @@ public:
 
 
 
+class Solution {
+public:
+    int solve(vector<int>& sat) {
 
+        vector<vector<int>> dp(sat.size()+1, vector<int>(sat.size() + 2, 0));
+        for(int i = sat.size()-1 ; i >=0 ; --i){
+            for(int j = sat.size() ; j >= 1 ; --j){
+                int include  = j * sat[i] + dp[i+1][j+1];
+                int exclude  = dp[i+1][j]; 
+                dp[i][j] = max(include , exclude);
+            }
+        }
+        return dp[0][1];
+    }
+
+    int maxSatisfaction(vector<int>& satisfaction) {
+        sort(satisfaction.begin(), satisfaction.end());
+
+        // DP table dimensions corrected
+        
+        return solve(satisfaction);
+    }
+};
 
 
 

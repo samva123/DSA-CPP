@@ -10,6 +10,8 @@ public:
         string word;
 
         for(int j = i ; j <s.size();++j){
+
+            
             word.push_back(s[j]);
             if(dict.find(word) == dict.end()) continue;
 
