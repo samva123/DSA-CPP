@@ -11,6 +11,8 @@ public:
         for(int x = 1 ; x<=3 ; ++x){
             if(i+x-1 >= sv.size()) break ;
             total += sv[i+x-1];
+
+            
             ans = max(ans , total - solve(sv , i+x));
 
         }

@@ -58,7 +58,36 @@ public:
     }
 };
 
+////////////////memo version but a lot better(ask gpt if you do not understand why )
 
+class Solution {
+public:
+    int dp[101][101][2];
+    int solve(int idx,int M,bool turn,vector<int>& piles){
+        if(idx>=piles.size()) return 0;
+
+        if(dp[idx][M][turn]!=-1) return dp[idx][M][turn];
+        int alice=0,curr=0,bob=INT_MAX;
+        int n=piles.size();
+        if(turn){
+            for(int i=idx;i<min(n,idx+2*M);i++){
+                curr+=piles[i];
+                int temp=solve(i+1,max(M,i-idx+1),false,piles);
+                alice=max(alice,temp+curr);
+            }
+        }else{
+            for(int i=idx;i<min(n,idx+2*M);i++){
+                int temp=solve(i+1,max(M,i-idx+1),true,piles);
+                bob=min(bob,temp);
+            }            
+        }
+        return dp[idx][M][turn]= ((turn) ? alice : bob);
+    }
+    int stoneGameII(vector<int>& piles) {
+        memset(dp,-1,sizeof(dp));
+        return solve(0,1,true,piles);
+    }
+};
 
 class Solution {
 public:
@@ -131,8 +160,34 @@ public:
 //for revising (read it after cookie analogy)
 //https://chatgpt.com/c/68ffac9a-7fcc-8320-8cf9-e641c899650a
 
-
-
+class Solution {
+public:
+    int stoneGameII(vector<int>& piles) {
+        int n = piles.size();
+        
+        vector<vector<int>> dp(n, vector<int>(n + 1, 0));
+        vector<int> suffixSum(n, 0);
+        suffixSum[n - 1] = piles[n - 1];
+        
+        for (int i = n - 2; i >= 0; i--) {
+            suffixSum[i] = suffixSum[i + 1] + piles[i];
+        }
+        
+        for (int i = n - 1; i >= 0; i--) {
+            for (int m = 1; m <= n; m++) {
+                if (i + 2 * m >= n) {
+                    dp[i][m] = suffixSum[i];
+                } else {
+                    for (int x = 1; x <= 2 * m; x++) {
+                        dp[i][m] = max(dp[i][m], suffixSum[i] - dp[i + x][max(m, x)]);
+                    }
+                }
+            }
+        }
+        
+        return dp[0][1];
+    }
+};
 
 
 

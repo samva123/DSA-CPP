@@ -31,3 +31,32 @@ public:
         return solveTD(satisfaction, 0, 1, dp);
     }
 };
+
+
+
+
+
+
+
+
+
+
+/////no dp solution 
+
+class Solution {
+public:
+    int maxSatisfaction(vector<int>& satisfaction) {
+        sort(satisfaction.begin(), satisfaction.end());
+        int n = satisfaction.size();
+        int prefix = 0, res = 0;
+
+        
+        for (int i = n - 1; i >= 0; i--) {
+            prefix += satisfaction[i];
+            if (prefix < 0) break; 
+            res += prefix;
+        }
+
+        return res;
+    }
+};
