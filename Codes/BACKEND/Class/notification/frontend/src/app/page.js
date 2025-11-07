@@ -10,9 +10,8 @@ export default function Home() {
   const [isLoggenIn,setIsLoggedIn] = useState(false);
   const [username,setUsername] = useState("");
   const [content,setContent] = useState("");
-  const [posts , setPosts] = useState([]);
-  const [refresh , setRefresh] = useState("");
-
+  const [posts,setPosts] = useState([]);
+  const [refresh,setRefresh] = useState(0);
 
   // socket client initialise
   useEffect(()=>{
@@ -20,17 +19,15 @@ export default function Home() {
     setSocket(newSocket);
   },[])
 
-  const getAllPosts = async()=>{
+  const gettAllPosts = async ()=>{
     if(isLoggenIn){
-      let res  =  await axios.get("http://localhost:4000/post/all");
+      let res = await axios.get("http://localhost:4000/post/all");
       setPosts(res.data.posts);
-
     }
-    
   }
 
   useEffect(()=>{
-    getAllPosts();
+    gettAllPosts();
   },[refresh])
 
   // client connection
@@ -68,13 +65,24 @@ export default function Home() {
       content
     }
     let res = await axios.post("http://localhost:4000/post/create",payload);
-    if(res.status == 201){
-      setRefresh(prev=>prev+1)
+    if(res.status==201){
+      setRefresh(prev=>prev+1);
+    }
+  }
+
+  const handlePostLike = async (id)=>{
+    try {
+      let res = await axios.post(`http://localhost:4000/post/like/${id}/${username}`);
+      if(res.status==200){
+        setRefresh(prev => prev+1);
+      } 
+    } catch (error) {
+      console.log(error.message);
     }
   }
 
   return (
-    <div className="h-screen w-full bg-white text-black px-20 py-10">
+    <div className="min-h-screen w-full bg-white text-black px-20 py-10">
       <h1 className="text-2xl font-semibold">Hello {username}!!</h1>
 
       <form onSubmit={handlePostCreate} className="flex flex-col gap-2 border rounded-md p-5">
@@ -83,24 +91,20 @@ export default function Home() {
           <button className="border bg-blue-300 rounded-lg">Post</button>
         </form>
 
-        <div className="p-5">
-          {posts?.map((post,indx) =>{
+      <div className="p-5 flex flex-col gap-3">
+          {posts?.map((post,indx)=>{
             return <div key={indx} className="p-4 border rounded-lg shadow-md">
-            <div>
-              <User className="h-7 w-7 border-rounded-full"/>
-              <h4 className = " text-lg font-semibold">{post.author}</h4>
+            <div className="flex gap-2 items-center">
+              <User className="h-7 w-7 border rounded-full"/>
+              <h4 className="text-lg font-semibold">{post.author}</h4>
             </div>
-            <p className="text-xl">{post.content}</p>
-            <p className="text-sm text-graay-400 float-end">{post.createdAt}</p>
-            <div className="flex">{post?.likes?.includes(username)? <Heart fill="red" className="mr-2"/>:<Heart className="mr-2"/>} {post.likes.length}Likes</div>  
-              
-
+              <p className="text-xl">{post.content}</p>
+              <p className="text-sm text-gray-400 float-end">{new Date(post.createdAt).toLocaleString()}</p>
+              <button disabled={post.likes.includes(username)} onClick={()=>handlePostLike(post.id)} className={`flex ${post.likes.includes(username)?"opacity-45 cursor-not-allowed":""}`}>{post.likes.includes(username)?<Heart fill="red" className="mr-2"/>
+              :<Heart className="mr-2"/>} {post.likes.length} Likes</button>
             </div>
-
-
           })}
-
-        </div>
+      </div>
     </div>
   );
 }

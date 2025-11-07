@@ -25,12 +25,13 @@ app.use(express.static(path.join(__dirname,"public")))
 const Users = {};
 
 //  post - > {
+  // id.  ->.  
   // author  -> username
   // content  ->string
   // likes -> [username]
-  // createdAt -> date 
+  // createdAt -> date
 // }
-const Posts = []
+let Posts = []
 
 io.on("connection",(client)=>{
   console.log("User 1 connected -> ",client.id);
@@ -46,7 +47,7 @@ app.post("/post/create",async (req,res)=>{
   try {
     const {username,content} = req.body;
     const post = {
-      id : uuid(),
+      id:uuid(),
       author:username,
       content,
       likes:[],
@@ -64,14 +65,22 @@ app.get("/post/all",async (req,res)=>{
 })
 
 app.post("/post/like/:id/:username",(req,res)=>{
-  try{
-    const {id , username}  = req.params;
-
-
-  }catch(error){
-
+  try {
+    const {id,username} = req.params;
+    // [post,post,updated post, post ,post]
+    Posts = Posts.map((post)=>{
+      if(post.id == id ){
+        if(post.likes.includes(username)){
+          throw new Error("alreday liked the post");
+        }
+        post.likes.push(username);
+      }
+      return post;
+    })
+    res.status(200).json({message:"post updated successfully"})
+  } catch (error) {
+    res.status(401).json({message:error.message})
   }
-
 })
 
 app.get("/", (req, res) => {
