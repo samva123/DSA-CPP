@@ -98,14 +98,14 @@ public:
 
             // Option 2: Buy a 7-day ticket
             int j = i;
-            while (j < n && days[j] < days[i] + 7) {
+            while (j < n && days[j] <= days[i] + 7-1) {
                 ++j;
             }
             int cost7 = costs[1] + dp[j];
 
             // Option 3: Buy a 30-day ticket
             j = i;
-            while (j < n && days[j] < days[i] + 30) {
+            while (j < n && days[j] <= days[i] + 30-1) {
                 ++j;
             }
             int cost30 = costs[2] + dp[j];
