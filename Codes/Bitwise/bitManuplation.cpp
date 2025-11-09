@@ -12,7 +12,7 @@ void checkEvenOdd(int n) {
 }
 
 void getIthBit(int n,int i) {
-	int mask = (1 << i);
+	int mask = (1 << i);//by this we are making the ith bit one
 	int ans = n & mask;
 	if(ans == 0) {
 		cout << "bit-> 0" << endl;
@@ -91,7 +91,7 @@ int fastCOuntSetBits(int n) {
 	while(n != 0) {
 		//cout << "n value: " << n << endl;
 		count++;
-		n = (n & (n-1));
+		n = (n & (n-1));//(Brian Kernighan’s Algorithm)
 	}
 	return count;
 }
@@ -118,12 +118,17 @@ int main() {
 
 
 void clearBitsInRange(int n, int i, int j) {
-	int a = (-1 << (i+1));
-	int b = ~(-1 << j);
-	int mask = a | b;
-	n = n & mask;
-	cout << "Updated number: " << n << endl;
+    // Step 1: Create a mask with 1s everywhere except between i and j
+    int left = (~0) << (j + 1);   // 1s from (j+1)th bit to MSB
+    int right = (1 << i) - 1;     // 1s from 0th bit to (i-1)th bit
+    int mask = left | right;      // combine both sides
+
+    // Step 2: Apply mask to clear bits i to j
+    n = n & mask;
+
+    cout << "Updated number: " << n << endl;
 }
+
 
 void getSubsequences(string str) {
 	int n = str.length();

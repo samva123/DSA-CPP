@@ -261,3 +261,53 @@ public:
 // This optimized version maintains the same time complexity but reduces the space complexity by using a 2D DP table instead of a 3D one.
 
 // Similar code found with 1 license type
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int stoneGameII(vector<int>& piles) {
+        int n = piles.size();
+
+        vector<vector<int>> dp(n, vector<int>(n + 1, 0));
+        vector<int> suffixSum(n, 0);
+
+        // Step 1: Build suffix sum
+        suffixSum[n - 1] = piles[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            suffixSum[i] = suffixSum[i + 1] + piles[i];
+        }
+
+        // Step 2: DP calculation
+        for (int i = n - 1; i >= 0; i--) {
+            for (int m = n; m >= 1; m--) {  // 🔁 backward m-loop
+                if (i + 2 * m >= n) {
+                    dp[i][m] = suffixSum[i];  // take all remaining stones
+                } else {
+                    for (int x = 1; x <= 2 * m; x++) {
+                        dp[i][m] = max(dp[i][m],
+                                       suffixSum[i] - dp[i + x][max(m, x)]);
+                    }
+                }
+            }
+        }
+
+        // Step 3: Final answer for starting position
+        return dp[0][1];
+    }
+};

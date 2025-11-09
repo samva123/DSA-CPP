@@ -88,6 +88,9 @@ int findLastOccurence(int arr[], int n, int target) {
   return ans;
 }
 
+
+
+
 int findTotalOccurence(int arr[], int n, int target) {
   int firstOcc = findFirstOccurence(arr, n, target);
   int lastOcc = findLastOccurence(arr, n, target);
