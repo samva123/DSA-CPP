@@ -446,58 +446,53 @@ public:
 
 //https://leetcode.com/problems/custom-sort-string/
 
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
-    //custom comparator
-    static string str;
-    static bool compare(char char1, char char2) {
-        
-        //this will return true, if position of character1 in str string is
-        //less than the position of character2 in str string
+    static unordered_map<char, int> charOrder;
 
-        //when true is returned, then char1 will be placed before char2 in 
-        //output string
-        return (str.find(char1) < str.find(char2));
-
+    static bool compare(char a, char b) {
+        return charOrder[a] < charOrder[b];
     }
+
     string customSortString(string order, string s) {
-        
-        str = order;
+        charOrder.clear();
+
+        for (int i = 0; i < order.size(); ++i)
+            charOrder[order[i]] = i;
+
         sort(s.begin(), s.end(), compare);
+
         return s;
     }
 };
+
+unordered_map<char, int> Solution::charOrder;
+
 //string Solution::str;
 
 
 
-// Time and Space Complexity
-// Time Complexity:
-// The find function inside the compare function has a time complexity of O(m), where m is the length of the order string.
-// The sort function has a time complexity of O(n log n), where n is the length of the string s. Since the compare function is called for each comparison, the overall time complexity becomes O(n log n * m).
-// Space Complexity:
-// The space complexity is O(1) for the extra space used, as we are not using any additional data structures that grow with the input size.
-// Optimization
-// We can optimize the customSortString function by using a more efficient approach. Instead of using the find function inside the comparator, we can create a mapping of characters to their positions in the order string. This reduces the time complexity of each comparison to O(1).
-
 // Here is the optimized version:
 
 
-class Solution {
-public:
-    string customSortString(string order, string s) {
-        unordered_map<char, int> charOrder;
-        for (int i = 0; i < order.size(); ++i) {
-            charOrder[order[i]] = i;
-        }
+// class Solution {
+// public:
+//     string customSortString(string order, string s) {
+//         unordered_map<char, int> charOrder;
+//         for (int i = 0; i < order.size(); ++i) {
+//             charOrder[order[i]] = i;
+//         }
 
-        sort(s.begin(), s.end(), [&charOrder](char a, char b) {
-            return charOrder[a] < charOrder[b];
-        });
+//         sort(s.begin(), s.end(), [&charOrder](char a, char b) {
+//             return charOrder[a] < charOrder[b];
+//         });
 
-        return s;
-    }
-};
+//         return s;
+//     }
+// };
 
 // Explanation:
 // Create an unordered_map to store the position of each character in the order string.
@@ -507,3 +502,10 @@ public:
 // Time Complexity: O(n log n), where n is the length of the string s.
 // Space Complexity: O(m), where m is the length of the order string, due to the unordered_map.
 // This approach is more efficient as it reduces the time complexity of each comparison from O(m) to O(1), resulting in an overall time complexity of O(n log n).
+
+
+
+// https://chatgpt.com/share/6913758e-507c-8003-9dd5-29905d7ab99c
+
+
+//read it you will definietly learn something new 

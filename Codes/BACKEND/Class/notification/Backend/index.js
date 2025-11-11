@@ -38,7 +38,7 @@ io.on("connection",(client)=>{
   
   // register user
   client.on("register",(username)=>{
-    Users[username] = socket.id
+    Users[username] = client.id
   })
   
 })
@@ -64,19 +64,31 @@ app.get("/post/all",async (req,res)=>{
   res.status(200).json({posts:Posts})
 })
 
+// let exp = {
+//   "shubham":""
+// }
 app.post("/post/like/:id/:username",(req,res)=>{
   try {
     const {id,username} = req.params;
     // [post,post,updated post, post ,post]
+    // let author;
+    // let likes;
+    let userPost;
     Posts = Posts.map((post)=>{
       if(post.id == id ){
         if(post.likes.includes(username)){
           throw new Error("alreday liked the post");
+
         }
+        userPost = post;
         post.likes.push(username);
       }
       return post;
     })
+    if(Users[userPost.author] &&  username != userPost.author){
+      io.to(Users[userPost.author]).emit("notice",`${username} liked your post ${userPost.content}`)
+    }
+    
     res.status(200).json({message:"post updated successfully"})
   } catch (error) {
     res.status(401).json({message:error.message})
