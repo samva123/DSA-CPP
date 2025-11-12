@@ -43,7 +43,32 @@ public:
 // this can not be optimised and has O(n) time complexity and O(n) space complexity
 
 
+//////////////////////////just cleaner but also slower on leetcode///////
+#include <bits/stdc++.h>
+using namespace std;
 
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if (numRows == 1 || numRows >= s.size()) return s;
+
+        vector<string> rows(numRows);
+        int curRow = 0;
+        bool goingDown = false;
+
+        for (char c : s) {
+            rows[curRow] += c;
+            // Change direction when you hit top or bottom
+            if (curRow == 0 || curRow == numRows - 1)
+                goingDown = !goingDown;
+            curRow += goingDown ? 1 : -1;
+        }
+
+        string result;
+        for (auto &row : rows) result += row;
+        return result;
+    }
+};
 
 
 
