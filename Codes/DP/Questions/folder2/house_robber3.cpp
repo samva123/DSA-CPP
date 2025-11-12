@@ -72,18 +72,6 @@ public:
 };
 
 
-// First Approach (Simple Recursive)
-// Time Complexity: (O(2^n))
-// The recursion explores all possible subsets of nodes to rob, leading to an exponential time complexity.
-// Space Complexity: (O(n))
-// The recursion depth can go up to (n), where (n) is the number of nodes in the tree.
-// Second Approach (Recursive with Memoization)
-// Time Complexity: (O(n))
-// Each node is processed once, and the results are stored in a hash map to avoid redundant calculations.
-// Space Complexity: (O(n))
-// The hash map stores the results for each node, and the recursion depth can go up to (n).
-// the time and space complexity of the above code is O(n) where n is the number of nodes in the tree
-// but we can optimise upto O(logn) space complexity by using pair<int , int> as return type of the function
 
 
 class Solution {
@@ -112,4 +100,62 @@ public:
 
 
 
+// 🥇 Approach 1 — Simple Recursion (No Memoization)
+// int solve(TreeNode* root);
 
+// ⏱ Time Complexity: O(2^n)
+
+// Each node makes two recursive choices — rob or not rob — leading to exponential growth.
+
+// Essentially, you recompute subproblems multiple times.
+
+// 💾 Space Complexity: O(n)
+
+// The recursion stack depth can go up to n (for a skewed tree).
+
+// No extra data structure used.
+
+// 🥈 Approach 2 — Recursion + Memoization (Using unordered_map)
+// int solve(TreeNode* root, unordered_map<TreeNode*, int>& dp);
+
+// ⏱ Time Complexity: O(n)
+
+// Each node is computed only once and stored in the hash map.
+
+// Hence, the number of computations = number of nodes.
+
+// 💾 Space Complexity: O(n)
+
+// O(n) for the recursion stack (worst case: skewed tree).
+
+// O(n) for the hash map storing results of each node.
+
+// Overall still O(n).
+
+// 🥉 Approach 3 — Pair Return (Optimized Space)
+// pair<int, int> solve(TreeNode* root);
+
+
+// Returns two values for each node: {rob, dont}.
+
+// Avoids using extra hash map.
+
+// ⏱ Time Complexity: O(n)
+
+// Each node is visited exactly once.
+
+// 💾 Space Complexity:
+
+// Recursion stack only → O(h), where h = height of the tree.
+
+// For a balanced tree, h = O(log n)
+
+// For a skewed tree, h = O(n)
+// ✅ So average/balanced case: O(log n)
+// ✅ Worst case: O(n)
+
+// 🔍 Final Summary Table
+// Approach	Technique	Time Complexity	Space Complexity	Notes
+// 1	Simple Recursion	O(2^n)	O(n)	Exponential, brute-force
+// 2	Memoization (DP)	O(n)	O(n)	Optimal in time, not in space
+// 3	Pair Return	O(n)	O(log n) avg / O(n) worst	Optimal in both time & space

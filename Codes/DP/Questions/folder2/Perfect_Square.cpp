@@ -96,36 +96,69 @@ public:
     }
 };
 
+// 🥇 Approach 1 — Simple Recursion (No Memoization)
+// int numsquarehelper(int n);
 
-class Solution {
-public:
-    bool isPerfectSquare(int n) {
-        int sq = sqrt(n);
-        return sq * sq == n;
-    }
+// ⏱ Time Complexity: O(n√n) ❌ Incorrect for recursion — read below
 
-    int numSquares(int n) {
-        // Check if n is a perfect square
-        if (isPerfectSquare(n)) return 1;
+// Actually, since you are exploring all combinations of perfect squares recursively without memoization,
+// you recompute the same subproblems multiple times.
 
-        // Check if n can be written as the sum of two perfect squares
-        for (int i = 1; i * i <= n; ++i) {
-            if (isPerfectSquare(n - i * i)) {
-                return 2;
-            }
-        }
+// 👉 The recursion tree branches roughly √n times at each level and goes down up to depth n.
+// Hence, exponential time — approximately O(√n ^ n) (very large).
+// Formally, it’s exponential time, not polynomial.
 
-        // Check the 4-square condition
-        while (n % 4 == 0) n /= 4;  // Remove factors of 4
-        if (n % 8 == 7) return 4;
+// 💾 Space Complexity: O(n)
 
-        // Otherwise, return 3
-        return 3;
-    }
-};
+// Recursion stack can go as deep as n.
 
+// ✅ Summary:
 
-// first has n^n time complexity and second has n time complexity.
-// second has O(n.sqrt(n)) space complexity and first has O(n) space complexity.
-// third has O(n.sqrt(n)) time complexity and O(n) space complexity.
-// fourth has O(n.sqrt(n)) time complexity and O(1) space complexity.
+// Case	Time	Space
+// Recursive brute force	Exponential (>> O(n√n))	O(n)
+// 🥈 Approach 2 — Recursion + Memoization
+// int numsquarehelper(int n, vector<int>& dp);
+
+// ⏱ Time Complexity: O(n√n)
+
+// Each n is solved once due to memoization.
+
+// For each n, you iterate through all possible squares up to √n.
+// ✅ So, O(n * √n) total.
+
+// 💾 Space Complexity: O(n)
+
+// O(n) for dp array.
+
+// O(n) recursion depth (worst case).
+// → Overall still O(n).
+
+// ✅ Summary:
+
+// Case	Time	Space
+// Memoized recursion	O(n√n)	O(n)
+// 🥉 Approach 3 — Tabulation (Bottom-Up DP)
+// int numsquarehelper(int n);
+
+// ⏱ Time Complexity: O(n√n)
+
+// Outer loop runs n times.
+
+// Inner loop checks all perfect squares ≤ i (≈ √i).
+// → Total 1 + 2 + 3 + ... + √n ≈ n√n.
+
+// 💾 Space Complexity: O(n)
+
+// dp array of size n + 1.
+
+// No recursion stack.
+
+// ✅ Summary:
+
+// Case	Time	Space
+// Bottom-up DP	O(n√n)	O(n)
+// 🧠 Final Comparison Table
+// Approach	Method	Time Complexity	Space Complexity	Remarks
+// 1	Pure Recursion	Exponential	O(n)	Very slow, redundant work
+// 2	Memoized Recursion	O(n√n)	O(n)	Optimal time, easy to code
+// 3	Tabulation	O(n√n)	O(n)	Most efficient in practice (iterative)

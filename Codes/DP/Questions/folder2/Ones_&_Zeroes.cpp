@@ -101,3 +101,97 @@ public:
     } 
     
 };
+
+
+
+
+// 🥇 Approach 1 — Simple Recursion (No Memoization)
+// int solve(vector<pair<int,int>>& numstrs, int i, int m, int n);
+
+// 🔹 Logic
+
+// At every index i, you can either:
+
+// include the current string (if enough zeros/ones left), or
+
+// exclude it.
+
+// This leads to a binary decision tree.
+
+// ⏱ Time Complexity: Exponential — O(2^n)
+
+// For each of the n strings, you make 2 choices (include/exclude).
+
+// Hence O(2^n) recursive calls in the worst case.
+
+// Each call does constant work (count comparisons and arithmetic).
+
+// 💾 Space Complexity: O(n)
+
+// Only recursion stack space (depth = number of strings n).
+
+// No DP array or extra data structures.
+
+// ✅ Summary:
+
+// Case	Time	Space	Remarks
+// Recursive	O(2^n)	O(n)	Exponential — recomputes subproblems
+// 🥈 Approach 2 — 3D DP (Bottom-Up Tabulation)
+// vector<vector<vector<int>>> dp(numstrs.size() + 1,
+//     vector<vector<int>>(m + 1, vector<int>(n + 1, 0)));
+
+// 🔹 Logic
+
+// Bottom-up iteration filling a 3D DP table:
+
+// i → index in numstrs (up to n)
+
+// j → available zeros (up to m)
+
+// k → available ones (up to n)
+
+// ⏱ Time Complexity: O(N * M * K)
+
+// Outer loop: N (number of strings)
+
+// Two inner loops: M (zeros) × K (ones)
+// ✅ Total → O(N × M × K)
+
+// 💾 Space Complexity: O(N * M * K)
+
+// 3D DP array of that size.
+
+// No recursion.
+
+// ✅ Summary:
+
+// Case	Time	Space	Remarks
+// 3D DP	O(N·M·K)	O(N·M·K)	Clean but memory-heavy
+// 🥉 Approach 3 — 2D DP (Optimized Tabulation)
+// vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+
+// 🔹 Logic
+
+// This is a 0/1 knapsack-style DP optimization:
+
+// Iterate strings one by one.
+
+// Update the DP table backward to prevent reusing the same string multiple times.
+
+// ⏱ Time Complexity: O(N * M * K)
+
+// For each of the N strings, you iterate over all (M × K) states.
+// ✅ Same as 3D DP.
+
+// 💾 Space Complexity: O(M * K)
+
+// Only a 2D array is needed.
+
+// No recursion, no 3D storage.
+// ✅ Big improvement from O(N·M·K).
+
+// 🧠 Final Comparison Table
+// Approach	Technique	Time Complexity	Space Complexity	Remarks
+// 1	Simple Recursion	O(2^N)	O(N)	Exponential — impractical
+// 2	3D DP	O(N·M·K)	O(N·M·K)	Efficient but high memory
+// 3	2D DP (Optimized)	O(N·M·K)	O(M·K)	✅ Best — optimal time & space
