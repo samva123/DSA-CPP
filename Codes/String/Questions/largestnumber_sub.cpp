@@ -81,3 +81,33 @@ public:
 // Space Complexity: O(n) for storing the snums vector.
 // This approach is already optimal for the problem, and the code is concise and readable.
 
+
+
+
+
+
+/////brute force
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        vector<string> arr;
+        for (int n : nums)
+            arr.push_back(to_string(n));
+
+        string best = "";
+        sort(arr.begin(), arr.end());   // start with lexicographic order
+
+        do {
+            string curr = "";
+            for (auto &s : arr)
+                curr += s;
+            if (curr > best)
+                best = curr;
+        } while (next_permutation(arr.begin(), arr.end()));
+
+        return best;
+    }
+};

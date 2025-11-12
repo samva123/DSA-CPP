@@ -1,48 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-    int cdevices(string &binary)
-    {
-        int c = 0;
-        for (int i = 0; i < binary.length(); i++)
-        {
-            int b = binary[i];
-            c += b - '0';
-        }
+    int solve(string&str){
+        int count = 0 ;
+        for(char ch : str){
+            if(ch == '1'){
+                count++;
 
-        return c;
-    }
-
-    int numberOfBeams(vector<string> &bank)
-    {
-        vector<int> devices;
-        for (auto row : bank)
-            devices.push_back(cdevices(row));
-        int beams = 0;
-        for (int i = 0; i < devices.size(); ++i)
-        {
-            int j = i + 1;
-            while (j < devices.size())
-            {
-                beams += devices[i] * devices[j];
-                if (devices[j] == 0)
-                {
-                    j++;
-                }
-                else
-                {
-                    break;
-                }
             }
         }
-        return beams;
+        return count;
+    }
+    int numberOfBeams(vector<string>& bank) {
+        int n  = bank.size();
+        vector<int>num(n);
+        int i = 0 ;
+        for(string str : bank){
+            int count = solve(str);
+            if(count != 0){
+                num[i] = count;
+                i++;
+            }  
+        }
+
+        int ans  = 0;
+        for(int i = 0 ; i < num.size()-1 ; i++){
+            ans  += num[i]*num[i+1];
+        }
+        return ans;
     }
 };
 
-// upper  has O(n square) time complexity and O(n) space complexity
+// upper  is my solution and has O(n*m) time complexity and O(n) space complexity
 //  below has O(n.m) time complexity and O(1) space complexity
 
 class Solution
