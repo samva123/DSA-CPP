@@ -118,7 +118,94 @@ public:
     }
 };
 
+// 🥇 Approach 1 — Pure Recursion (No Memoization)
+// int helper(vector<int>& days, vector<int>& costs, int i);
 
+// 🔹 Logic
+
+// At every index i, you try 3 options:
+
+// Buy a 1-day, 7-day, or 30-day pass
+// Each recursive branch moves the index i forward according to the pass duration.
+
+// ⏱ Time Complexity: Exponential — O(3^n)
+
+// Each call spawns up to 3 recursive calls.
+
+// No memoization → subproblems recomputed many times.
+
+// Rough upper bound: O(3^n).
+
+// 💾 Space Complexity: O(n)
+
+// Only recursion stack (depth = number of days n).
+
+// No extra data structure.
+
+// ✅ Summary:
+
+// Case	Time	Space	Remarks
+// Recursive	O(3^n)	O(n)	Exponential, inefficient
+// 🥈 Approach 2 — Recursion + Memoization
+// int helper(vector<int>& days, vector<int>& costs, int i, vector<int>& dp);
+
+// 🔹 Logic
+
+// Same recursion, but now results are stored in a dp array where
+// dp[i] = minimum cost starting from day index i.
+
+// ⏱ Time Complexity: O(n²)
+
+// There are n distinct states (i from 0 to n-1).
+
+// For each state, the while loop to find the next valid index may scan up to n in the worst case.
+// ✅ So total work ≈ O(n × n) = O(n²).
+
+// 👉 (With some optimization like using binary search for j, this can be reduced to O(n log n).)
+
+// 💾 Space Complexity: O(n)
+
+// O(n) for dp array.
+
+// O(n) recursion stack (worst case).
+// ✅ Total: O(n).
+
+// ✅ Summary:
+
+// Case	Time	Space	Remarks
+// Memoized Recursion	O(n²)	O(n)	Optimal time with caching
+// 🥉 Approach 3 — Bottom-Up DP (Tabulation)
+// for (int i = n - 1; i >= 0; --i) { ... }
+
+// 🔹 Logic
+
+// Iterative version of memoization.
+// You fill dp[i] (minimum cost from i to end) using future states already computed (dp[j]).
+
+// ⏱ Time Complexity: O(n²)
+
+// Outer loop → n iterations.
+
+// Inner scanning loops (while for 7-day and 30-day passes) can move through up to n days total.
+// ✅ So O(n²) overall.
+
+// 👉 Again, using binary search instead of linear scan could bring this to O(n log n).
+
+// 💾 Space Complexity: O(n)
+
+// Only a single DP array of size n + 1.
+
+// No recursion stack.
+
+// ✅ Summary:
+
+// Case	Time	Space	Remarks
+// Bottom-Up DP	O(n²)	O(n)	Most practical — no recursion overhead
+// 🧠 Final Comparison Table
+// Approach	Technique	Time Complexity	Space Complexity	Remarks
+// 1	Simple Recursion	O(3^n)	O(n)	Exponential brute force
+// 2	Memoized Recursion	O(n²)	O(n)	Efficient (can optimize to O(n log n))
+// 3	Bottom-Up DP	O(n²)	O(n)	✅ Best practical version (no stack, same logic)
 
 // Optimization Opportunities
 // The current solutions (especially the bottom-up DP) are quite optimized for practical scenarios. However, we can slightly improve the efficiency by reducing the overhead of searching for valid indices jjj in the 7-day and 30-day ticket calculations.
@@ -162,33 +249,3 @@ public:
 // 3.	Bottom-Up DP: O(n2)O(n^2)O(n2), O(n)O(n)O(n) space.
 // 4.	Optimized Bottom-Up with Pointers: O(n)O(n)O(n), O(n)O(n)O(n) space.
 // The Optimized Bottom-Up Approach with Pointers is the best in terms of both time and space efficiency.
-
-
-class Solution {
-public:
-    int mincostTickets(vector<int>& days, vector<int>& costs) {
-        unordered_set<int> daySet(days.begin(), days.end());
-        int lastDay = days.back();
-        vector<int> dp(lastDay + 1, 0);
-
-        for (int i = 1; i <= lastDay; ++i) {
-            if (daySet.find(i) == daySet.end()) {
-                dp[i] = dp[i - 1];
-            } else {
-                dp[i] = min({
-                    dp[i - 1] + costs[0],
-                    dp[max(0, i - 7)] + costs[1],
-                    dp[max(0, i - 30)] + costs[2]
-                });
-            }
-        }
-
-        return dp[lastDay];
-    }
-};
-
-
-// this is also a approach written by co-pilot with O(n) time complexity and O(n) space complexity
-// but pointer approach will work better 
-
-
