@@ -80,25 +80,24 @@ public:
 class Solution {
 public:
     string removeDuplicates(string s, int k) {
-        stack<pair<char, int>> st; // Stack to store characters and their counts
-        for (char c : s) {
-            if (!st.empty() && st.top().first == c) {
-                st.top().second++;
-                if (st.top().second == k) {
-                    st.pop(); // Remove the sequence when count reaches k
-                }
-            } else {
-                st.push({c, 1}); // Add a new character to the stack
+        vector<pair<char,int>> st;
+
+        for(char c : s){
+            if(!st.empty() && st.back().first == c){
+                st.back().second++;
+                if(st.back().second == k)
+                    st.pop_back();
+            }else{
+                st.push_back({c,1});
             }
         }
-        // Reconstruct the string
-        string result;
-        while (!st.empty()) {
-            result.append(st.top().second, st.top().first);
-            st.pop();
+
+        string ans = "";
+        for(auto &p : st){
+            ans.append(p.second, p.first);
         }
-        reverse(result.begin(), result.end());
-        return result;
+        return ans;
     }
 };
+
 // space complexity is O(n) and time complexity is O(n) for this solution
