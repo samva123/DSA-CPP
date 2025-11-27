@@ -45,8 +45,8 @@ void printLevelOrder(Node* root) {
     cout << endl;
 }
 
-// Main function to convert BST to Min Heap
-void convertBSTToMinHeap(Node* root) {
+// Main function to convert BST to Max Heap
+void convertBSTToMaxHeap(Node* root) {
     vector<int> inorder;
     storeInorder(root, inorder);  // Step 1
     int index = 0;
@@ -70,9 +70,9 @@ int main() {
     root->right->left = new Node(5);
     root->right->right = new Node(7);
 
-    convertBSTToMinHeap(root);
+    convertBSTToMaxHeap(root);
 
-    cout << "Level Order of Converted Min Heap:\n";
+    cout << "Level Order of Converted Max Heap:\n";
     printLevelOrder(root);
 
     return 0;
