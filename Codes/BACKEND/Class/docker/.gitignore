@@ -1,0 +1,43 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+logs/*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Editor folders
+.vscode/
+.idea/
+
+# Docker files (you said you don't want to push)
+docker-compose.yml
+compose.yaml
+compose.yml
+Dockerfile
+dockerfile
+
+# Misc
+*.pid
+*.seed
+*.tgz
