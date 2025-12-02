@@ -1,3 +1,7 @@
+#include <iostream>
+using namespace std;
+
+
 class Solution {
 public:
     int solve(vector<int>&nums1 , vector<int>&nums2 , int i , int p1,int p2){
