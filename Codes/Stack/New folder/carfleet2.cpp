@@ -1,4 +1,7 @@
-  class Solution {
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
 public:
     vector<double> getCollisionTimes(vector<vector<int>>& cars) {
         vector<double>answer(cars.size() , -1);

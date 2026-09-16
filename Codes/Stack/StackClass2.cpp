@@ -87,7 +87,10 @@ bool checkRedundantBracket(string s)
                     operatorCount++;
                 st.pop();
             }
-            st.pop();
+            if (!st.empty()){
+                st.pop();
+            }
+            
             if (operatorCount == 0)
                 return 1;
         }
@@ -105,4 +108,12 @@ int main()
     string str = "((a+b)*c)";
     cout << checkRedundantBracket(str) << endl;
     return 0;
+
+
+
+
+
+
+
+
 }

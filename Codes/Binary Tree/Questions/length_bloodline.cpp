@@ -1,7 +1,9 @@
 //User function Template for C++
+#include <bits/stdc++.h>
+using namespace std;
 
-/*
-structure of the node of the binary tree is as
+
+//structure of the node of the binary tree is as
 struct Node
 {
     int data;
@@ -15,7 +17,7 @@ struct Node
         right = NULL;
     }
 };
-*/
+
 // https://www.geeksforgeeks.org/problems/sum-of-the-longest-bloodline-of-a-tree/1
 
 class Solution
@@ -49,7 +51,38 @@ public:
     }
 };
 
+// Problem	Pair meaning
+// Longest bloodline	{height, sum}
 
+class Solution {
+public:
+    int maxLen = 0;
+    int maxSum = 0;
+
+    void solve(Node* root, int len, int sum) {
+        if (!root) return;
+
+        sum += root->data;
+
+        if (!root->left && !root->right) {
+            if (len > maxLen) {
+                maxLen = len;
+                maxSum = sum;
+            } else if (len == maxLen) {
+                maxSum = max(maxSum, sum);
+            }
+            return;
+        }
+
+        solve(root->left, len + 1, sum);
+        solve(root->right, len + 1, sum);
+    }
+
+    int sumOfLongRootToLeafPath(Node* root) {
+        solve(root, 0, 0);
+        return maxSum;
+    }
+};
 
 // class TreeNode {
 //     int data;

@@ -18,6 +18,7 @@ int solve(int n) {
 //painting fence algo
 int getPaintWays(int n, int k ) {
 	//base case
+    
 	if(n == 1) {
 		return k;
 	}

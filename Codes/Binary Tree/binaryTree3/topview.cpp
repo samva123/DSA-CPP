@@ -1,15 +1,4 @@
-
-
-
-
-
-
-
-
 // in this we are initialising answer array from start
-
-
-
 
 #include <iostream>
 #include <vector>

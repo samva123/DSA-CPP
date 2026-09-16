@@ -57,7 +57,7 @@ public:
         }
         return s;
     }
-};// find has time complexity of n*m and erase has on n and the loop runs n/m times 
+};// find has time complexity of n*m and erase has of n and the loop runs n/m times 
 
 class Solution {
 public:
@@ -130,7 +130,11 @@ public:
         return true;
     }
 }; 
+
+
 //time complexity O(n)
+
+// brute force will be by removing and checking every character time will be n square
 
 
 

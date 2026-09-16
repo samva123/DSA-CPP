@@ -71,3 +71,53 @@ public:
         return vector<string>(ans.begin(), ans.end());
     }
 };
+
+
+
+class Solution {
+public:
+    vector<string> ans;
+
+    void remove(string s, int last_i, int last_j, char open, char close) {
+        int balance = 0;
+
+        for (int i = last_i; i < s.size(); i++) {
+            if (s[i] == open)
+                balance++;
+            else if (s[i] == close)
+                balance--;
+
+            if (balance >= 0)
+                continue;
+
+            // Too many closing parentheses.
+            for (int j = last_j; j <= i; j++) {
+                // Remove only the first closing parenthesis in a sequence.
+                if (s[j] == close && (j == last_j || s[j - 1] != close)) {
+                    remove(s.substr(0, j) + s.substr(j + 1),
+                           i,
+                           j,
+                           open,
+                           close);
+                }
+            }
+            return;
+        }
+
+        // No extra closing parentheses.
+        reverse(s.begin(), s.end());
+
+        if (open == '(') {
+            // Now remove extra opening parentheses.
+            remove(s, 0, 0, ')', '(');
+        } else {
+            // Both passes finished.
+            ans.push_back(s);
+        }
+    }
+
+    vector<string> removeInvalidParentheses(string s) {
+        remove(s, 0, 0, '(', ')');
+        return ans;
+    }
+};

@@ -39,7 +39,7 @@ vector<int> divisibleSet(vector<int>& arr) {
     while (hash[lastIndex] != lastIndex) {
         lastIndex = hash[lastIndex];
         temp.push_back(arr[lastIndex]);
-    }
+    } 
 
     // Reverse the array to get the correct order
     reverse(temp.begin(), temp.end());

@@ -1,58 +1,175 @@
-#include <bits/stdc++.h>
+// #include <iostream>
+// #include <cstring>
+// #include <vector>
+// #include <algorithm>
+// using namespace std;
+
+// // Global index to store permutations
+// int idx = 0;
+
+// // Store only valid permutations in perm[][]
+// void desiredPermutations(char *a, char ch, int pos, int l, int r, char **perm)
+// {
+//     if (l == r)
+//     {
+//         // Restriction: skip permutation where a[pos] == ch
+//         if (a[pos] == ch)
+//             return;
+
+//         // Copy permutation into perm list
+//         perm[idx] = new char[strlen(a) + 1];
+//         strcpy(perm[idx], a);
+//         idx++;
+
+//         return;
+//     }
+
+//     for (int i = l; i <= r; i++)
+//     {
+//         std::swap(a[l], a[i]);     // built-in swap
+//         desiredPermutations(a, ch, pos, l + 1, r, perm);
+//         std::swap(a[l], a[i]);     // backtrack
+//     }
+// }
+
+// int main()
+// {
+//     char str[20];
+//     char restricted;
+//     int pos;
+
+//     cin >> str;
+//     cin >> restricted;
+//     cin >> pos;
+
+//     int n = strlen(str);
+
+//     // max possible permutations = n!
+//     int maxPerm = 1;
+//     for (int i = 2; i <= n; i++) 
+//         maxPerm *= i;
+
+//     // allocate memory for perm
+//     char **perm = new char*[maxPerm];
+
+//     desiredPermutations(str, restricted, pos, 0, n - 1, perm);
+
+//     // Convert to vector for easy sorting
+//     vector<string> v;
+//     for (int i = 0; i < idx; i++)
+//         v.push_back(string(perm[i]));
+
+//     sort(v.begin(), v.end());
+
+//     // Print sorted permutations
+//     for (string s : v)
+//         cout << s << endl;
+
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+
 using namespace std;
 
-class Heap{
-    public:
-    int* arr;
-    int capacity ; 
-    int size;
-
-    Heap(int capacity){
-        this->arr = new int[capacity];
-        this->capacity  = capacity;
-        this->size = 0;
-
-    }
-
-    void insert(int val){
-        if(size == capacity){
-            cout << "heap oveflow" << endl;
-            return;
+void print(int **v, int rows, int cols)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            cout << v[i][j] << " ";
         }
-        size++;
-        int index  = size;
-        arr[index] = val;
-
-        while(index > 1){
-            int parent = index/2;
-            if(arr[index] > arr[parent]){
-                swap(arr[index] , arr[parent]);
-                index  = parent;
-            }else{
-                break;
-            }
-        }
+        cout << endl;
     }
-    void printHeap() {
-      for(int i=1; i<=size; i++) {
-         cout << arr[i] << " ";
-     }
-    }
+}
 
-};
+int main()
+{
+    // 1. allocate int
+    int *intPtr = new int(5);
 
+    // using malloc
+    int *mptr = (int *)malloc(4);
+    *mptr = 5;
 
-int main(){
+    cout << *intPtr << " " << *mptr << endl;
+    delete intPtr;
+    free(mptr);
 
-    Heap h(20);
-    //insertion
-    h.insert(10);
-    h.insert(20);
-    h.insert(5);
-    h.insert(11);
-    h.insert(6);
+    // // 1D allocation
+    // int *arrnew = new int[5];
 
-    cout << "Printing the content of heap: " << endl;
-    h.printHeap();
+    // // using malloc
+    // int *arrmalloc = (int *)malloc(5 * sizeof(int));
 
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     int d;
+    //     cin >> d;
+    //     arrnew[i] = arrmalloc[i] = d;
+    // }
+
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     cout << arrnew[i] << " " << arrmalloc[i] << endl;
+    // }
+    // delete[] arrnew;
+    // free(arrmalloc);
+
+    // 2D allocation
+    // int rows = 5, cols = 5;
+    // int **ptr2d = new int *[rows];
+
+    // for (int i = 0; i < rows; ++i)
+    //     ptr2d[i] = new int[cols];
+
+    // int **ptr2dmalloc = (int **)malloc(sizeof(int *) * rows);
+    // for (int i = 0; i < rows; i++)
+    //     ptr2dmalloc[i] = (int *)malloc(sizeof(int) * cols);
+
+    // for (int i = 0; i < rows; i++)
+    // {
+    //     for (int j = 0; j < cols; j++)
+    //     {
+    //         ptr2d[i][j] = 7;
+    //         ptr2dmalloc[i][j] = 8;
+    //     }
+    // }
+
+    // print(ptr2d, rows, cols);
+    // print(ptr2dmalloc, rows, cols);
+
+    // for (int i = 0; i < rows; ++i)
+    //     delete[] ptr2d[i];
+    // delete[] ptr2d;
+
+    // for (int i = 0; i < rows; ++i)
+    //     free(ptr2dmalloc[i]);
+    // free(ptr2dmalloc);
+    return 0;
 }

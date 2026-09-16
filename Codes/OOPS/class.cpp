@@ -104,7 +104,7 @@ private:
 
 int main()
 {
-    // cout << sizeof(Student) << endl;
+    cout << sizeof(Student) << endl;
     // Student s1;
 
     // Student s2(1, 12, 1, "Chota Bheem", 1, "Chutki");

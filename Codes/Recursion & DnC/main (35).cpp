@@ -20,6 +20,7 @@ void printPermutation(string &str, int index) {
 }
 
 
+
 //a function that will handle all the below mentioned possibilities:
 //posssiblity hai
 	//-> path closed

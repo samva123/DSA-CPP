@@ -23,7 +23,7 @@ public:
         }
     }
     bool isIsomorphic(string s, string t) {
-       createUpdateMapping(s);
+        createUpdateMapping(s);
         createUpdateMapping(t);
 
         if(s == t){

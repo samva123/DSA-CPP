@@ -37,10 +37,51 @@ class Solution{
         return max(ans.first , ans.second);
     }
 };
+// Problem	Pair meaning
+// Non-adjacent sum	{include, exclude}
+
+class Solution {
+public:
+    unordered_map<Node*, int> dp;
+
+    int solve(Node* root) {
+        if (!root) return 0;
+        if (dp.count(root)) return dp[root];
+
+        int include = root->data;
+        if (root->left) {
+            include += solve(root->left->left) + solve(root->left->right);
+        }
+        if (root->right) {
+            include += solve(root->right->left) + solve(root->right->right);
+        }
+
+        int exclude = solve(root->left) + solve(root->right);
+
+        return dp[root] = max(include, exclude);
+    }
+
+    int getMaxSum(Node* root) {
+        return solve(root);
+    }
+};
 
 
 
 
+int solve(Node* root) {
+    if (!root) return 0;
+
+    int include = root->data;
+    if (root->left)
+        include += solve(root->left->left) + solve(root->left->right);
+    if (root->right)
+        include += solve(root->right->left) + solve(root->right->right);
+
+    int exclude = solve(root->left) + solve(root->right);
+
+    return max(include, exclude);
+}
 // class TreeNode {
 //     int data;
 //     TreeNode left, right;

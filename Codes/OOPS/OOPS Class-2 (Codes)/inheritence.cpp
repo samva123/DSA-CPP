@@ -99,27 +99,27 @@ public:
     }
 };
 
-class Parrot : protected Bird
-{
+// class Parrot : protected Bird
+// {
     
-public:
+// public:
 
-    // string getwife(){
-    //     return this->wife;
-    // }
-    void speaking()
-    {
-        cout << "Parrot is speaking" << endl;
-    }
-    //void print()
-};
-class yashasvi : public Parrot{
+//     // string getwife(){
+//     //     return this->wife;
+//     // }
+//     void speaking()
+//     {
+//         cout << "Parrot is speaking" << endl;
+//     }
+//     //void print()
+// };
+// class yashasvi : public Parrot{
 
-    string getwife(){
-        return this->wife;
-    } 
+//     string getwife(){
+//         return this->wife;
+//     } 
 
-};
+// };
 int main()
 {
   //  Sparrow s(1, 1, "brown", 2 , "janu");
@@ -135,8 +135,8 @@ int main()
     //s.age;
     cout << s.getwife();
 
-    Peigon p(2,3,"hello");
-    cout << p.getwife();
+    // Peigon p(2,3,"hello");
+    // cout << p.getwife();
     
    // cout << golu.gf ; 
 

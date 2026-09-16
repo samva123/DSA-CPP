@@ -27,6 +27,9 @@ int maxCoinsHelperMemo(int i, int j, vector<int> &nums, vector<vector<int>> &dp)
     if (dp[i][j] != -1) return dp[i][j];
 
     int maxCoins = INT_MIN;
+
+
+    
     for (int k = i; k <= j; k++) {
         int coins = nums[i - 1] * nums[k] * nums[j + 1];
         int remainingCoins = maxCoinsHelperMemo(i, k - 1, nums, dp) + maxCoinsHelperMemo(k + 1, j, nums, dp);

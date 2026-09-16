@@ -1,38 +1,29 @@
-#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
 
-bool isPrime(int num) {
-    if (num <= 1) {
-        return false;
-    }
-    for (int i = 2; i * i <= num; ++i) {
-        if (num % i == 0) {
-            return false;
+vector<int>sieve(int n){
+    vector<bool>primes(n+1 , true );
+    vector<int>ans;
+    primes[0] = primes[1] = false;
+
+    for(int  i = 2  ; i*i <= n ; i++){
+
+        if(primes[i] == true){
+            
+        
+            int j = i*i;
+            while(j <= n){
+                //ans.push_back(j);
+                primes[j] = false;
+                j += i;
+            }
         }
+        
     }
-    return true;
+    return ans;
+
 }
 
-int countPrimesInRange( int end) {
-    int count = 0;
-    for (int i = 2; i <= end; ++i) {
-        if (isPrime(i)) {
-            ++count;
-        }
-    }
-    return count;
-}
-
-int main() {
-    int start, end;
-
-    // Input the range from the user
+int main(){
     
-    std::cout << "Enter the end of the range: ";
-    std::cin >> end;
-
-    // Count and display the number of prime numbers in the range
-    int primeCount = countPrimesInRange(end);
-    std::cout << "Number of prime numbers between "  << end<< ": " << primeCount << std::endl;
-
-    return 0;
 }

@@ -1,113 +1,64 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-void merge(int arr[], int s, int e) {
+class Solution {
+public:
+    void merge(vector<int>& arr, int low, int mid, int high) {
+        vector<int> temp;
 
-	int mid = (s+e)/2;
+        int left = low;
+        int right = mid + 1;
 
-	int lenLeft = mid - s + 1;
-	int lenRight = e - mid;
+        // Merge the two sorted halves
+        while (left <= mid && right <= high) {
+            if (arr[left] <= arr[right]) {
+                temp.push_back(arr[left]);
+                left++;
+            } else {
+                temp.push_back(arr[right]);
+                right++;
+            }
+        }
 
-	//create left and right array
-	int *left = new int[lenLeft];
-	int *right = new int[lenRight];
+        // Copy remaining elements from left half
+        while (left <= mid) {
+            temp.push_back(arr[left]);
+            left++;
+        }
 
-	//copy values from original array to left array
-	int k = s;
-	//k -> starting index of left array values in original arrya
-	for(int i=0; i<lenLeft; i++) {
-		left[i] = arr[k];
-		k++;
-	}
+        // Copy remaining elements from right half
+        while (right <= high) {
+            temp.push_back(arr[right]);
+            right++;
+        }
 
-	//copy values from original array to right array
-	k = mid+1;
-	for(int i=0; i<lenRight; i++) {
-		right[i] = arr[k];
-		k++;
-	}
+        // Copy back to original array
+        for (int i = low; i <= high; i++) {
+            arr[i] = temp[i - low];
+        }
+    }
 
-	//actual merge logic here
-	//left array is already sorted
-	//right array is already sorted
-	int leftIndex = 0;
-	int rightIndex = 0;
-	//yahi pr galti karte h log
-	int mainArrayIndex = s;
+    void mergeSort(vector<int>& arr, int low, int high) {
+        if (low >= high)
+            return;
 
-	while(leftIndex < lenLeft &&  rightIndex < lenRight) {
-		
-		if(left[leftIndex] < right[rightIndex] ) {
-			arr[mainArrayIndex] =  left[leftIndex];
-			mainArrayIndex++;
-			leftIndex++;
-		}
-		else {
-			arr[mainArrayIndex] =  right[rightIndex];
-			mainArrayIndex++;
-			rightIndex++;
-		}
-	}
+        int mid = low + (high - low) / 2;
 
+        mergeSort(arr, low, mid);
+        mergeSort(arr, mid + 1, high);
 
-	//2 more cases
-
-	//1 case -> left array exhaust but right array me element abhi bhi bache hai
-	while(rightIndex < lenRight) {
-		arr[mainArrayIndex] =  right[rightIndex];
-		mainArrayIndex++;
-		rightIndex++;
-	}
-	
-
-	//2nd case -> rigght array exhaust but left array me element abhi bhi bache hai
-	while(leftIndex < lenLeft) {
-		arr[mainArrayIndex] =  left[leftIndex];
-		mainArrayIndex++;
-		leftIndex++;
-	}
-	//1 more step pending
-	delete[] left;
-	delete[] right;
-}
-
-void mergeSort(int arr[], int s, int e) {
-	//base case
-	if(s >= e) {
-		return;
-	}
-	//break
-	int mid = (s+e)/2;
-	//recusive call for left array
-	mergeSort(arr,s, mid);
-	//recusive call for right array
-	mergeSort(arr, mid+1, e);
-	//merge 2 sorted arrays
-	merge(arr, s, e);
-}
+        merge(arr, low, mid, high);
+    }
+};
 
 int main() {
+    vector<int> arr = {8, 4, 2, 6, 1, 9, 3};
 
-	int arr[] = {2,1,6,9,4,5};
-	int size = 6;
-	int s = 0;
-	int e = size - 1;
+    Solution obj;
+    obj.mergeSort(arr, 0, arr.size() - 1);
 
-	cout << "Before merge sort: " << endl;
-	for(int i=0; i<size; i++) {
-		cout << arr[i] << " ";
-	}
-	cout << endl;
-	
-	mergeSort(arr,s,e);
+    for (int x : arr)
+        cout << x << " ";
 
-	cout << "After merge sort: " << endl;
-	for(int i=0; i<size; i++) {
-		cout << arr[i] << " ";
-	}
-	cout << endl;
-
-
-
-	return 0;
+    return 0;
 }

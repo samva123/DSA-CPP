@@ -1,4 +1,4 @@
-// lc-204 but ye solution tle mar dega 
+// lc-204 but ye solution tle mar dega or under root n bhi
 
 class solution {
     public:

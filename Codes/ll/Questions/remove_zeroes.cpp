@@ -10,7 +10,7 @@
  */
 class Solution {
 public:
-    void sanitizeMap(ListNode* head, unordered_map<int, ListNode*> mp, int csum) {
+    void sanitizeMap(ListNode* head, unordered_map<int, ListNode*>&mp, int csum) {
         int temp = csum;
         while (true) {
             temp += head->val;
@@ -19,7 +19,7 @@ public:
             head = head->next;
         }
     }
-
+    // 1->2->3->-3->4 is the best example you can use 
     ListNode* removeZeroSumSublists(ListNode* head) {
         if (!head) return nullptr;
 

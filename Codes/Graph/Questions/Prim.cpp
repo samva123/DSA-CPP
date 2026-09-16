@@ -51,7 +51,9 @@ class Solution
             if(parent[u] == -1) continue;
             
            for(auto edge : adj[u]){
-               int v = edge[0];
+               int v = edge
+               
+               [0];
                int w = edge[1];
                if(v == parent[u]){
                    sum += w ;
@@ -98,3 +100,88 @@ int main()
 
 
 // } Driver Code Ends
+
+
+
+
+
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int spanningTree(int V, vector<vector<pair<int, int>>> &adj) {
+
+        priority_queue<
+            pair<int, int>,
+            vector<pair<int, int>>,
+            greater<pair<int, int>>
+        > pq;
+
+        vector<int> vis(V, 0);
+
+        pq.push({0, 0}); // {weight, node}
+
+        int sum = 0;
+
+        while (!pq.empty()) {
+
+            auto [wt, node] = pq.top();
+            pq.pop();
+
+            if (vis[node])
+                continue;
+
+            vis[node] = 1;
+            sum += wt;
+
+            for (auto &it : adj[node]) {
+                int adjNode = it.first;
+                int edgeWeight = it.second;
+
+                if (!vis[adjNode]) {
+                    pq.push({edgeWeight, adjNode});
+                }
+            }
+        }
+
+        return sum;
+    }
+};
+
+int main() {
+
+    int V = 5;
+
+    vector<vector<int>> edges = {
+        {0, 1, 2},
+        {0, 2, 1},
+        {1, 2, 1},
+        {2, 3, 2},
+        {3, 4, 1},
+        {4, 2, 2}
+    };
+
+    vector<vector<pair<int, int>>> adj(V);
+
+    for (auto &edge : edges) {
+        int u = edge[0];
+        int v = edge[1];
+        int wt = edge[2];
+
+        adj[u].push_back({v, wt});
+        adj[v].push_back({u, wt});
+    }
+
+    Solution obj;
+
+    cout << "Sum of MST = " << obj.spanningTree(V, adj);
+
+    return 0;
+}

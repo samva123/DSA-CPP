@@ -21,8 +21,8 @@ public:
 
         //update the string
         for(int i=0; i<str.length(); i++) {
-            char ch = str[i];
-            str[i] = mapping[ch];
+            // char ch = str[i];
+            str[i] = mapping[str[i]];
         }
     }
     vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
@@ -84,7 +84,42 @@ public:
 
 
 
+class Solution {
+public:
+    bool match(string word, string pattern) {
+        unordered_map<char,char> mp1;
+        unordered_map<char,char> mp2;
 
+        for(int i = 0; i < word.size(); i++) {
+
+            char w = word[i];
+            char p = pattern[i];
+
+            if(mp1.count(p) && mp1[p] != w)
+                return false;
+
+            if(mp2.count(w) && mp2[w] != p)
+                return false;
+
+            mp1[p] = w;
+            mp2[w] = p;
+        }
+
+        return true;
+    }
+
+    vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
+
+        vector<string> ans;
+
+        for(string &word : words) {
+            if(match(word, pattern))
+                ans.push_back(word);
+        }
+
+        return ans;
+    }
+};
 
 
 
@@ -474,6 +509,11 @@ unordered_map<char, int> Solution::charOrder;
 //string Solution::str;
 
 
+////////////////////comparator logic//////
+//this will return true, if position of character1 in str string is 
+//less than the position of character2 in str string 
+//when true is returned, then char1 will be placed before char2 in 
+//output string
 
 // Here is the optimized version:
 

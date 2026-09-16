@@ -1,4 +1,6 @@
 // M1
+#include <bits/stdc++.h>
+using namespace std;
 
 #include <vector>
 class Solution
@@ -55,6 +57,8 @@ public:
         return c;
     }
 };
+
+
 
 // M3 Sieve of Eratosthenes Algorithm
 class Solution

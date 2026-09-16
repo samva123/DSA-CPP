@@ -1,4 +1,7 @@
-  // this is a type of question of monotonic stack question
+ #include <bits/stdc++.h>
+using namespace std;
+
+// this is a type of question of monotonic stack question
 
 class StockSpanner {
 public:

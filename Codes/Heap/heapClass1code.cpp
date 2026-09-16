@@ -1,4 +1,4 @@
- #include <iostream>
+#include <iostream>
 using namespace std;
 
 class Heap{
@@ -13,7 +13,7 @@ class Heap{
       //size = current number of elements in heap
       this->size = 0 ;
     }
-
+    // max heap
     void insert(int val) {
       if(size == capacity) {
         cout << "Heap OverFlow" << endl;
@@ -36,12 +36,35 @@ class Heap{
         }
       }
     }
+    // min heap
+      void insert(int val) {
+      if(size == capacity) {
+          cout << "Heap OverFlow" << endl;
+          return;
+      }
+
+      size++;
+      int index = size;
+      arr[index] = val;
+
+      while(index > 1) {
+          int parentIndex = index / 2;
+
+          if(arr[index] < arr[parentIndex]) {
+              swap(arr[index], arr[parentIndex]);
+              index = parentIndex;
+          }
+          else {
+              break;
+          }
+      }
+  }
     void printHeap() {
       for(int i=1; i<=size; i++) {
          cout << arr[i] << " ";
      }
     }
-
+    //maxheap
     int deleteFromHeap() {
       int answer = arr[1];
       //replacement
@@ -73,6 +96,40 @@ class Heap{
       }
       return answer;
     }
+
+    //minheap
+    int deleteFromHeap() {
+    int answer = arr[1];
+
+    arr[1] = arr[size];
+    size--;
+
+    int index = 1;
+
+    while(index <= size) {
+        int leftIndex = 2 * index;
+        int rightIndex = 2 * index + 1;
+
+        int smallestIndex = index;
+
+        if(leftIndex <= size && arr[smallestIndex] > arr[leftIndex]) {
+            smallestIndex = leftIndex;
+        }
+
+        if(rightIndex <= size && arr[smallestIndex] > arr[rightIndex]) {
+            smallestIndex = rightIndex;
+        }
+
+        if(index == smallestIndex) {
+            break;
+        }
+
+        swap(arr[index], arr[smallestIndex]);
+        index = smallestIndex;
+    }
+
+    return answer;
+}
 };
 
 void heapify(int *arr, int n, int index) {
@@ -102,6 +159,33 @@ void buildHeap(int arr[], int n) {
   }
 }
 // why it is in O(n) not in O(logn)
+
+///////////min heap//////////
+// void heapify(int *arr, int n, int index) {
+//     int leftIndex = 2 * index;
+//     int rightIndex = 2 * index + 1;
+//     int smallestIndex = index;
+
+//     // find smallest among parent, left child, right child
+//     if(leftIndex <= n && arr[leftIndex] < arr[smallestIndex]) {
+//         smallestIndex = leftIndex;
+//     }
+
+//     if(rightIndex <= n && arr[rightIndex] < arr[smallestIndex]) {
+//         smallestIndex = rightIndex;
+//     }
+
+//     if(index != smallestIndex) {
+//         swap(arr[index], arr[smallestIndex]);
+//         heapify(arr, n, smallestIndex);
+//     }
+// }
+
+// void buildHeap(int arr[], int n) {
+//     for(int index = n/2; index > 0; index--) {
+//         heapify(arr, n, index);
+//     }
+// }
 
 void heapSort(int arr[], int n) {
   while(n != 1 ) {

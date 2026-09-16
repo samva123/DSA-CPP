@@ -11,3 +11,10 @@ int fast(int a , int b){
     }
     return ans;
 }
+
+
+
+///for lcm 
+
+
+////   gcd*lcm == a*b

@@ -113,6 +113,8 @@ int evaluateExp_tab(string &exp) {
                         if (isTrue) ways = (ways + (lF * rT) % mod + (lT * rF) % mod + (lT * rT) % mod) % mod;
                         else ways = (ways + (lF * rF) % mod) % mod;
                     }
+
+                    
                     else {
                         if (isTrue) ways = (ways + (lF * rT) % mod + (lT * rF) % mod) % mod;
                         else ways = (ways + (lF * rF) % mod + (lT * rT) % mod) % mod;

@@ -144,7 +144,7 @@ public:
         while (i < m) {
             if (needle[i] == needle[len]) {
                 len++;
-                lps[i] = len;
+                lps[i] = len; 
                 i++;
             } else {
                 if (len != 0) {
@@ -179,6 +179,8 @@ public:
                 if (j != 0) {
                     j = lps[j - 1];
                 } else {
+
+
                     i++;
                 }
             }

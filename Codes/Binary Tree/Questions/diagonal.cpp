@@ -1,11 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
 
-
-/* A binary tree node
+//A binary tree node
 struct Node
 {
     int data;
     Node* left, * right;
-}; */
+}; 
 
 
 vector<int> diagonal(Node *root)

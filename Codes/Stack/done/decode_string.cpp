@@ -4,68 +4,6 @@ using namespace std;
 
 
 
-class Solution {
-public:
-    string decodeString(string s) {
-        stack<string>st;
-        for(auto ch:s){
-            if(ch == ']'){
-                string stringtorepeat = "";
-                while(!st.empty() && !isdigit(st.top()[0])){
-                    string top = st.top();
-                    stringtorepeat += top == "[" ? "" : top;
-                    st.pop();
-                }
-
-                string numericTimes = "";
-                while(!st.empty() && isdigit(st.top()[0])){
-                    numericTimes += st.top();
-                    st.pop(); 
-                }
-                reverse(numericTimes.begin() , numericTimes.end());
-                int n = stoi(numericTimes);
-
-                string current = "";
-                while(n--){
-                    current += stringtorepeat;
-                }
-                st.push(current);
-
-            }
-            else{
-                string temp(1,ch);
-
-                    // The line string temp(1, ch); creates a new string temp that contains a single character ch.
-
-                    // Explanation
-                    // string temp(1, ch); is a constructor call for the string class.
-                    // The first argument 1 specifies the number of times the character ch should be repeated in the string.
-                    // The second argument ch is the character to be repeated.
-                    // In this case, it creates a string temp that consists of the character ch repeated once.
-
-                    // Example
-                    // If ch is 'a', then string temp(1, 'a'); will create a string temp with the value "a".
-                st.push(temp);
-
-            }
-        }
-        string ans;
-        while(!st.empty()){
-            ans += st.top();
-            st.pop();
-        }
-        reverse(ans.begin() , ans.end());
-        return ans;
-
-        
-    }
-};
-
-
-
-
-
-
 
 
 
@@ -88,7 +26,10 @@ public:
                 currentString = "";
                 currentNum = 0;
             } else if (ch == ']') {
-                auto [prevString, repeatTimes] = st.top();
+                auto front = st.top();
+                auto prevString  = front.first;
+                auto repeatTimes = front.second;
+
                 st.pop();
                 string temp = "";
                 for (int i = 0; i < repeatTimes; ++i) {
@@ -128,41 +69,38 @@ public:
 
 
 
-
-
-
-
-
-
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
     string decodeString(string s) {
-        stack<pair<int, int>> st;  // Stores (previous string length, repeat count)
+        stack<pair<int, int>> st;
         string currentString = "";
         int currentNum = 0;
 
         for (char ch : s) {
             if (isdigit(ch)) {
-                currentNum = currentNum * 10 + (ch - '0');  // Build multi-digit numbers
+                currentNum = currentNum * 10 + (ch - '0');
             } 
             else if (ch == '[') {
-                st.push({currentString.size(), currentNum});  // Store the current string size instead of full string
+                st.push({currentString.size(), currentNum});
                 currentNum = 0;
             } 
             else if (ch == ']') {
-                auto [prevSize, repeatTimes] = st.top();
+                auto front = st.top();
+                int prevSize = front.first;
+                int repeatTimes = front.second;
                 st.pop();
                 
-                string repeatedString = currentString.substr(prevSize);  // Get the substring to repeat
-                stringstream ss;
-                while (repeatTimes--) {
-                    ss << repeatedString;
+                string repeatedString = currentString.substr(prevSize);
+
+                string temp = "";
+                for (int i = 0; i < repeatTimes; i++) {
+                    temp += repeatedString;
                 }
-                
-                currentString = currentString.substr(0, prevSize) + ss.str();  // Append efficiently
+
+                currentString = currentString.substr(0, prevSize) + temp;
             } 
             else {
                 currentString += ch;

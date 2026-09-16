@@ -41,7 +41,17 @@ class Solution {
 
 
 
+// The biggest intuition
 
+// For LCSubstring, every state is independent except for the diagonal:
+
+// dp[i][j] = 1 + dp[i+1][j+1]
+
+// or
+
+// dp[i][j] = 0
+
+// Since we already know exactly which future state we need, recursion gives no advantage.
 
 
 

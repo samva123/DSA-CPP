@@ -1,37 +1,26 @@
 class Solution {
 public:
     ListNode* merge(ListNode* left, ListNode* right) {
-        if (left == nullptr) return right;
-        if (right == nullptr) return left;
+        // Create a dummy node to act as the head of the merged list
+        ListNode dummy(-1);
+        ListNode* tail = &dummy;
 
-        ListNode* ans = new ListNode(-1);
-        ListNode* mptr = ans;
-
+        // Merge the two lists
         while (left && right) {
             if (left->val <= right->val) {
-                mptr->next = left;
-                mptr = left;
+                tail->next = left;
                 left = left->next;
             } else {
-                mptr->next = right;
-                mptr = right;
+                tail->next = right;
                 right = right->next;
             }
+            tail = tail->next;
         }
 
-        while (left) {
-            mptr->next = left;
-            mptr = left;
-            left = left->next;
-        }
+        // Attach the remaining nodes (if any) from the non-empty list
+        tail->next = left ? left : right;
 
-        while (right) {
-            mptr->next = right;
-            mptr = right;
-            right = right->next;
-        }
-
-        return ans->next;
+        return dummy.next;
     }
 
     ListNode* FindMid(ListNode* head) {

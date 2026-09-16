@@ -85,7 +85,9 @@ public:
         vector<int> ans;
         //initial state
         ans.push_back(num[0]);
-        for(int i=1; i<num.size(); i++) {
+        for(
+            
+            int i=1; i<num.size(); i++) {
             if(num[i] > ans.back()) {
                 ans.push_back(num[i]);
             }

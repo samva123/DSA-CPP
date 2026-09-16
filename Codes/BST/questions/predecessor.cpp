@@ -1,3 +1,7 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
 Node* findPredecessor(Node* root, Node* p) {
     // add your logic here
 	Node*pred = 0 ;

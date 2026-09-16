@@ -1,3 +1,7 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
 class BrowserHistory {
     stack<string>browserstack , fwdstack;
 public:

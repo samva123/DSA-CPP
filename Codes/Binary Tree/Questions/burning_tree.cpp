@@ -1,6 +1,9 @@
 //User function Template for C++
 
-/*
+#include <bits/stdc++.h>
+using namespace std;
+
+
 struct Node {
     int data;
     Node *left;
@@ -11,7 +14,8 @@ struct Node {
         left = right = NULL;
     }
 };
-*/
+
+
 class Solution {
   public:
     Node*makenodetoparentandfindtarget(Node* root , unordered_map<Node* , Node*>&parentmap , int target ){

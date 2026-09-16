@@ -1,45 +1,33 @@
+  
+
+
 // Question 1: first non repeating character in a stream
 #include <bits/stdc++.h>
 using namespace std;
-int main()
-{
-    string str = "ababc";
+
+
+string FirstNonRepeating(string A) {
+    vector<int> freq(26, 0);
     queue<char> q;
-    int freq[26] = {0};
-    // har char ko pakdo frequency store kro queue mai dalo aur check kro
-    for (int i = 0; i < str.length(); i++)
-    {
-        char ch = str[i];
+    string ans = "";
+
+    for (char ch : A) {
         freq[ch - 'a']++;
-        // queue ke ander push taki track rakh pao
         q.push(ch);
 
-        // answer find kro
-        while (!q.empty())
-        {
-            char frontChar = q.front();
-            // check freq
-            if (freq[frontChar - 'a'] > 1)
-            {
-                // not an answer
-                q.pop();
-            }
-            else
-            {
-                //==1 vala case
-                // unique character
-                cout << frontChar << " ";
-                break;
-            }
+        while (!q.empty() && freq[q.front() - 'a'] > 1) {
+            q.pop();
         }
+
         if (q.empty())
-        {
-            // no answer found
-            cout << '#' << " ";
-        }
+            ans.push_back('#');
+        else
+            ans.push_back(q.front());
     }
-    return 0;
+
+    return ans;
 }
+
 // Question 2: Gas Station Leetcode->134
 int canCompleteCircuit(vector<int> &gas, vector<int> &cost)
 {

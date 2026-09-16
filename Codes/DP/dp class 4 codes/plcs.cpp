@@ -67,3 +67,77 @@ class Solution {
         return result;
     }
 };
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<vector<int>> dp;
+    map<pair<int,int>, set<string>> memo;
+
+    set<string> solve(string &s, string &t, int i, int j) {
+        int n = s.size();
+        int m = t.size();
+
+        if (i == n || j == m) {
+            return {""};
+        }
+
+        if (memo.count({i, j})) {
+            return memo[{i, j}];
+        }
+
+        set<string> ans;
+
+        if (s[i] == t[j]) {
+            set<string> temp = solve(s, t, i + 1, j + 1);
+
+            for (auto &str : temp) {
+                ans.insert(s[i] + str);
+            }
+        }
+        else {
+            if (dp[i + 1][j] == dp[i][j]) {
+                set<string> temp = solve(s, t, i + 1, j);
+
+                for (auto &str : temp) {
+                    ans.insert(str);
+                }
+            }
+
+            if (dp[i][j + 1] == dp[i][j]) {
+                set<string> temp = solve(s, t, i, j + 1);
+
+                for (auto &str : temp) {
+                    ans.insert(str);
+                }
+            }
+        }
+
+        return memo[{i, j}] = ans;
+    }
+
+    vector<string> allLCS(string s, string t) {
+        int n = s.size();
+        int m = t.size();
+
+        dp.assign(n + 1, vector<int>(m + 1, 0));
+
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = m - 1; j >= 0; j--) {
+                if (s[i] == t[j]) {
+                    dp[i][j] = 1 + dp[i + 1][j + 1];
+                }
+                else {
+                    dp[i][j] = max(dp[i + 1][j], dp[i][j + 1]);
+                }
+            }
+        }
+
+        set<string> ans = solve(s, t, 0, 0);
+
+        return vector<string>(ans.begin(), ans.end());
+    }
+};

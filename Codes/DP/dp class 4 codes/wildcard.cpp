@@ -12,6 +12,9 @@ bool isAllStars(string &S1, int i) {
             return false;
     }
     return true;
+
+
+    
 }
 
 bool isAllStars1Based(string &S1, int i) {
@@ -123,3 +126,37 @@ int main() {
 
     return 0;
 }
+
+
+
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int i = 0;
+        int j = 0;
+        int n = s.size();
+        int staridx = -1;
+        int matchidx = -1;
+
+        while(i < n ){
+            if(j < p.size() && (s[i] == p[j] || p[j] == '?')){
+                i++;
+                j++;
+            }else if(j<p.size() && p[j] == '*'){
+                staridx = j;
+                matchidx = i;
+                j++;
+            }else if(staridx != -1){
+                j = staridx+1;
+                matchidx++;
+                i = matchidx;
+            }else{
+                return false;
+            }
+        }
+
+        while(j < p.size() && p[j] == '*')j++;
+        return j == p.size();
+    }
+};

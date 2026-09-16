@@ -9,7 +9,7 @@ int f_recursive(vector<int>& arr, int i, int j) {
         int ans = f_recursive(arr, i, k) + f_recursive(arr, k + 1, j) + arr[i - 1] * arr[k] * arr[j];
         mini = min(mini, ans);
     }
-    return mini;
+    return mini; 
 }
 int matrixMultiplication_recursive(vector<int>& arr, int N) {
     return f_recursive(arr, 1, N - 1);
@@ -104,3 +104,4 @@ int matrixMultiplication(vector<int> &arr, int N)
     }
     return dp[1][N - 1];
 }
+

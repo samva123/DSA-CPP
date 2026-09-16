@@ -29,6 +29,8 @@ int minPartitionsRec(int i, int n, string &str) {
 int palindromePartitioningRec(string str) {
     int n = str.size();
     return minPartitionsRec(0, n, str) - 1;
+
+    
 }
 
 /*---------------------------------------------------
@@ -101,55 +103,156 @@ int main() {
 
 
 
-////Instead of only returning the minimum number of cuts,
-/////we’ll print all sets of substrings that form palindromic partitions.
-
-
-// Input:  "aab"
-// Output partitions:
-// a | a | b
-// aa | b
 
 
 
+
+
+/////////////////with pre-computed table/
 
 #include <bits/stdc++.h>
 using namespace std;
 
-bool isPalindrome(int i, int j, string &s) {
-    while (i < j) {
-        if (s[i] != s[j]) return false;
-        i++; j--;
-    }
-    return true;
-}
+// Function to precompute palindrome table
+vector<vector<bool>> precomputePalTable(string &s) {
+    int n = s.size();
+    vector<vector<bool>> pal(n, vector<bool>(n, false));
 
-void allPalPartitions(int i, int n, string &str, vector<string> &path) {
-    if (i == n) {
-        for (int k = 0; k < path.size(); k++) {
-            cout << path[k];
-            if (k != path.size() - 1) cout << " | ";
-        }
-        cout << endl;
-        return;
-    }
-
-    for (int j = i; j < n; j++) {
-        if (isPalindrome(i, j, str)) {
-            path.push_back(str.substr(i, j - i + 1));
-            allPalPartitions(j + 1, n, str, path);
-            path.pop_back(); // backtrack
+    for (int i = n - 1; i >= 0; i--) {
+        for (int j = i; j < n; j++) {
+            if (s[i] == s[j] && (j - i < 2 || pal[i + 1][j - 1])) {
+                pal[i][j] = true;
+            }
         }
     }
+    return pal;
 }
 
+/*---------------------------------------------------
+   Optimized Tabulation with precomputed palindrome table
+---------------------------------------------------*/
+int palindromePartitioningTabu(string str) {
+    int n = str.size();
+    vector<vector<bool>> isPal = precomputePalTable(str);
+    vector<int> dp(n + 1, 0);
+    dp[n] = 0;
+
+    for (int i = n - 1; i >= 0; i--) {
+        int minCost = INT_MAX;
+        for (int j = i; j < n; j++) {
+            if (isPal[i][j]) {
+                int cost = 1 + dp[j + 1];
+                minCost = min(minCost, cost);
+            }
+        }
+        dp[i] = minCost;
+    }
+    return dp[0] - 1;
+}
+
+/*---------------------------------------------------
+   Driver Code
+---------------------------------------------------*/
 int main() {
-    string str = "aab";
-    vector<string> path;
-    cout << "All Palindromic Partitions:\n";
-    allPalPartitions(0, str.size(), str, path);
+    string str = "BABABCBADCEDE";
+
+    cout << "Using Optimized Tabulation: " << palindromePartitioningTabu(str) << "\n";
+
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -239,74 +342,6 @@ int main() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////////with pre-computed table/
-
-#include <bits/stdc++.h>
-using namespace std;
-
-// Function to precompute palindrome table
-vector<vector<bool>> precomputePalTable(string &s) {
-    int n = s.size();
-    vector<vector<bool>> pal(n, vector<bool>(n, false));
-
-    for (int i = n - 1; i >= 0; i--) {
-        for (int j = i; j < n; j++) {
-            if (s[i] == s[j] && (j - i < 2 || pal[i + 1][j - 1])) {
-                pal[i][j] = true;
-            }
-        }
-    }
-    return pal;
-}
-
-/*---------------------------------------------------
-   Optimized Tabulation with precomputed palindrome table
----------------------------------------------------*/
-int palindromePartitioningTabu(string str) {
-    int n = str.size();
-    vector<vector<bool>> isPal = precomputePalTable(str);
-    vector<int> dp(n + 1, 0);
-    dp[n] = 0;
-
-    for (int i = n - 1; i >= 0; i--) {
-        int minCost = INT_MAX;
-        for (int j = i; j < n; j++) {
-            if (isPal[i][j]) {
-                int cost = 1 + dp[j + 1];
-                minCost = min(minCost, cost);
-            }
-        }
-        dp[i] = minCost;
-    }
-    return dp[0] - 1;
-}
-
-/*---------------------------------------------------
-   Driver Code
----------------------------------------------------*/
-int main() {
-    string str = "BABABCBADCEDE";
-
-    cout << "Using Optimized Tabulation: " << palindromePartitioningTabu(str) << "\n";
-
-    return 0;
-}
 
 
 

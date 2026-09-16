@@ -179,3 +179,57 @@ public:
 
 // indegree
 
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+
+    bool dfs(int node,
+             vector<vector<int>>& adj,
+             vector<int>& state){
+
+        state[node] = 1;
+
+        for(int nbr : adj[node]){
+
+            if(state[nbr] == 1)
+                return true;
+
+            if(state[nbr] == 0){
+                if(dfs(nbr, adj, state))
+                    return true;
+            }
+        }
+
+        state[node] = 2;
+
+        return false;
+    }
+
+    bool canFinish(int numCourses,
+                   vector<vector<int>>& prerequisites) {
+
+        vector<vector<int>> adj(numCourses);
+
+        for(auto &i : prerequisites){
+            int u = i[0];
+            int v = i[1];
+
+            adj[v].push_back(u);
+        }
+
+        vector<int> state(numCourses,0);
+
+        for(int i=0;i<numCourses;i++){
+
+            if(state[i]==0){
+
+                if(dfs(i,adj,state))
+                    return false;
+            }
+        }
+
+        return true;
+    }
+};

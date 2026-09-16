@@ -1,67 +1,28 @@
+#include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
 
-template<typename T>
-class Graph{
-    unordered_map<T, list<pair<T,int> > > adjList;
-    unordered_set<T>nodes;
+int solve(vector<int>arr , int n ){
+    int ans  = 0 ;
+    unordered_set<int>s(arr.begin(), arr.end());
 
-    void addEdge(T u, T v, int wt, bool direction) {
-        nodes.insert(u);
-        nodes.insert(v);
-      if(direction == 1) {
-        adjList[u].push_back(make_pair(v,wt));
-      }
-      else {
-        adjList[u].push_back({v,wt});
-        adjList[v].push_back({u,wt});
-      }
-      printAdjList();
-    cout << endl;
-    }
+    for(auto x : arr){
+        if(!s.count(x-1)){
+            int curr  = x ;
+            int count  = 1;
 
-
-
-
-
-
-    void dijkastra(T src){
-        vector<T>dist(nodes.size());
-        for(int i = 0 ; i < nodes.size() ; i++){
-            dist[i] = INT_MAX;
-        }
-        set<pair<int , T>>st;
-        st.insert({0,src});
-        dist[src] = 0 ;
-
-        while(!st.empty()){
-            auto topelement  = st.begin();
-            auto topPair  = *topelement;
-            auto topDist = toppair.first;
-            auto topNode  = toppair.second;
-            st.erase(st.begin());
-
-            if(topDist > dist[topNode]){
-                continue;
+            while(s.count(curr+1)){
+                curr = curr+1;
+                count++;
             }
-
-            for(auto nbrPair : adjList[topNode]){
-                auto nbrDist = nbrPair.first;
-                auto nbrNode = nbrPair.second;
-                if(topDist + nbrDist < dist[nbrNode]){
-                    auto previousEntry = st.find({ dist[nbrNode],nbrNode });
-                    if(previousEntry != st.end()){
-                        st.erase({dist[nbrNode],nbrNode });
-                    }
-                    dist[nbrNode] = topDist +nbrDist;
-                    st.insert({dist[nbrNode] , nbrNode});
-                }
-            }
-
-
+            ans  = max(ans , count);
         }
-
     }
+    return ans;
+}
 
-};
-
+int main(){
+    vector<int>arr  = {10,101,12,13,11,102,103,105,104,106};
+    int n = 7;
+    cout << solve(arr , n);
+}

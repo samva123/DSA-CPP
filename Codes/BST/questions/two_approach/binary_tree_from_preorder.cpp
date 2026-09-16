@@ -38,20 +38,23 @@ public:
 
 
 
+class Solution {
+public:
+    TreeNode* insert(TreeNode* root, int val){
+        if(root == NULL) return new TreeNode(val);
 
-//////brute force in java 
+        if(val < root->val)
+            root->left = insert(root->left, val);
+        else
+            root->right = insert(root->right, val);
 
-// public TreeNode bstFromPreorder(int[] preorder) {
-//     TreeNode root = null;
-//     for (int val : preorder) {
-//         root = insert(root, val);
-//     }
-//     return root;
-// }
+        return root;
+    }
 
-// private TreeNode insert(TreeNode root, int val) {
-//     if (root == null) return new TreeNode(val);
-//     if (val < root.val) root.left = insert(root.left, val);
-//     else root.right = insert(root.right, val);
-//     return root;
-// }
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        TreeNode* root = NULL;
+        for(int x : preorder)
+            root = insert(root, x);
+        return root;
+    }
+};

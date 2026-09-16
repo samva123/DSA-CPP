@@ -1,57 +1,35 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+
 
 class Solution {
 public:
-    int compress(vector<char>& s) {
-        int index = 0;
-        int count = 1 ;
-        int  prev = s[0];
+    int compress(vector<char>& chars) {
+        int n = chars.size();
 
-        for(int i = 1 ; i < s.size() ; ++i){
-            if(s[i] == prev){
+        int i = 0;      // read pointer
+        int index = 0;  // write pointer
+
+        while (i < n) {
+            char curr = chars[i];
+            int count = 0;
+
+            while (i < n && chars[i] == curr) {
                 count++;
+                i++;
             }
-            else{
-                s[index++] = prev;
-                if(count>1){
-                    int start = index;
-                    while(count){
-                        
-                        s[index++] = (count % 10) + '0';
-                        count/=10;
-                    }
-                    reverse(s.begin()+start , s.begin()+index );
-                
+
+            chars[index++] = curr;
+
+            if (count > 1) {
+                string freq = to_string(count);
+                for (char c : freq) {
+                    chars[index++] = c;
                 }
-                prev = s[i];
-                count = 1;
-
-
-                
             }
         }
-        s[index++] = prev;
-        if(count>1){
-            int start = index;
-            while(count){
-                s[index++] = (count % 10) + '0';
-                count/=10;
 
-            }
-            reverse(s.begin()+start , s.begin()+index );
-            
-
-        }
         return index;
-          
-
-        
     }
 };
-//time complexity is O(n) and space complexity is O(1)
-
-
-
-
 

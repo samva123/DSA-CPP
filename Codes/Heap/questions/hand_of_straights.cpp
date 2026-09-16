@@ -18,8 +18,7 @@ public:
 
         for(int card : hand) {
             if(freq[card] > 0) {
-
-                
+                         
                 int count = freq[card];
                 for(int i = 0; i < groupSize; i++) {
                     if(freq[card + i] < count) return false;
@@ -30,8 +29,6 @@ public:
         return true;
     }
 };
-
-
 
 
 

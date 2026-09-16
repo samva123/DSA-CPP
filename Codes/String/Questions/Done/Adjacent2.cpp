@@ -32,32 +32,24 @@ string removeDuplicates(string s, int k) {
 }
 
 
-class Solution
-{
-public:
-    string removeDuplicates(string s, int k)
-    {
-        int i = 0;
-        int j = 0;
-        int n = s.size();
-        vector<int> count(n);
-        while (j < s.size())
-        {
-            s[i] = s[j];
-            count[i] = 1;
-            if (i > 0 && s[i] == s[i - 1])
-            {
-                count[i] += count[i - 1];
-            }
-            if (count[i] == k)
-            {
-                i -= k;
-            }
-            ++i, ++j;
-        }
-        return s.substr(0, i);
+string removeDuplicates(string s, int k) {
+    vector<int> count(s.size());
+    int j = 0;
+
+    for (int i = 0; i < s.size(); i++, j++) {
+        s[j] = s[i];
+
+        if (j > 0 && s[j] == s[j - 1])
+            count[j] = count[j - 1] + 1;
+        else
+            count[j] = 1;
+
+        if (count[j] == k)
+            j -= k;
     }
-};
+
+    return s.substr(0, j);
+}
 
 // this is better approach because it has O(n) time complexity and first approach has O(n*k) time complexity
 // and both have O(n) space complexity

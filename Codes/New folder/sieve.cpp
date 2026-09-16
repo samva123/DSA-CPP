@@ -1,21 +1,37 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
 int countprimes(int n){
-    if(n == 0) return 0;
+    if(n <= 1) return 0;
 
-    vector<bool> prime(n , true);
+    vector<bool> prime(n + 1 , true);
     prime[0] = prime[1] = false;
-    int ans = 0;
 
-    for(int i = 2 ; i<n;i++){
+    //int m = sqrt(n);
+
+    for(int i = 2 ; i*i <= n ; i++){
         if(prime[i]){
-            ans++;
 
-            int j = 2*i;
-            while(j<n){
+            //int j = 2*i;
+            int j = i*i; 
+            // Optimisation 1:
+            // first unmarked number would be i*i , as others have been
+            // marked by 2 to (i-1)
+
+            while(j <= n){
                 prime[j] = false;
-                j+=i;
+                j += i;
             }
         }
     }
+
+    int ans = 0;
+    for(int i = 2 ; i <= n ; i++){
+        if(prime[i]) ans++;
+    }
+
+    return ans;
 }
 
 // time complexity is O(n/2 + n/3 + n/5 + n/7.....);

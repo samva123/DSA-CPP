@@ -17,7 +17,7 @@
  };
 
  class BoxFactory{
-    int count;
+    int count = 0;
     public:
             Box getabox(int _w){
                 ++count;

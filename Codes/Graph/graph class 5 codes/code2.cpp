@@ -1,3 +1,7 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
 class Solution {
 public:
     void topSortBfs(int n, vector<int>& topoOrder,unordered_map<int , list<int> >& adjList) {
@@ -50,5 +54,65 @@ public:
             //invalid
             return {};
         } 
+    }
+};
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    
+    bool dfs(int node, vector<vector<int>>& adj,
+             vector<int>& state,
+             vector<int>& order){
+
+        state[node] = 1; // visiting
+
+        for(int nbr : adj[node]){
+
+            if(state[nbr] == 1)
+                return true; // cycle
+
+            if(state[nbr] == 0){
+                if(dfs(nbr, adj, state, order))
+                    return true;
+            }
+        }
+
+        state[node] = 2; // visited
+        order.push_back(node);
+
+        return false;
+    }
+
+    vector<int> findOrder(int numCourses,
+                          vector<vector<int>>& prerequisites) {
+
+        vector<vector<int>> adj(numCourses);
+
+        for(auto &i : prerequisites){
+            int u = i[0];
+            int v = i[1];
+
+            adj[v].push_back(u);
+        }
+
+        vector<int> state(numCourses,0);
+        vector<int> order;
+
+        for(int i=0;i<numCourses;i++){
+
+            if(state[i]==0){
+
+                if(dfs(i,adj,state,order))
+                    return {};
+            }
+        }
+
+        reverse(order.begin(),order.end());
+
+        return order;
     }
 };

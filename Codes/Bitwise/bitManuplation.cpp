@@ -85,13 +85,33 @@ bool checkPowerOf2(int n) {
 //     }
 // };
 
+int whichPower(int n) {
+    if (n <= 0 || (n & (n - 1)) != 0) return -1; // not power of 2
+    
+    int k = 0;
+    while (n > 1) {
+        n >>= 1;   // divide by 2
+        k++;
+    }
+    return k;
+}
+
+
 
 int fastCOuntSetBits(int n) {
 	int count = 0;
 	while(n != 0) {
 		//cout << "n value: " << n << endl;
 		count++;
-		n = (n & (n-1));//(Brian Kernighan’s Algorithm)
+		n = (n & (n-1));//(Brian Kernighan’s Algorithm)//it sets the rightmost bit 0
+		// n = 12 -> 1100
+
+		// Iteration 1:
+		// 1100 & 1011 = 1000
+
+		// Iteration 2:
+		// 1000 & 0111 = 0000
+
 	}
 	return count;
 }
@@ -112,7 +132,7 @@ int countSetBitsLoop(int n) {
 
 int main() {
     int n = 29;  // Binary: 11101, expected output: 4
-    cout << "Set bits count: " << countSetBitsLoop(n) << endl;
+    cout << "Set bits count: " << countSetBitsLoop(n) << endl;//because it is giving error 
     return 0;
 }
 
