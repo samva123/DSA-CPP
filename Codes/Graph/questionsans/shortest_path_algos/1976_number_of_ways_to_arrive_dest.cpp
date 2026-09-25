@@ -1,39 +1,4 @@
-// #include <bits/stdc++.h>
-// using namespace std;
-// class Solution {
-// public:
-//     int countPaths(int n, vector<vector<int>>& roads) {
-//         const long long MOD = 1'000'000'007;
-//         vector<vector<pair<int,int>>> adj(n);
-//         for (auto &r : roads) {
-//             adj[r[0]].push_back({r[1], r[2]});
-//             adj[r[1]].push_back({r[0], r[2]});
-//         }
-//         vector<long long> dist(n, LLONG_MAX), ways(n, 0);
-//         using P = pair<long long,int>;
-//         priority_queue<P, vector<P>, greater<P>> pq;
-//         dist[0] = 0;
-//         ways[0] = 1;
-//         pq.push({0, 0});
-//         while (!pq.empty()) {
-//             auto [d, u] = pq.top(); pq.pop();
-//             if (d > dist[u]) continue;
-//             for (auto &e : adj[u]) {
-//                 int v = e.first;
-//                 long long w = e.second;
-//                 if (dist[v] > d + w) {
-//                     dist[v] = d + w;
-//                     ways[v] = ways[u];
-//                     pq.push({dist[v], v});
-//                 } else if (dist[v] == d + w) {
-//                     ways[v] = (ways[v] + ways[u]) % MOD;
-//                 }
-//             }
-//         }
-//         return ways[n-1] % MOD;
-//     }
-// };
-
+ 
 
 
 
